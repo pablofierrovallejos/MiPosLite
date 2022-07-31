@@ -1024,6 +1024,10 @@
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        initScreen()
+    End Sub
+
+    Private Sub initScreen()
         cargarProducto() 'Carga imagenes de productos
         cargarMarizProductosyPrecios() 'Carga nombres de productos y precios
         If obtenerEstadoCaja() Then
@@ -1032,7 +1036,6 @@
             Label38.Text = "Cerrada"
         End If
     End Sub
-
 
 
 

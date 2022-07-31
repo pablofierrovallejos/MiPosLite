@@ -173,7 +173,25 @@
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        If Integer.Parse(Label5.Text) > 0 Then
+            Dim sregistro As String
+            sregistro = TextBox1.Text & ";" &
+            TextBox2.Text & ";" &
+            TextBox3.Text & ";" &
+            TextBox4.Text & ";" &
+            TextBox5.Text
 
+            actualizarBase(Integer.Parse(Label7.Text), sregistro)
+
+            leerRegistro(Integer.Parse(Label7.Text))
+            If Integer.Parse(Label5.Text) = 0 Then
+                TextBox1.Text = ""
+                TextBox2.Text = ""
+                TextBox3.Text = ""
+                TextBox4.Text = ""
+
+            End If
+        End If
     End Sub
 
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
@@ -182,5 +200,44 @@
 
             Label7.Text = Label5.Text
         End If
+    End Sub
+    Private Sub actualizarBase(nroReg As Integer, sregistro As String)
+        'Primero caragamos el archivo completo en una lista excepto el que se va a eliminar
+        Dim objReader As New IO.StreamReader("C:\ventasPOS\productos.txt")
+        Dim sLine As String = ""
+        Dim arrText As New ArrayList()
+        Dim regActual As Integer = 1
+        Do
+            sLine = objReader.ReadLine()
+            If Not sLine Is Nothing Then
+                If regActual <> nroReg Then  'Solo carga si es distinto al solicitado a eliminar
+                    arrText.Add(sLine)
+                Else
+                    arrText.Add(sregistro)
+                End If
+            End If
+            regActual = regActual + 1
+        Loop Until sLine Is Nothing
+        objReader.Close()
+
+        'Luego vaciamos el archivo
+        vaciarArchivo()
+
+        'finalmente escribimos la lista en el archivo
+        For Each sLine In arrText
+            agregarRegistro(sLine)
+            'Console.WriteLine(sLine)
+        Next
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        'Dim form1 As New Form1()
+        Form1.Close()
+        Form1.Show()
+        Me.BringToFront()
+
+        '  Form2.Show()
+
+
     End Sub
 End Class
