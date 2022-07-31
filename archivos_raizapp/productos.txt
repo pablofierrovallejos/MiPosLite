@@ -1,0 +1,9 @@
+Soft Simple;5500;12345678910
+Soft Doble;1200;12345678911
+Beb Lata;600;193905641482
+Artesa Simple;1300;853211005148
+Artesanal Doble;2200;
+Granizado Chico;600;
+Granizado Grande;1000;
+Cachantun;600;z
+INGRESARVENTA;0;SC050

@@ -1,0 +1,46 @@
+Instrucciones para configurar
+
+1.- El tamaño de imagenes producto debe ser de 150X150 pix y se debe guardar en carpeta c:\ventasPOS\img\
+2.- El tamaño de imagenes billetes debe ser de 150X65  pix y se debe guardar en carpeta c:\ventasPOS\img\
+3.- Generar archivo c:\ventasPOS\productos.txt con 2 columnas separadas por ; (Ahora se hace automático desde el mantenedor de productos)
+    a.-La primera columna lleva el nombre producto de largo no mas de 14 caracteres (deprecado)
+    b.-La segunda columna lleva el precio del producto (deprecado)
+    c.-Los primeros 12 productos son los que se cargarán en la pantalla vista previa de productos mas
+       usados a la derecha de pantalla
+4.- Para visualizar o cambiar las imagenes de los productos debe cambiar las imagenes llamadas:
+     producto1.jpg
+     producto2.jpg
+     producto3.jpg
+     producto4.jpg
+     ...
+     Cada un de ellas se carga en la pantalla principal (las 9 imagenes) de izquierda a derecha y de arriba
+     hacia abajo
+
+
+Mejoras
+[22:06, 24/10/2019] Andres Bci: 
+1.- que tenga un mantenedor de productos
+
+[22:06, 24/10/2019] pablofierrovallejos: tiene un leame.txt  para ingresar los productos ????
+
+[22:07, 24/10/2019] Andres Bci: 2.- apertura y cierre de caja (Cuadrar caja fin del dia)
+
+[22:08, 24/10/2019] Andres Bci: me dijo ejecutarlo
+[22:08, 24/10/2019] pablofierrovallejos: ??
+
+[22:10, 24/10/2019] pablofierrovallejos: ahí ya no sería gratis
+
+[22:10, 24/10/2019] Andres Bci: claro
+
+[22:10, 24/10/2019] Andres Bci: 10 dias de prueba ajjaja
+
+[22:13, 24/10/2019] Andres Bci: quizás mas avanzado crear una conexión a bd para el mantenedor y estadísticas de ventas
+
+[22:13, 24/10/2019] Andres Bci: crear perfiles
+[22:14, 24/10/2019] pablofierrovallejos: shaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+[22:14, 24/10/2019] Andres Bci: Administrador y cajeros
+[22:14, 24/10/2019] pablofierrovallejos: cliente cacho
+
+[22:14, 24/10/2019] Andres Bci: JAJAJAJJA
+[22:14, 24/10/2019] Andres Bci: son solamente ideas

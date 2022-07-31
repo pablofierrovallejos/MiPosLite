@@ -1,0 +1,56 @@
+-- Para crear la secuencia ventas
+CREATE TABLE sequence (id INT NOT NULL);
+INSERT INTO sequence VALUES (0);
+UPDATE sequence SET id=LAST_INSERT_ID(id+1);
+SELECT LAST_INSERT_ID();
+select * from sequence;
+
+-- 22:44:48	UPDATE sequence SET id=LAST_INSERT_ID(id+1)	Error Code: 1175. You are using safe update mode and you tried to update a table without a WHERE that uses a KEY column.  To disable safe mode, toggle the option in Preferences -> SQL Editor and reconnect.	0.016 sec
+
+-- INSERTAR PRODUCTOS
+-- nombreproducto, precio,  fechacreacion,  vigente, nroposicion ,  cantidaddisponible  
+CALL sp_insertarProducto("COCA COLA LATA", "800","20200623","V", "1",100);
+select * from productos; -- Obtiene el id de producto
+
+--   IN totalmonto ,  IN totalproductos ,  IN fechaventa , IN cuadratura ,   OUT idout)               
+CALL sp_insertarVenta("2000","2","20200601","V", @ids);
+SELECT @ids;
+select * from ventas;
+--   IN iddetalleventas, IN idproducto ,IN cantidad ,IN total 
+CALL sp_insertarDetalleVenta(11,"955","1","1500");
+CALL sp_insertarDetalleVenta(11,"955","1","500");
+select * from detalleventas;
+
+
+
+drop table detalleventas;
+CREATE TABLE `detalleventas` (
+  `idregistro` int(11) NOT NULL,
+  `iddetalleventas` int(11) DEFAULT NULL,
+  `idproducto` varchar(45) DEFAULT NULL,
+  `cantidad` varchar(45) DEFAULT NULL,
+  `total` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idregistro`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `ventas` (
+  `idventas` int(11) NOT NULL,
+  `totalmonto` varchar(45) DEFAULT NULL,
+  `totalproductos` varchar(45) DEFAULT NULL,
+  `fechaventa` varchar(20) DEFAULT NULL,
+  `cuadratura` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idventas`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `productos` (
+  `idproductos` int(11) NOT NULL,
+  `nombreproducto` varchar(45) DEFAULT NULL,
+  `precio` varchar(20) DEFAULT NULL,
+  `fechacreacion` varchar(10) DEFAULT NULL,
+  `vigente` varchar(1) DEFAULT NULL,
+  `nroposicion` varchar(45) DEFAULT NULL,
+  `cantidaddisponible` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`idproductos`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
