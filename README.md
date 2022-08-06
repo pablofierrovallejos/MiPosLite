@@ -14,3 +14,13 @@ Dentro de ella copiar los archivos de configuracion en imagenes
 <p align="center">
    <img src ="https://github.com/pablofierrovallejos/MiPosLite/blob/master/pantalla1.PNG" />
 </p>
+
+<p align="center">
+   <img src ="https://github.com/pablofierrovallejos/MiPosLite/blob/master/cierrecaja.PNG" />
+</p>
+
+
+<p align="center">
+   <img src ="https://github.com/pablofierrovallejos/MiPosLite/blob/master/mantenedor.PNG" />
+</p>
+
