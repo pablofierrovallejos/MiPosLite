@@ -1,4 +1,8 @@
-﻿Public Class Form1
+﻿Imports Transbank.POSIntegrado
+Imports Transbank.Responses.CommonResponses
+Imports Transbank.Responses.IntegradoResponse
+
+Public Class Form1
     Dim mfocus As Integer
 
     Public Sub cargarMarizProductosyPrecios()
@@ -987,6 +991,9 @@
         Else
             MsgBox("Caja se encuentra Cerrada, proceda a apertura desde Menu->Caja->Apertura/Cierre de Caja", "MiPOSLite")
         End If
+
+
+
     End Sub
 
     Private Function getConfigPrintTicket() As Boolean
@@ -1024,8 +1031,51 @@
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         initScreen()
+        Dim lcoms = POSIntegrado.Instance.ListPorts()
+
+        If (lcoms IsNot Nothing) Then
+
+            For Each item As String In lcoms
+
+                MsgBox(item)
+
+            Next
+
+        End If
+
+        ' Pruebas POS ########################################################
+        ' Pruebas POS ########################################################
+        Dim portName As String = "COM1"
+
+        POSIntegrado.Instance.OpenPort(portName)   ' Abrir puerto com
+
+        POSIntegrado.Instance.ClosePort()          ' Cerrar puerto com
+
+
+
+        'POSIntegrado.Instance.IntermediateResponseChange += NewIntermediateMessageReceived   ' EventHandler para los mensajes intermedios.
+
+        Dim Task_resp = POSIntegrado.Instance.Sale(999, "tICKET", False)
+        Try
+            MsgBox(Task_resp.Result.Amount)
+
+        Catch ex As Exception
+            MsgBox(ex.StackTrace.ToString)
+        End Try
+
+
+        'Manejador de mensajes intermedios...
     End Sub
+
+    ' Pruebas POS ########################################################
+    Private Sub NewIntermediateMessageReceived(sender As Object, IntermediateResponse As Object)
+
+
+    End Sub
+    ' Pruebas POS ########################################################
+
 
     Private Sub initScreen()
         cargarProducto() 'Carga imagenes de productos
