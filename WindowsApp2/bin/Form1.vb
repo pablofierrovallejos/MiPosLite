@@ -1033,6 +1033,8 @@ Public Class Form1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         initScreen()
+
+
         Dim lcoms = POSIntegrado.Instance.ListPorts()
 
         If (lcoms IsNot Nothing) Then
@@ -1059,7 +1061,52 @@ Public Class Form1
 
         Dim Task_resp = POSIntegrado.Instance.Sale(999, "tICKET", False)
         Try
-            MsgBox(Task_resp.Result.Amount)
+
+            Dim miFunction = Task_resp.Result.Amount '": 210,
+            Dim miResponse = Task_resp.Result.Response '" :  "Aprobado",
+            Dim miResponseCode = Task_resp.Result.ResponseCode '" :  "Aprobado",
+            Dim miResponseMsg = Task_resp.Result.ResponseMessage '" :  "Aprobado",
+            Dim miComerceCode = Task_resp.Result.CommerceCode '"Commerce Code": 550062700310,
+            Dim miTerminalId = Task_resp.Result.TerminalId '"Terminal Id": "ABC1234C",
+            Dim miTicket = Task_resp.Result.Ticket '"Ticket" :  "ABC123",
+            Dim miAuthCode = Task_resp.Result.AuthorizationCode '"Authorization Code": "XZ123456",
+            Dim miMonto = Task_resp.Result.Amount
+            Dim miSharesNumber = Task_resp.Result.SharesNumber '"Shares Number": 3,
+            Dim miSharesAount = Task_resp.Result.SharesAmount  '"Shares Amount" :  5000,
+            Dim miLast4Digit = Task_resp.Result.Last4Digits '"Last 4 Digits": 6677,
+            Dim miOperationNumber = Task_resp.Result.OperationNumber  '"Operation Number" :  60,
+            Dim miCardType = Task_resp.Result.CardType '"Card Type": "CR",
+            Dim miAccountingDate = Task_resp.Result.AccountingDate '"Accounting Date" : "28/10/2019 22:35:12",
+            Dim miAccountNumber = Task_resp.Result.AccountNumber '"Account Number":"300000000",
+            Dim miCardBrand = Task_resp.Result.CardBrand '"Card Brand" :  "AX",
+            Dim miRealDate = Task_resp.Result.RealDate '"Real Date": "28/10/2019 22:35:12",
+            Dim miEmployeId = Task_resp.Result.EmployeeId '"Employee Id" : 1,
+            Dim miTip = Task_resp.Result.Tip '"Tip": 1500,
+            '  Dim miChange = Task_resp.Result.c '"Change" :  150,
+            'Dim miCommerceProviderCode = Task_resp.Result.co  '"CommerceProviderCode:": 550062712310
+            'MsgBox(Monto)
+
+            Debug.Print(miFunction)
+            Debug.Print(miResponse)
+            Debug.Print(miResponseCode)
+            Debug.Print(miResponseMsg)
+            Debug.Print(miComerceCode)
+            Debug.Print(miTerminalId)
+            Debug.Print(miTicket)
+            Debug.Print(miAuthCode)
+            Debug.Print(miMonto)
+            Debug.Print(miSharesNumber)
+            Debug.Print(miSharesAount)
+            Debug.Print(miLast4Digit)
+            Debug.Print(miOperationNumber)
+            Debug.Print(miCardType)
+            Debug.Print(miAccountingDate)
+            Debug.Print(miAccountNumber)
+            Debug.Print(miCardBrand)
+            Debug.Print(miRealDate)
+            Debug.Print(miEmployeId)
+            Debug.Print(miTip)
+
 
         Catch ex As Exception
             MsgBox(ex.StackTrace.ToString)

@@ -1,4 +1,8 @@
-﻿Public Class Configuracion
+﻿Imports Transbank.POSIntegrado
+Imports Transbank.Responses.CommonResponses
+Imports Transbank.Responses.IntegradoResponse
+
+Public Class Configuracion
 
     Private Sub vaciarArchivo(sfile As String)
         Using file As New IO.StreamWriter(sfile)
@@ -38,6 +42,19 @@
 
     Private Sub Configuracion_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         obtenerConfig("C:\ventasPOS\config\impresion_ticket.ini")
+
+        Dim lcoms = POSIntegrado.Instance.ListPorts()   ' Agrega los coms detectados por windows
+        If (lcoms IsNot Nothing) Then
+            For Each item As String In lcoms
+                ComboBox1.Items.Add(item)
+                Dim mindex = ComboBox1.FindStringExact(item)  ' Deja seleccionado el último COM encontrado
+                ComboBox1.SelectedIndex = mindex
+                miComm = item
+            Next
+        End If
+
+
+
     End Sub
 
     Private Sub CheckBox1_Click(sender As Object, e As EventArgs) Handles CheckBox1.Click
