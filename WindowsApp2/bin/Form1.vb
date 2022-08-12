@@ -1041,7 +1041,8 @@ Public Class Form1
 
             For Each item As String In lcoms
 
-                MsgBox(item)
+                'MsgBox(item)
+                Debug.Print(item)
 
             Next
 
@@ -1059,7 +1060,7 @@ Public Class Form1
 
         'POSIntegrado.Instance.IntermediateResponseChange += NewIntermediateMessageReceived   ' EventHandler para los mensajes intermedios.
 
-        Dim Task_resp = POSIntegrado.Instance.Sale(999, "tICKET", False)
+        Dim Task_resp = POSIntegrado.Instance.Sale(999, "Ticket", False)
         Try
 
             Dim miFunction = Task_resp.Result.Amount '": 210,
@@ -1109,7 +1110,8 @@ Public Class Form1
 
 
         Catch ex As Exception
-            MsgBox(ex.StackTrace.ToString)
+            'MsgBox(ex.StackTrace.ToString)
+            Debug.Print(ex.StackTrace.ToString)
         End Try
 
 
