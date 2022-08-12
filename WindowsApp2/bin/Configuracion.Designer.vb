@@ -30,6 +30,7 @@ Partial Class Configuracion
         Me.cmdLeer = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.cmdAdd = New System.Windows.Forms.Button()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Label1
@@ -69,7 +70,7 @@ Partial Class Configuracion
         '
         'cmdLeer
         '
-        Me.cmdLeer.Location = New System.Drawing.Point(413, 142)
+        Me.cmdLeer.Location = New System.Drawing.Point(96, 285)
         Me.cmdLeer.Name = "cmdLeer"
         Me.cmdLeer.Size = New System.Drawing.Size(116, 27)
         Me.cmdLeer.TabIndex = 4
@@ -78,25 +79,35 @@ Partial Class Configuracion
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(248, 159)
+        Me.TextBox1.Location = New System.Drawing.Point(170, 175)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(150, 20)
         Me.TextBox1.TabIndex = 5
         '
         'cmdAdd
         '
-        Me.cmdAdd.Location = New System.Drawing.Point(413, 175)
+        Me.cmdAdd.Location = New System.Drawing.Point(218, 285)
         Me.cmdAdd.Name = "cmdAdd"
         Me.cmdAdd.Size = New System.Drawing.Size(114, 26)
         Me.cmdAdd.TabIndex = 6
         Me.cmdAdd.Text = "Guardar"
         Me.cmdAdd.UseVisualStyleBackColor = True
         '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(95, 182)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(69, 13)
+        Me.Label3.TabIndex = 7
+        Me.Label3.Text = "Puerto TSBK"
+        '
         'Configuracion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.cmdAdd)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.cmdLeer)
@@ -119,4 +130,5 @@ Partial Class Configuracion
     Friend WithEvents cmdLeer As Button
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents cmdAdd As Button
+    Friend WithEvents Label3 As Label
 End Class

@@ -135,6 +135,12 @@
     <Compile Include="cIniArray.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="bin\administraciontbk.Designer.vb">
+      <DependentUpon>administraciontbk.vb</DependentUpon>
+    </Compile>
+    <Compile Include="bin\administraciontbk.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Module1.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -167,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="bin\Configuracion.resx">
       <DependentUpon>Configuracion.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bin\administraciontbk.resx">
+      <DependentUpon>administraciontbk.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

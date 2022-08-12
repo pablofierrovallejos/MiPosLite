@@ -155,8 +155,9 @@ Partial Class Form1
         Me.CajaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AperturaDeCajaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MantenedorDeProductosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AyudaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConfiguraciónToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AyudaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AdministraciónTBKToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
@@ -1497,7 +1498,7 @@ Partial Class Form1
         '
         'MenuToolStripMenuItem
         '
-        Me.MenuToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CajaToolStripMenuItem, Me.MantenedorDeProductosToolStripMenuItem, Me.ConfiguraciónToolStripMenuItem})
+        Me.MenuToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CajaToolStripMenuItem, Me.MantenedorDeProductosToolStripMenuItem, Me.ConfiguraciónToolStripMenuItem, Me.AdministraciónTBKToolStripMenuItem})
         Me.MenuToolStripMenuItem.Name = "MenuToolStripMenuItem"
         Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(50, 22)
         Me.MenuToolStripMenuItem.Text = "Menu"
@@ -1521,17 +1522,23 @@ Partial Class Form1
         Me.MantenedorDeProductosToolStripMenuItem.Size = New System.Drawing.Size(212, 22)
         Me.MantenedorDeProductosToolStripMenuItem.Text = "Mantenedor de Productos"
         '
+        'ConfiguraciónToolStripMenuItem
+        '
+        Me.ConfiguraciónToolStripMenuItem.Name = "ConfiguraciónToolStripMenuItem"
+        Me.ConfiguraciónToolStripMenuItem.Size = New System.Drawing.Size(212, 22)
+        Me.ConfiguraciónToolStripMenuItem.Text = "Configuración"
+        '
         'AyudaToolStripMenuItem
         '
         Me.AyudaToolStripMenuItem.Name = "AyudaToolStripMenuItem"
         Me.AyudaToolStripMenuItem.Size = New System.Drawing.Size(53, 22)
         Me.AyudaToolStripMenuItem.Text = "Ayuda"
         '
-        'ConfiguraciónToolStripMenuItem
+        'AdministraciónTBKToolStripMenuItem
         '
-        Me.ConfiguraciónToolStripMenuItem.Name = "ConfiguraciónToolStripMenuItem"
-        Me.ConfiguraciónToolStripMenuItem.Size = New System.Drawing.Size(212, 22)
-        Me.ConfiguraciónToolStripMenuItem.Text = "Configuración"
+        Me.AdministraciónTBKToolStripMenuItem.Name = "AdministraciónTBKToolStripMenuItem"
+        Me.AdministraciónTBKToolStripMenuItem.Size = New System.Drawing.Size(212, 22)
+        Me.AdministraciónTBKToolStripMenuItem.Text = "Administración TBK"
         '
         'Form1
         '
@@ -1695,4 +1702,5 @@ Partial Class Form1
     Friend WithEvents Label37 As Label
     Friend WithEvents AyudaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ConfiguraciónToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AdministraciónTBKToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -71,7 +71,7 @@ Public Class Configuracion
         '
         Dim sFicINI As String = Application.StartupPath & "\configparams.ini"
         Dim sSeccion As String = "PARAMETROS"
-        Dim sClave As String = "NROCAJA"
+        Dim sClave As String = "COM_TRANSBANK"
         Dim sValor As String = ""
         '
         TextBox1.Text = mINI.IniGet(sFicINI, sSeccion, sClave, sValor)
@@ -82,9 +82,11 @@ Public Class Configuracion
         '
         Dim sFicINI As String = Application.StartupPath & "\configparams.ini"
         Dim sSeccion As String = "PARAMETROS"
-        Dim sClave As String = "NROCAJA"
+        Dim sClave As String = "COM_TRANSBANK"
         Dim sValor As String = TextBox1.Text
         '
         mINI.IniWrite(sFicINI, sSeccion, sClave, sValor)
     End Sub
+
+
 End Class

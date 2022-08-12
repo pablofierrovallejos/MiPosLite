@@ -1576,11 +1576,8 @@ Public Class Form1
 
     Private Sub AperturaDeCajaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AperturaDeCajaToolStripMenuItem.Click
         Dim AperturaCaja As New AperturaCaja()
-
         AperturaCaja.Show()
         Me.Hide()
-
-
     End Sub
 
 
@@ -1602,5 +1599,10 @@ Public Class Form1
     Private Sub ConfiguraciónToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConfiguraciónToolStripMenuItem.Click
         Dim configuracion As New Configuracion()
         configuracion.Show()
+    End Sub
+
+    Private Sub AdministraciónTBKToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AdministraciónTBKToolStripMenuItem.Click
+        Dim administraciontbk As New administraciontbk()
+        administraciontbk.Show()
     End Sub
 End Class
