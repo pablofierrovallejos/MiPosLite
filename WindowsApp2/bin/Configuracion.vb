@@ -4,6 +4,7 @@ Imports Transbank.Responses.IntegradoResponse
 
 Public Class Configuracion
 
+    Private mINI As New cIniArray               'Para inicializar clase que genera archivo de inicialización
     Private Sub vaciarArchivo(sfile As String)
         Using file As New IO.StreamWriter(sfile)
             file.Flush()
@@ -63,5 +64,27 @@ Public Class Configuracion
         Else
             agregarRegistro("C:\ventasPOS\config\impresion_ticket.ini", "IMPRIMIR_TICKET=NO")
         End If
+    End Sub
+
+    Private Sub cmdLeer_Click(sender As Object, e As EventArgs) Handles cmdLeer.Click
+        ' Leer del fichero INI
+        '
+        Dim sFicINI As String = Application.StartupPath & "\configparams.ini"
+        Dim sSeccion As String = "PARAMETROS"
+        Dim sClave As String = "NROCAJA"
+        Dim sValor As String = ""
+        '
+        TextBox1.Text = mINI.IniGet(sFicINI, sSeccion, sClave, sValor)
+    End Sub
+
+    Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
+        ' Añadir la sección, clave y/o valor
+        '
+        Dim sFicINI As String = Application.StartupPath & "\configparams.ini"
+        Dim sSeccion As String = "PARAMETROS"
+        Dim sClave As String = "NROCAJA"
+        Dim sValor As String = TextBox1.Text
+        '
+        mINI.IniWrite(sFicINI, sSeccion, sClave, sValor)
     End Sub
 End Class

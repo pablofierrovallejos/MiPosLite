@@ -27,6 +27,9 @@ Partial Class Configuracion
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.cmdLeer = New System.Windows.Forms.Button()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.cmdAdd = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Label1
@@ -64,11 +67,39 @@ Partial Class Configuracion
         Me.Label2.TabIndex = 3
         Me.Label2.Text = "Puerto COM Transbank"
         '
+        'cmdLeer
+        '
+        Me.cmdLeer.Location = New System.Drawing.Point(413, 142)
+        Me.cmdLeer.Name = "cmdLeer"
+        Me.cmdLeer.Size = New System.Drawing.Size(116, 27)
+        Me.cmdLeer.TabIndex = 4
+        Me.cmdLeer.Text = "Leer"
+        Me.cmdLeer.UseVisualStyleBackColor = True
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(248, 159)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(150, 20)
+        Me.TextBox1.TabIndex = 5
+        '
+        'cmdAdd
+        '
+        Me.cmdAdd.Location = New System.Drawing.Point(413, 175)
+        Me.cmdAdd.Name = "cmdAdd"
+        Me.cmdAdd.Size = New System.Drawing.Size(114, 26)
+        Me.cmdAdd.TabIndex = 6
+        Me.cmdAdd.Text = "Guardar"
+        Me.cmdAdd.UseVisualStyleBackColor = True
+        '
         'Configuracion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.cmdAdd)
+        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.cmdLeer)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.ComboBox1)
         Me.Controls.Add(Me.CheckBox1)
@@ -85,4 +116,7 @@ Partial Class Configuracion
     Friend WithEvents CheckBox1 As CheckBox
     Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents Label2 As Label
+    Friend WithEvents cmdLeer As Button
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents cmdAdd As Button
 End Class

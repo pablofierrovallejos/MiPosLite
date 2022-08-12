@@ -129,6 +129,12 @@
     <Compile Include="bin\Configuracion.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="cIniArray.Designer.vb">
+      <DependentUpon>cIniArray.vb</DependentUpon>
+    </Compile>
+    <Compile Include="cIniArray.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Module1.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
