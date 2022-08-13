@@ -1052,9 +1052,9 @@ Public Class Form1
         ' Pruebas POS ########################################################
         Dim portName As String = "COM1"
 
-        POSIntegrado.Instance.OpenPort(portName)   ' Abrir puerto com
+        'POSIntegrado.Instance.OpenPort(portName)   ' Abrir puerto com
 
-        POSIntegrado.Instance.ClosePort()          ' Cerrar puerto com
+        ' POSIntegrado.Instance.ClosePort()          ' Cerrar puerto com
 
 
 
