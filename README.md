@@ -30,3 +30,5 @@ PM> Install-Package TransbankPosSDK
 </p>
 
 
+Driver impresora térmica Dinon 9389  (ZJ-58)
+http://www.zjiang.com/en/init.php/product/index?id=28
