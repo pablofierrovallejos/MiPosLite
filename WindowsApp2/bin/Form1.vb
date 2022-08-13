@@ -107,29 +107,29 @@ Public Class Form1
     Private Sub actualizaTotaPagar()
         Label19.Text = 0
         If TextBox9.Text.Trim <> "" Then
-            Label19.Text = Integer.Parse(Label19.Text) + Integer.Parse(TextBox22.Text.Trim)
+            Label19.Text = FormatNumber(Integer.Parse(Label19.Text.Replace(".", "")) + Integer.Parse(TextBox22.Text.Trim), 0)
         End If
         If TextBox10.Text.Trim <> "" Then
-            Label19.Text = Integer.Parse(Label19.Text) + Integer.Parse(TextBox21.Text.Trim)
+            Label19.Text = FormatNumber(Integer.Parse(Label19.Text.Replace(".", "")) + Integer.Parse(TextBox21.Text.Trim), 0)
         End If
         If TextBox11.Text.Trim <> "" Then
-            Label19.Text = Integer.Parse(Label19.Text) + Integer.Parse(TextBox20.Text.Trim)
+            Label19.Text = FormatNumber(Integer.Parse(Label19.Text.Replace(".", "")) + Integer.Parse(TextBox20.Text.Trim), 0)
         End If
         If TextBox12.Text.Trim <> "" Then
-            Label19.Text = Integer.Parse(Label19.Text) + Integer.Parse(TextBox19.Text.Trim)
+            Label19.Text = FormatNumber(Integer.Parse(Label19.Text.Replace(".", "")) + Integer.Parse(TextBox19.Text.Trim), 0)
         End If
         If TextBox13.Text.Trim <> "" Then
-            Label19.Text = Integer.Parse(Label19.Text) + Integer.Parse(TextBox18.Text.Trim)
+            Label19.Text = FormatNumber(Integer.Parse(Label19.Text.Replace(".", "")) + Integer.Parse(TextBox18.Text.Trim), 0)
         End If
         If TextBox14.Text.Trim <> "" Then
-            Label19.Text = Integer.Parse(Label19.Text) + Integer.Parse(TextBox17.Text.Trim)
+            Label19.Text = FormatNumber(Integer.Parse(Label19.Text.Replace(".", "")) + Integer.Parse(TextBox17.Text.Trim), 0)
         End If
         If TextBox15.Text.Trim <> "" Then
-            Label19.Text = Integer.Parse(Label19.Text) + Integer.Parse(TextBox16.Text.Trim)
+            Label19.Text = FormatNumber(Integer.Parse(Label19.Text.Replace(".", "")) + Integer.Parse(TextBox16.Text.Trim), 0)
         End If
 
         If TextBox31.Text.Trim <> "" Then
-            TextBox31.Text = TextBox30.Text - Integer.Parse(Label19.Text)
+            TextBox31.Text = TextBox30.Text - Integer.Parse(Label19.Text.Replace(".", ""))
         End If
 
     End Sub
@@ -1604,5 +1604,9 @@ Public Class Form1
     Private Sub AdministraciónTBKToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AdministraciónTBKToolStripMenuItem.Click
         Dim administraciontbk As New administraciontbk()
         administraciontbk.Show()
+    End Sub
+
+    Private Sub GroupBox1_Enter(sender As Object, e As EventArgs)
+
     End Sub
 End Class
