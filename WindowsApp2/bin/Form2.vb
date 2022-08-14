@@ -63,6 +63,20 @@
                 TextBox3.Text = currentField
             Case 4
                 TextBox4.Text = currentField
+            Case 5
+                TextBox5.Text = currentField
+                If Len(currentField) > 3 Then
+                    PictureBox1.Image = Image.FromFile(currentField)
+                    PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
+                Else
+                    ' PictureBox1.Dispose()
+
+                    PictureBox1.ImageLocation = ""
+                    PictureBox1.Image = Nothing
+
+                    PictureBox1.Refresh()
+
+                End If
             Case Else
                 'nada
         End Select
@@ -240,4 +254,42 @@
 
 
     End Sub
+
+    Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs) Handles TextBox2.TextChanged
+
+    End Sub
+
+    'Solo permite digitos para los montos
+    Private Sub TextBox2_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox2.KeyPress
+        If Char.IsDigit(e.KeyChar) Then
+            e.Handled = False
+        ElseIf Char.IsControl(e.KeyChar) Then
+            e.Handled = False
+        Else
+            e.Handled = True
+        End If
+    End Sub
+    'Solo permite digitos para el UPC
+    Private Sub TextBox3_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox3.KeyPress
+        If Char.IsDigit(e.KeyChar) Then
+            e.Handled = False
+        ElseIf Char.IsControl(e.KeyChar) Then
+            e.Handled = False
+        Else
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub cmdSelecImage_Click(sender As Object, e As EventArgs) Handles cmdSelecImage.Click
+        If OpenFileDialog1.ShowDialog <> Windows.Forms.DialogResult.Cancel Then
+            Dim sImagen As String
+            sImagen = OpenFileDialog1.FileName
+            PictureBox1.Image = Image.FromFile(sImagen)
+            PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
+            TextBox5.Text = sImagen
+
+        End If
+    End Sub
+
+
 End Class
