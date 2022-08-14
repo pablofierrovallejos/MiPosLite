@@ -108,6 +108,8 @@ Partial Class Form1
         Me.Button1 = New System.Windows.Forms.Button()
         Me.btnImprimirSimple = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label38 = New System.Windows.Forms.Label()
+        Me.Label37 = New System.Windows.Forms.Label()
         Me.Label35 = New System.Windows.Forms.Label()
         Me.Label36 = New System.Windows.Forms.Label()
         Me.Button52 = New System.Windows.Forms.Button()
@@ -144,6 +146,9 @@ Partial Class Form1
         Me.Button17 = New System.Windows.Forms.Button()
         Me.Button16 = New System.Windows.Forms.Button()
         Me.Button15 = New System.Windows.Forms.Button()
+        Me.Button14 = New System.Windows.Forms.Button()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.MenuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -153,11 +158,7 @@ Partial Class Form1
         Me.ConfiguraciónToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AdministraciónTBKToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AyudaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Label38 = New System.Windows.Forms.Label()
-        Me.Label37 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Button14 = New System.Windows.Forms.Button()
+        Me.VentasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
@@ -1178,6 +1179,28 @@ Partial Class Form1
         Me.Panel2.Size = New System.Drawing.Size(1084, 1337)
         Me.Panel2.TabIndex = 1
         '
+        'Label38
+        '
+        Me.Label38.AutoSize = True
+        Me.Label38.Location = New System.Drawing.Point(39, 30)
+        Me.Label38.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label38.Name = "Label38"
+        Me.Label38.Size = New System.Drawing.Size(16, 24)
+        Me.Label38.TabIndex = 40
+        Me.Label38.Text = "."
+        Me.Label38.Visible = False
+        '
+        'Label37
+        '
+        Me.Label37.AutoSize = True
+        Me.Label37.Location = New System.Drawing.Point(17, 14)
+        Me.Label37.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label37.Name = "Label37"
+        Me.Label37.Size = New System.Drawing.Size(138, 24)
+        Me.Label37.TabIndex = 39
+        Me.Label37.Text = "Estado Caja:"
+        Me.Label37.Visible = False
+        '
         'Label35
         '
         Me.Label35.AutoSize = True
@@ -1554,6 +1577,7 @@ Partial Class Form1
         Me.Button18.Name = "Button18"
         Me.Button18.Size = New System.Drawing.Size(220, 190)
         Me.Button18.TabIndex = 6
+        Me.Button18.Text = "<"
         Me.Button18.UseVisualStyleBackColor = True
         '
         'Button17
@@ -1586,6 +1610,37 @@ Partial Class Form1
         Me.Button15.TabIndex = 3
         Me.Button15.UseVisualStyleBackColor = True
         '
+        'Button14
+        '
+        Me.Button14.Location = New System.Drawing.Point(517, 16)
+        Me.Button14.Margin = New System.Windows.Forms.Padding(2)
+        Me.Button14.Name = "Button14"
+        Me.Button14.Size = New System.Drawing.Size(71, 21)
+        Me.Button14.TabIndex = 2
+        Me.Button14.Text = "Buscar"
+        Me.Button14.UseVisualStyleBackColor = True
+        Me.Button14.Visible = False
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(258, 18)
+        Me.TextBox1.Margin = New System.Windows.Forms.Padding(2)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(247, 32)
+        Me.TextBox1.TabIndex = 1
+        Me.TextBox1.Visible = False
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(187, 19)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(110, 24)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Producto:"
+        Me.Label1.Visible = False
+        '
         'PrintDocument1
         '
         '
@@ -1602,7 +1657,7 @@ Partial Class Form1
         '
         'MenuToolStripMenuItem
         '
-        Me.MenuToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CajaToolStripMenuItem, Me.MantenedorDeProductosToolStripMenuItem, Me.ConfiguraciónToolStripMenuItem, Me.AdministraciónTBKToolStripMenuItem})
+        Me.MenuToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CajaToolStripMenuItem, Me.MantenedorDeProductosToolStripMenuItem, Me.ConfiguraciónToolStripMenuItem, Me.AdministraciónTBKToolStripMenuItem, Me.VentasToolStripMenuItem})
         Me.MenuToolStripMenuItem.Name = "MenuToolStripMenuItem"
         Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(50, 22)
         Me.MenuToolStripMenuItem.Text = "Menu"
@@ -1644,58 +1699,11 @@ Partial Class Form1
         Me.AyudaToolStripMenuItem.Size = New System.Drawing.Size(53, 22)
         Me.AyudaToolStripMenuItem.Text = "Ayuda"
         '
-        'Label38
+        'VentasToolStripMenuItem
         '
-        Me.Label38.AutoSize = True
-        Me.Label38.Location = New System.Drawing.Point(39, 30)
-        Me.Label38.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label38.Name = "Label38"
-        Me.Label38.Size = New System.Drawing.Size(16, 24)
-        Me.Label38.TabIndex = 40
-        Me.Label38.Text = "."
-        Me.Label38.Visible = False
-        '
-        'Label37
-        '
-        Me.Label37.AutoSize = True
-        Me.Label37.Location = New System.Drawing.Point(17, 14)
-        Me.Label37.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label37.Name = "Label37"
-        Me.Label37.Size = New System.Drawing.Size(138, 24)
-        Me.Label37.TabIndex = 39
-        Me.Label37.Text = "Estado Caja:"
-        Me.Label37.Visible = False
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(187, 19)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(110, 24)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Producto:"
-        Me.Label1.Visible = False
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(258, 18)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(2)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(247, 32)
-        Me.TextBox1.TabIndex = 1
-        Me.TextBox1.Visible = False
-        '
-        'Button14
-        '
-        Me.Button14.Location = New System.Drawing.Point(517, 16)
-        Me.Button14.Margin = New System.Windows.Forms.Padding(2)
-        Me.Button14.Name = "Button14"
-        Me.Button14.Size = New System.Drawing.Size(71, 21)
-        Me.Button14.TabIndex = 2
-        Me.Button14.Text = "Buscar"
-        Me.Button14.UseVisualStyleBackColor = True
-        Me.Button14.Visible = False
+        Me.VentasToolStripMenuItem.Name = "VentasToolStripMenuItem"
+        Me.VentasToolStripMenuItem.Size = New System.Drawing.Size(212, 22)
+        Me.VentasToolStripMenuItem.Text = "Ventas"
         '
         'Form1
         '
@@ -1860,4 +1868,5 @@ Partial Class Form1
     Friend WithEvents Button14 As Button
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Label1 As Label
+    Friend WithEvents VentasToolStripMenuItem As ToolStripMenuItem
 End Class

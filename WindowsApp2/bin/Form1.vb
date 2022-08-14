@@ -80,7 +80,67 @@ Public Class Form1
                 Case Else
                     'nada
             End Select
+        ElseIf nroCol = 5 Then 'Seteamos las imagenes en los botones
+            Select Case nroFila
+                Case 1
+                    Try
+                        Button15.BackgroundImage = Image.FromFile(currentField)
+                    Catch ex As System.IO.FileNotFoundException
+                        Button15.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
+                    End Try
+                Case 2
+                    Try
+                        Button16.BackgroundImage = Image.FromFile(currentField)
+                    Catch ex As System.IO.FileNotFoundException
+                        Button16.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
+                    End Try
+                Case 3
+                    Try
+                        Button17.BackgroundImage = Image.FromFile(currentField)
+                    Catch ex As System.IO.FileNotFoundException
+                        Button17.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
+                    End Try
+                Case 4
+                    Try
+                        Button18.BackgroundImage = Image.FromFile(currentField)
+                    Catch ex As System.IO.FileNotFoundException
+                        Button18.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
+                    End Try
+                Case 5
+                    Try
+                        Button19.BackgroundImage = Image.FromFile(currentField)
+                    Catch ex As System.IO.FileNotFoundException
+                        Button19.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
+                    End Try
+                Case 6
+                    Try
+                        Button20.BackgroundImage = Image.FromFile(currentField)
+                    Catch ex As System.IO.FileNotFoundException
+                        Button20.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
+                    End Try
+                Case 7
+                    Try
+                        Button42.BackgroundImage = Image.FromFile(currentField)
+                    Catch ex As System.IO.FileNotFoundException
+                        Button42.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
+                    End Try
+                Case 8
+                    Try
+                        Button41.BackgroundImage = Image.FromFile(currentField)
+                    Catch ex As System.IO.FileNotFoundException
+                        Button41.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
+                    End Try
+                Case 9
+                    Try
+                        Button40.BackgroundImage = Image.FromFile(currentField)
+                    Catch ex As System.IO.FileNotFoundException
+                        Button40.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
+                    End Try
+                Case Else
+                    'nada
+            End Select
         End If
+
 
     End Sub
     Private Function obtenerEstadoCaja() As Boolean
