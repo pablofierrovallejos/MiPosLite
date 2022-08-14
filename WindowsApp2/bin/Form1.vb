@@ -313,99 +313,141 @@ Public Class Form1
             Dim ilinea As Integer
             Dim ipaso As Integer
             Dim sCompra As String
-            margenIzq = 2
+            Dim mrelleno As Integer
+            Dim mrellenoc As Integer
+            Dim sNomProducto As String
+
+            Dim numAleatorio As New Random()
+            Dim valorAleatorio As Integer = numAleatorio.Next(100, 999) ' Numero aleatorio para el ticket
+
+
+            mrelleno = 17  'Relleno largo  del nombre del producto
+            mrellenoc = 2  'Relleno largo  de cantidad de productos
+            margenIzq = 0
             ilinea = 2
             ipaso = 20
             ' La fuente a usar
-            Dim prFont As New Font("Arial", 10, FontStyle.Regular)
-            ' la posición superior
+            Dim prFont As New Font("Consolas", 9, FontStyle.Regular)
+
+            ' La fuente del titulo
+            Dim prFontTit As New Font("Arial", 14, FontStyle.Regular)
+
 
             'imprimimos la fecha y hora
             e.Graphics.DrawString(Date.Now.ToShortDateString.ToString & " " & Date.Now.ToShortTimeString.ToString, prFont, Brushes.Black, margenIzq, ilinea)
 
             'imprimimos el nombre del Local
             ilinea = ilinea + ipaso
-            e.Graphics.DrawString("Heladeria Serrano", prFont, Brushes.Black, margenIzq, ilinea)
+            e.Graphics.DrawString("Heladeria Serrano", prFontTit, Brushes.Black, margenIzq, ilinea)
+
+            'Imprimir numero de ticket
+            ilinea = ilinea + ipaso
+            e.Graphics.DrawString("Ticket: " & Date.Now.ToShortDateString.ToString.Replace("-", "") & Date.Now.ToShortTimeString.ToString.Replace(":", "") & valorAleatorio, prFont, Brushes.Black, margenIzq, ilinea)
+
+            'Salto de linea
             ilinea = ilinea + ipaso
             e.Graphics.DrawString(" ", prFont, Brushes.Black, margenIzq, ilinea)
 
 
             'imprimimos Detalle de la compra
-            sCompra = "Producto  Unidad  Sub."
+            sCompra = "Producto       Uni  Sub"
             ilinea = ilinea + ipaso
             e.Graphics.DrawString(sCompra, prFont, Brushes.Black, margenIzq, ilinea)
 
             If TextBox2.Text.Trim <> "" Then
+                sNomProducto = TextBox2.Text.PadRight(mrelleno, " ")
+                If sNomProducto.Length > 17 Then
+                    sNomProducto = sNomProducto.Substring(0, 17)
+                End If
                 ilinea = ilinea + ipaso
-                sCompra = TextBox2.Text.PadRight(14, " ") & "   " & TextBox9.Text & " " & TextBox22.Text
+                sCompra = sNomProducto & TextBox9.Text.PadRight(mrellenoc, " ") & " $" & FormatNumber(Integer.Parse(TextBox22.Text), 0)
                 e.Graphics.DrawString(sCompra, prFont, Brushes.Black, margenIzq, ilinea)
             End If
             If TextBox3.Text.Trim <> "" Then
+                sNomProducto = TextBox3.Text.PadRight(mrelleno, " ")
+                If sNomProducto.Length > 17 Then
+                    sNomProducto = sNomProducto.Substring(0, 17)
+                End If
                 ilinea = ilinea + ipaso
-                sCompra = TextBox3.Text.PadRight(14, " ") & "   " & TextBox10.Text & " " & TextBox21.Text
+                sCompra = sNomProducto & TextBox10.Text.PadRight(mrellenoc, " ") & " $" & FormatNumber(Integer.Parse(TextBox21.Text), 0)
                 e.Graphics.DrawString(sCompra, prFont, Brushes.Black, margenIzq, ilinea)
             End If
             If TextBox4.Text.Trim <> "" Then
+                sNomProducto = TextBox4.Text.PadRight(mrelleno, " ")
+                If sNomProducto.Length > 17 Then
+                    sNomProducto = sNomProducto.Substring(0, 17)
+                End If
                 ilinea = ilinea + ipaso
-                sCompra = TextBox4.Text.PadRight(14, " ") & "   " & TextBox11.Text & " " & TextBox20.Text
+                sCompra = sNomProducto & TextBox11.Text.PadRight(mrellenoc, " ") & " $" & FormatNumber(Integer.Parse(TextBox20.Text), 0)
                 sCompra = sCompra.PadRight(13)
                 e.Graphics.DrawString(sCompra, prFont, Brushes.Black, margenIzq, ilinea)
             End If
             If TextBox5.Text.Trim <> "" Then
+                sNomProducto = TextBox5.Text.PadRight(mrelleno, " ")
+                If sNomProducto.Length > 17 Then
+                    sNomProducto = sNomProducto.Substring(0, 17)
+                End If
                 ilinea = ilinea + ipaso
-                'sCompra = TextBox5.Text & "   " & TextBox12.Text & "   " & TextBox26.Text & "   " & TextBox19.Text
-                sCompra = TextBox5.Text.PadRight(14, " ") & "   " & TextBox12.Text & " " & TextBox19.Text
+                sCompra = sNomProducto & TextBox12.Text.PadRight(mrellenoc, " ") & " $" & FormatNumber(Integer.Parse(TextBox19.Text), 0)
                 sCompra = sCompra.PadRight(13)
                 e.Graphics.DrawString(sCompra, prFont, Brushes.Black, margenIzq, ilinea)
             End If
-
             If TextBox6.Text.Trim <> "" Then
+                sNomProducto = TextBox6.Text.PadRight(mrelleno, " ")
+                If sNomProducto.Length > 17 Then
+                    sNomProducto = sNomProducto.Substring(0, 17)
+                End If
                 ilinea = ilinea + ipaso
-                'sCompra = TextBox6.Text & "   " & TextBox13.Text & "   " & TextBox25.Text & "   " & TextBox18.Text
-                sCompra = TextBox6.Text.PadRight(14, " ") & "   " & TextBox13.Text & " " & TextBox18.Text
+                sCompra = sNomProducto & TextBox13.Text.PadRight(mrellenoc, " ") & " $" & FormatNumber(Integer.Parse(TextBox18.Text), 0)
                 sCompra = sCompra.PadRight(13)
                 e.Graphics.DrawString(sCompra, prFont, Brushes.Black, margenIzq, ilinea)
             End If
-
             If TextBox7.Text.Trim <> "" Then
+                sNomProducto = TextBox7.Text.PadRight(mrelleno, " ")
+                If sNomProducto.Length > 17 Then
+                    sNomProducto = sNomProducto.Substring(0, 17)
+                End If
                 ilinea = ilinea + ipaso
-                'sCompra = TextBox7.Text & "   " & TextBox14.Text & "   " & TextBox24.Text & "   " & TextBox17.Text
-                sCompra = TextBox7.Text.PadRight(14, " ") & "   " & TextBox14.Text & " " & TextBox17.Text
+                sCompra = sNomProducto & TextBox14.Text.PadRight(mrellenoc, " ") & " $" & FormatNumber(Integer.Parse(TextBox17.Text), 0)
                 sCompra = sCompra.PadRight(13)
                 e.Graphics.DrawString(sCompra, prFont, Brushes.Black, margenIzq, ilinea)
             End If
-
             If TextBox8.Text.Trim <> "" Then
+                If sNomProducto.Length > 17 Then
+                    sNomProducto = sNomProducto.Substring(0, 17)
+                End If
+                sNomProducto = TextBox8.Text.PadRight(mrelleno, " ")
                 ilinea = ilinea + ipaso
-                'sCompra = TextBox8.Text & "   " & TextBox15.Text & "   " & TextBox23.Text & "   " & TextBox16.Text
-                sCompra = TextBox8.Text.PadRight(14, " ") & "   " & TextBox15.Text & " " & TextBox16.Text
+                sCompra = sNomProducto & TextBox15.Text.PadRight(mrellenoc, " ") & " $" & FormatNumber(Integer.Parse(TextBox16.Text), 0)
                 sCompra = sCompra.PadRight(13)
                 e.Graphics.DrawString(sCompra, prFont, Brushes.Black, margenIzq, ilinea)
             End If
 
             'Imprime el total
             ilinea = ilinea + ipaso
-            e.Graphics.DrawString(" ", prFont, Brushes.Black, margenIzq, ilinea)
+            e.Graphics.DrawString(" ", prFont, Brushes.Black, margenIzq, ilinea) ' hace un salto de linea
 
             ilinea = ilinea + ipaso
-            sCompra = Label2.Text & "   " & Label18.Text & "   " & "$" & Label19.Text
+            sCompra = Label2.Text & "   " & Label18.Text.PadLeft(2, "0") & "   " & "$" & Label19.Text
             e.Graphics.DrawString(sCompra, prFont, Brushes.Black, margenIzq, ilinea)
 
             'Imprime vuelto
-            ilinea = ilinea + ipaso
-            sCompra = Label22.Text & "   " & TextBox30.Text
-            e.Graphics.DrawString(sCompra, prFont, Brushes.Black, margenIzq, ilinea)
+            'ilinea = ilinea + ipaso
+            'sCompra = Label22.Text & "   " & TextBox30.Text
+            'e.Graphics.DrawString(sCompra, prFont, Brushes.Black, margenIzq, ilinea)
 
             ilinea = ilinea + ipaso
             sCompra = Label24.Text & "   " & TextBox31.Text
             e.Graphics.DrawString(sCompra, prFont, Brushes.Black, margenIzq, ilinea)
 
+
+
             ilinea = ilinea + ipaso
             e.Graphics.DrawString(". ", prFont, Brushes.Black, margenIzq, ilinea)
             ilinea = ilinea + ipaso
             e.Graphics.DrawString(". ", prFont, Brushes.Black, margenIzq, ilinea)
-            ilinea = ilinea + ipaso
-            e.Graphics.DrawString(". ", prFont, Brushes.Black, margenIzq, ilinea)
+            ' ilinea = ilinea + ipaso
+            'e.Graphics.DrawString(". ", prFont, Brushes.Black, margenIzq, ilinea)
 
             'indicamos que hemos llegado al final de la pagina
             e.HasMorePages = False
