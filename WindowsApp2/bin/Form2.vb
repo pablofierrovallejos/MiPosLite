@@ -6,8 +6,6 @@
         Label7.Text = Integer.Parse(Label7.Text) + 1
         nroRegistroActual = Integer.Parse(Label7.Text) + 1
         Label5.Text = Integer.Parse(Label5.Text) + 1
-
-
     End Sub
 
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -171,6 +169,8 @@
         Next
     End Sub
 
+
+
     Private Sub agregarRegistro(sLin As String)
         Const fic As String = "C:\ventasPOS\productos.txt"
         ' Dim texto As String = TextBox1.Text & ";" & TextBox2.Text & ";" & TextBox3.Text
@@ -249,10 +249,7 @@
         Form1.Close()
         Form1.Show()
         Me.BringToFront()
-
         '  Form2.Show()
-
-
     End Sub
 
     Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs) Handles TextBox2.TextChanged
@@ -291,5 +288,95 @@
         End If
     End Sub
 
+    Private Sub cmdAtras_Click(sender As Object, e As EventArgs) Handles cmdAtras.Click
+        If Label7.Text <> Label5.Text Then
+            Dim nuevaPosicReg As Integer = Integer.Parse(Label7.Text) + 1
+            moverRegistroAtras(Integer.Parse(Label7.Text))
+            leerRegistro(nuevaPosicReg)
+            Label7.Text = nuevaPosicReg
 
+            'Refresca´pantalla
+            Form1.Close()
+            Form1.Show()
+            Me.BringToFront()
+        End If
+    End Sub
+    Private Sub moverRegistroAtras(nroReg As Integer)
+        'Primero caragamos el archivo completo en una lista , el que movemos lo guardamos en un temporal
+
+        Dim objReader As New IO.StreamReader("C:\ventasPOS\productos.txt")
+        Dim sLine As String = ""
+        Dim arrText As New ArrayList()
+        Dim regActual As Integer = 1
+        Dim slineMov As String = ""
+        Do
+            sLine = objReader.ReadLine()
+            If Not sLine Is Nothing Then
+                If regActual <> nroReg Then  'Solo carga si es distinto al solicitado a mover
+                    arrText.Add(sLine)
+                Else
+                    slineMov = sLine
+                End If
+            End If
+            regActual = regActual + 1
+        Loop Until sLine Is Nothing
+        objReader.Close()
+
+        arrText.Insert(nroReg, slineMov)
+
+        'Luego vaciamos el archivo
+        vaciarArchivo()
+
+        'finalmente escribimos la lista en el archivo
+        For Each sLine In arrText
+            agregarRegistro(sLine)
+            'Console.WriteLine(sLine)
+        Next
+    End Sub
+
+    Private Sub cmdAdelante_Click(sender As Object, e As EventArgs) Handles cmdAdelante.Click
+        If Label7.Text <> "1" Then
+            Dim nuevaPosicReg As Integer = Integer.Parse(Label7.Text) - 1
+            moverRegistroAdelante(Integer.Parse(Label7.Text))
+            leerRegistro(nuevaPosicReg)
+            Label7.Text = nuevaPosicReg
+
+            'Refresca´pantalla
+            Form1.Close()
+            Form1.Show()
+            Me.BringToFront()
+        End If
+    End Sub
+    Private Sub moverRegistroAdelante(nroReg As Integer)
+        'Primero caragamos el archivo completo en una lista , el que movemos lo guardamos en un temporal
+
+        Dim objReader As New IO.StreamReader("C:\ventasPOS\productos.txt")
+        Dim sLine As String = ""
+        Dim arrText As New ArrayList()
+        Dim regActual As Integer = 1
+        Dim slineMov As String = ""
+        Do
+            sLine = objReader.ReadLine()
+            If Not sLine Is Nothing Then
+                If regActual <> nroReg Then  'Solo carga si es distinto al solicitado a mover
+                    arrText.Add(sLine)
+                Else
+                    slineMov = sLine
+                End If
+            End If
+            regActual = regActual + 1
+        Loop Until sLine Is Nothing
+        objReader.Close()
+
+        arrText.Insert((nroReg - 2), slineMov)
+
+        'Luego vaciamos el archivo
+        vaciarArchivo()
+
+        'finalmente escribimos la lista en el archivo
+        For Each sLine In arrText
+            agregarRegistro(sLine)
+            'Console.WriteLine(sLine)
+        Next
+    End Sub
 End Class

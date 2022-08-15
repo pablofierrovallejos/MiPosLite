@@ -2,9 +2,12 @@
 Imports Transbank.Responses.CommonResponses
 Imports Transbank.Responses.IntegradoResponse
 
+
 Public Class Form1
     Dim mfocus As Integer
-
+    Dim btnMatriz(30) As System.Windows.Forms.Button      ' Botones de productos
+    Dim tbNombreProd(30) As TextBox                       ' Textbox para nombre de productos
+    Dim tbPrecio(30) As TextBox                           ' Textbox para precio de cada producto
     Public Sub cargarMarizProductosyPrecios()
         Dim nroCol As Integer = 1
         Dim nroFila As Integer = 1
@@ -34,111 +37,85 @@ Public Class Form1
 
 
     Private Sub setearLabel(nroFila As Integer, nroCol As Integer, currentField As String)
-        If nroCol = 1 Then   ' Seteamos los nombres de productos
-            Select Case nroFila
-                Case 1
-                    Label6.Text = currentField
-                Case 2
-                    Label9.Text = currentField
-                Case 3
-                    Label11.Text = currentField
-                Case 4
-                    Label17.Text = currentField
-                Case 5
-                    Label15.Text = currentField
-                Case 6
-                    Label13.Text = currentField
-                Case 7
-                    Label30.Text = currentField
-                Case 8
-                    Label28.Text = currentField
-                Case 9
-                    Label26.Text = currentField
-                Case Else
-                    'nada
-            End Select
-        ElseIf nroCol = 2 Then 'Seteamos los precios
-            Select Case nroFila
-                Case 1
-                    Label7.Text = currentField
-                Case 2
-                    Label8.Text = currentField
-                Case 3
-                    Label10.Text = currentField
-                Case 4
-                    Label16.Text = currentField
-                Case 5
-                    Label14.Text = currentField
-                Case 6
-                    Label12.Text = currentField
-                Case 7
-                    Label29.Text = currentField
-                Case 8
-                    Label27.Text = currentField
-                Case 9
-                    Label25.Text = currentField
-                Case Else
-                    'nada
-            End Select
+        If nroCol = 1 Then   ' Seteamos los nombres de productos en los botones
+            Try
+                tbNombreProd(nroFila - 1).Text = currentField
+            Catch ex As System.IO.FileNotFoundException
+                tbNombreProd(nroFila - 1).Text = "."
+            End Try
+            btnMatriz(nroFila - 1).Name = "BTN" & nroFila - 1
+        ElseIf nroCol = 2 Then 'Seteamos los precios tbPrecio(i).BringToFront()
+            Try
+                tbPrecio(nroFila - 1).Text = "$" & currentField
+            Catch ex As System.IO.FileNotFoundException
+                tbPrecio(nroFila - 1).Text = "."
+            End Try
         ElseIf nroCol = 5 Then 'Seteamos las imagenes en los botones
-            Select Case nroFila
-                Case 1
-                    Try
-                        Button15.BackgroundImage = Image.FromFile(currentField)
-                    Catch ex As System.IO.FileNotFoundException
-                        Button15.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
-                    End Try
-                Case 2
-                    Try
-                        Button16.BackgroundImage = Image.FromFile(currentField)
-                    Catch ex As System.IO.FileNotFoundException
-                        Button16.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
-                    End Try
-                Case 3
-                    Try
-                        Button17.BackgroundImage = Image.FromFile(currentField)
-                    Catch ex As System.IO.FileNotFoundException
-                        Button17.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
-                    End Try
-                Case 4
-                    Try
-                        Button18.BackgroundImage = Image.FromFile(currentField)
-                    Catch ex As System.IO.FileNotFoundException
-                        Button18.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
-                    End Try
-                Case 5
-                    Try
-                        Button19.BackgroundImage = Image.FromFile(currentField)
-                    Catch ex As System.IO.FileNotFoundException
-                        Button19.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
-                    End Try
-                Case 6
-                    Try
-                        Button20.BackgroundImage = Image.FromFile(currentField)
-                    Catch ex As System.IO.FileNotFoundException
-                        Button20.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
-                    End Try
-                Case 7
-                    Try
-                        Button42.BackgroundImage = Image.FromFile(currentField)
-                    Catch ex As System.IO.FileNotFoundException
-                        Button42.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
-                    End Try
-                Case 8
-                    Try
-                        Button41.BackgroundImage = Image.FromFile(currentField)
-                    Catch ex As System.IO.FileNotFoundException
-                        Button41.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
-                    End Try
-                Case 9
-                    Try
-                        Button40.BackgroundImage = Image.FromFile(currentField)
-                    Catch ex As System.IO.FileNotFoundException
-                        Button40.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
-                    End Try
-                Case Else
-                    'nada
-            End Select
+            Try
+                btnMatriz(nroFila - 1).BackgroundImage = Image.FromFile(currentField)
+            Catch ex As System.IO.FileNotFoundException
+                btnMatriz(nroFila - 1).BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
+            End Try
+
+
+            'Select Case nroFila
+            '    Case 1
+            '        Try
+            '            Button15.BackgroundImage = Image.FromFile(currentField)
+            '        Catch ex As System.IO.FileNotFoundException
+            '            Button15.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
+            '        End Try
+            '    Case 2
+            '        Try
+            '            Button16.BackgroundImage = Image.FromFile(currentField)
+            '        Catch ex As System.IO.FileNotFoundException
+            '            Button16.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
+            '        End Try
+            '    Case 3
+            '        Try
+            '            Button17.BackgroundImage = Image.FromFile(currentField)
+            '        Catch ex As System.IO.FileNotFoundException
+            '            Button17.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
+            '        End Try
+            '    Case 4
+            '        Try
+            '            Button18.BackgroundImage = Image.FromFile(currentField)
+            '        Catch ex As System.IO.FileNotFoundException
+            '            Button18.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
+            '        End Try
+            '    Case 5
+            '        Try
+            '            Button19.BackgroundImage = Image.FromFile(currentField)
+            '        Catch ex As System.IO.FileNotFoundException
+            '            Button19.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
+            '        End Try
+            '    Case 6
+            '        Try
+            '            Button20.BackgroundImage = Image.FromFile(currentField)
+            '        Catch ex As System.IO.FileNotFoundException
+            '            Button20.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
+            '        End Try
+            '    Case 7
+            '        Try
+            '            Button42.BackgroundImage = Image.FromFile(currentField)
+            '        Catch ex As System.IO.FileNotFoundException
+            '            Button42.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
+            '        End Try
+            '    Case 8
+            '        Try
+            '            Button41.BackgroundImage = Image.FromFile(currentField)
+            '        Catch ex As System.IO.FileNotFoundException
+            '            Button41.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
+            '        End Try
+            '    Case 9
+            '        Try
+            '            Button40.BackgroundImage = Image.FromFile(currentField)
+            '        Catch ex As System.IO.FileNotFoundException
+            '            Button40.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
+            '        End Try
+            '    Case Else
+            '        'nada
+            'End Select
         End If
 
 
@@ -604,27 +581,78 @@ Public Class Form1
         Dim dt As Date = Today
         Dim sdate As String = Replace(dt, "-", "")
         Dim file As System.IO.StreamWriter
-        file = My.Computer.FileSystem.OpenTextFileWriter("C:\ventasPOS\baseventas\ventasPOS" & sdate & ".csv", True)
+        Dim sfileName = "C:\ventasPOS\baseventas\ventasPOS" & sdate & ".csv"
+        Dim isizeFile As Integer
+
+        isizeFile = tamanioArchivo(sfileName)
+        file = My.Computer.FileSystem.OpenTextFileWriter(sfileName, True)
 
         'Dim Linea As String = "Línea de texto " & vbNewLine & "Otra linea de texto"
-        Dim Linea As String
+        Dim hLinea As String
+        Dim bLinea As String
+        Dim sTotales As String
+        hLinea = dt & ";" & Now.ToLongTimeString & ";" & numeroAleatorioDistinto() & ";"
+        sTotales = Label18.Text & ";" & Label19.Text.Replace(".", "") & ";" & TextBox30.Text.Replace(".", "") & ";" & TextBox31.Text
 
-        Linea = dt & ";" & Now.ToLongTimeString & ";"
+        If isizeFile = 0 Then ' si el arcchivo esta vacío escribir cabecera
+            file.WriteLine("Fecha; Hora; Secuencia; Producto ; Cantidad; Valor; Subtotal; Cantidad Total;Monto Total;P3;P4")
+        End If
 
-        Linea = Linea & TextBox2.Text & ";" & TextBox9.Text & ";" & TextBox29.Text & ";" & TextBox22.Text & ";" _
-                      & TextBox3.Text & ";" & TextBox10.Text & ";" & TextBox28.Text & ";" & TextBox21.Text & ";" _
-                      & TextBox4.Text & ";" & TextBox11.Text & ";" & TextBox27.Text & ";" & TextBox20.Text & ";" _
-                      & TextBox5.Text & ";" & TextBox12.Text & ";" & TextBox26.Text & ";" & TextBox19.Text & ";" _
-                      & TextBox6.Text & ";" & TextBox13.Text & ";" & TextBox25.Text & ";" & TextBox18.Text & ";" _
-                      & TextBox7.Text & ";" & TextBox14.Text & ";" & TextBox24.Text & ";" & TextBox17.Text & ";" _
-                      & TextBox8.Text & ";" & TextBox15.Text & ";" & TextBox23.Text & ";" & TextBox16.Text & ";" _
-                      & Label18.Text & ";" & Label19.Text & ";" & TextBox30.Text & ";" & TextBox31.Text
-        file.WriteLine(Linea)
+
+
+        If TextBox2.Text.Trim.Length > 0 Then
+            bLinea = hLinea & TextBox2.Text & ";" & TextBox9.Text & ";" & TextBox29.Text & ";" & TextBox22.Text & ";" & sTotales
+            file.WriteLine(bLinea)
+        End If
+
+        If TextBox3.Text.Trim.Length > 0 Then
+            bLinea = hLinea & TextBox3.Text & ";" & TextBox10.Text & ";" & TextBox28.Text & ";" & TextBox21.Text & ";" & sTotales
+            file.WriteLine(bLinea)
+        End If
+
+        If TextBox4.Text.Trim.Length > 0 Then
+            bLinea = hLinea & TextBox4.Text & ";" & TextBox11.Text & ";" & TextBox27.Text & ";" & TextBox20.Text & ";" & sTotales
+            file.WriteLine(bLinea)
+        End If
+
+        If TextBox5.Text.Trim.Length > 0 Then
+            bLinea = hLinea & TextBox5.Text & ";" & TextBox12.Text & ";" & TextBox26.Text & ";" & TextBox19.Text & ";" & sTotales
+            file.WriteLine(bLinea)
+        End If
+
+        If TextBox6.Text.Trim.Length > 0 Then
+            bLinea = hLinea & TextBox6.Text & ";" & TextBox13.Text & ";" & TextBox25.Text & ";" & TextBox18.Text & ";" & sTotales
+            file.WriteLine(bLinea)
+        End If
+
+        If TextBox7.Text.Trim.Length > 0 Then
+            bLinea = hLinea & TextBox7.Text & ";" & TextBox14.Text & ";" & TextBox24.Text & ";" & TextBox17.Text & ";" & sTotales
+            file.WriteLine(bLinea)
+        End If
+
+        If TextBox8.Text.Trim.Length > 0 Then
+            bLinea = hLinea & TextBox8.Text & ";" & TextBox15.Text & ";" & TextBox23.Text & ";" & TextBox16.Text & ";" & sTotales
+            file.WriteLine(bLinea)
+        End If
         'oSW.WriteLine(Linea)
 
         'file.Flush()
         file.Close()
     End Sub
+    Public Function tamanioArchivo(sfile As String) As Integer
+        Dim text As String
+        Try
+            text = System.IO.File.ReadAllText(sfile)
+            Return text.Length
+        Catch
+            Return 0
+        End Try
+    End Function
+    Private Function numeroAleatorioDistinto() As String
+        Dim numAleatorio As New Random(CInt(Date.Now.Ticks And Integer.MaxValue))
+        Dim sAleatorio = System.Convert.ToString(numAleatorio.Next(10000, 99999))
+        Return sAleatorio
+    End Function
 
     Private Sub cargarProducto()
         'Button1.BackgroundImage = My.Resources.Imagen1
@@ -1134,37 +1162,76 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        'Genera la matriz de botones
+
+        Dim xPos As Integer = 15
+        Dim yPos As Integer = 0
+        Dim columna As Integer = 0
+
+        For i As Integer = 0 To 29
+            ' Initialize one variable
+            btnMatriz(i) = New System.Windows.Forms.Button
+            btnMatriz(i).BackgroundImageLayout = ImageLayout.Stretch
+            btnMatriz(i).Width = 170 '170; 160
+            btnMatriz(i).Height = 160
+            btnMatriz(i).Top = yPos
+            btnMatriz(i).Left = xPos
+
+            tbNombreProd(i) = New TextBox
+            tbNombreProd(i).Text = ""
+            tbNombreProd(i).Top = yPos + 145
+            tbNombreProd(i).Left = xPos
+            tbNombreProd(i).Width = 170
+            tbNombreProd(i).ReadOnly = True
+            tbNombreProd(i).TextAlign = HorizontalAlignment.Center
+            tbNombreProd(i).Font = New Font("Arial", 14)
+            tbNombreProd(i).ForeColor = Color.RoyalBlue
+
+
+            tbPrecio(i) = New TextBox
+            tbPrecio(i).Text = ""
+            tbPrecio(i).Top = yPos + 172
+            tbPrecio(i).Left = xPos
+            tbPrecio(i).Width = 170
+            tbPrecio(i).ReadOnly = True
+            tbPrecio(i).TextAlign = HorizontalAlignment.Center
+            tbPrecio(i).Font = New Font("Arial", 14)
+            tbPrecio(i).ForeColor = Color.Red
+
+            If columna < 5 Then
+                xPos = xPos + 175
+                columna = columna + 1
+            Else
+                columna = 0
+                xPos = 15
+                yPos = yPos + 230
+            End If
+            Panel2.Controls.Add(btnMatriz(i))   ' Let panel hold the Buttons
+            AddHandler btnMatriz(i).Click, AddressOf Me.ClickButton
+
+            Panel2.Controls.Add(tbNombreProd(i))
+            Panel2.Controls.Add(tbPrecio(i))
+            tbNombreProd(i).BringToFront()
+            tbPrecio(i).BringToFront()
+        Next i
+
         initScreen()
 
-
-        Dim lcoms = POSIntegrado.Instance.ListPorts()
-
-        If (lcoms IsNot Nothing) Then
-
-            For Each item As String In lcoms
-
-                'MsgBox(item)
-                Debug.Print(item)
-
-            Next
-
-        End If
-
         ' Pruebas POS ########################################################
+        Dim lcoms = POSIntegrado.Instance.ListPorts()
+        If (lcoms IsNot Nothing) Then
+            For Each item As String In lcoms
+                Debug.Print(item)
+            Next
+        End If
         ' Pruebas POS ########################################################
         Dim portName As String = "COM1"
-
         'POSIntegrado.Instance.OpenPort(portName)   ' Abrir puerto com
-
         ' POSIntegrado.Instance.ClosePort()          ' Cerrar puerto com
-
-
-
         'POSIntegrado.Instance.IntermediateResponseChange += NewIntermediateMessageReceived   ' EventHandler para los mensajes intermedios.
 
         Dim Task_resp = POSIntegrado.Instance.Sale(999, "Ticket", False)
         Try
-
             Dim miFunction = Task_resp.Result.Amount '": 210,
             Dim miResponse = Task_resp.Result.Response '" :  "Aprobado",
             Dim miResponseCode = Task_resp.Result.ResponseCode '" :  "Aprobado",
@@ -1209,15 +1276,29 @@ Public Class Form1
             Debug.Print(miRealDate)
             Debug.Print(miEmployeId)
             Debug.Print(miTip)
-
-
         Catch ex As Exception
             'MsgBox(ex.StackTrace.ToString)
             Debug.Print(ex.StackTrace.ToString)
         End Try
-
-
         'Manejador de mensajes intermedios...
+    End Sub
+    Private Sub ClickButton(ByVal sender As Object, ByVal e As System.EventArgs) 'Eventos para el arreglo de botones
+
+        Dim btn As Button = CType(sender, Button)
+
+        'MessageBox.Show(btn.Location.ToString & " Name: " & btn.Name)
+
+        If btn.Name.Length > 3 Then
+            Dim sNombre = btn.Name
+            Dim nlargo = sNombre.Length
+            Dim subIndx = sNombre.Substring(3, (nlargo - 3))
+            Dim nindex = Integer.Parse(subIndx)
+
+            insertaCompra(tbNombreProd(nindex).Text, tbPrecio(nindex).Text.Replace("$", ""))
+            actualizaTotalesManuales()
+            actualizaTotalCantidades()
+            actualizaTotaPagar()
+        End If
     End Sub
 
     ' Pruebas POS ########################################################
@@ -1237,8 +1318,6 @@ Public Class Form1
             Label38.Text = "Cerrada"
         End If
     End Sub
-
-
 
     Private Sub Button42_Click(sender As Object, e As EventArgs) Handles Button42.Click
         insertaCompra(Label30.Text, Label29.Text)
@@ -1711,4 +1790,11 @@ Public Class Form1
     Private Sub GroupBox1_Enter(sender As Object, e As EventArgs)
 
     End Sub
+
+    Private Sub VentasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles VentasToolStripMenuItem.Click
+        Dim ventas As New ventas()
+        ventas.Show()
+    End Sub
+
+
 End Class

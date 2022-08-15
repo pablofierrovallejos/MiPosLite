@@ -54,6 +54,8 @@ Partial Class Form2
         Me.OpenFileDialog2 = New System.Windows.Forms.OpenFileDialog()
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.OpenFileDialog3 = New System.Windows.Forms.OpenFileDialog()
+        Me.cmdAdelante = New System.Windows.Forms.Button()
+        Me.cmdAtras = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -99,6 +101,8 @@ Partial Class Form2
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.GroupBox1.Controls.Add(Me.cmdAtras)
+        Me.GroupBox1.Controls.Add(Me.cmdAdelante)
         Me.GroupBox1.Controls.Add(Me.cmdSelecImage)
         Me.GroupBox1.Controls.Add(Me.PictureBox1)
         Me.GroupBox1.Controls.Add(Me.Label10)
@@ -351,6 +355,24 @@ Partial Class Form2
         '
         Me.OpenFileDialog3.FileName = "OpenFileDialog3"
         '
+        'cmdAdelante
+        '
+        Me.cmdAdelante.Location = New System.Drawing.Point(423, 208)
+        Me.cmdAdelante.Name = "cmdAdelante"
+        Me.cmdAdelante.Size = New System.Drawing.Size(121, 36)
+        Me.cmdAdelante.TabIndex = 26
+        Me.cmdAdelante.Text = "<-- Mover Adelante"
+        Me.cmdAdelante.UseVisualStyleBackColor = True
+        '
+        'cmdAtras
+        '
+        Me.cmdAtras.Location = New System.Drawing.Point(423, 250)
+        Me.cmdAtras.Name = "cmdAtras"
+        Me.cmdAtras.Size = New System.Drawing.Size(121, 36)
+        Me.cmdAtras.TabIndex = 27
+        Me.cmdAtras.Text = "Mover Atrás --> "
+        Me.cmdAtras.UseVisualStyleBackColor = True
+        '
         'Form2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -398,4 +420,6 @@ Partial Class Form2
     Friend WithEvents OpenFileDialog2 As OpenFileDialog
     Friend WithEvents ImageList1 As ImageList
     Friend WithEvents OpenFileDialog3 As OpenFileDialog
+    Friend WithEvents cmdAtras As Button
+    Friend WithEvents cmdAdelante As Button
 End Class
