@@ -22,7 +22,6 @@ Partial Class Form2
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form2))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -51,11 +50,10 @@ Partial Class Form2
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.OpenFileDialog2 = New System.Windows.Forms.OpenFileDialog()
-        Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
-        Me.OpenFileDialog3 = New System.Windows.Forms.OpenFileDialog()
         Me.cmdAdelante = New System.Windows.Forms.Button()
         Me.cmdAtras = New System.Windows.Forms.Button()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -83,7 +81,7 @@ Partial Class Form2
         'TextBox1
         '
         Me.TextBox1.ForeColor = System.Drawing.SystemColors.WindowText
-        Me.TextBox1.Location = New System.Drawing.Point(121, 47)
+        Me.TextBox1.Location = New System.Drawing.Point(119, 47)
         Me.TextBox1.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox1.MaxLength = 17
         Me.TextBox1.Name = "TextBox1"
@@ -92,7 +90,7 @@ Partial Class Form2
         '
         'TextBox2
         '
-        Me.TextBox2.Location = New System.Drawing.Point(121, 77)
+        Me.TextBox2.Location = New System.Drawing.Point(119, 77)
         Me.TextBox2.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(103, 20)
@@ -101,6 +99,8 @@ Partial Class Form2
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.GroupBox1.Controls.Add(Me.CheckBox1)
+        Me.GroupBox1.Controls.Add(Me.Label11)
         Me.GroupBox1.Controls.Add(Me.cmdAtras)
         Me.GroupBox1.Controls.Add(Me.cmdAdelante)
         Me.GroupBox1.Controls.Add(Me.cmdSelecImage)
@@ -132,7 +132,7 @@ Partial Class Form2
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBox1.Size = New System.Drawing.Size(605, 564)
+        Me.GroupBox1.Size = New System.Drawing.Size(605, 646)
         Me.GroupBox1.TabIndex = 4
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Mantenedor"
@@ -150,7 +150,7 @@ Partial Class Form2
         '
         Me.PictureBox1.BackColor = System.Drawing.SystemColors.ControlLightLight
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PictureBox1.Location = New System.Drawing.Point(120, 203)
+        Me.PictureBox1.Location = New System.Drawing.Point(120, 229)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(273, 242)
         Me.PictureBox1.TabIndex = 24
@@ -167,7 +167,7 @@ Partial Class Form2
         '
         'Button5
         '
-        Me.Button5.Location = New System.Drawing.Point(423, 166)
+        Me.Button5.Location = New System.Drawing.Point(423, 163)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(121, 36)
         Me.Button5.TabIndex = 22
@@ -192,7 +192,7 @@ Partial Class Form2
         '
         'Button8
         '
-        Me.Button8.Location = New System.Drawing.Point(318, 468)
+        Me.Button8.Location = New System.Drawing.Point(318, 494)
         Me.Button8.Margin = New System.Windows.Forms.Padding(2)
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(63, 33)
@@ -202,7 +202,7 @@ Partial Class Form2
         '
         'Button7
         '
-        Me.Button7.Location = New System.Drawing.Point(129, 468)
+        Me.Button7.Location = New System.Drawing.Point(129, 494)
         Me.Button7.Margin = New System.Windows.Forms.Padding(2)
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(63, 33)
@@ -212,7 +212,7 @@ Partial Class Form2
         '
         'TextBox4
         '
-        Me.TextBox4.Location = New System.Drawing.Point(121, 136)
+        Me.TextBox4.Location = New System.Drawing.Point(119, 137)
         Me.TextBox4.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.Size = New System.Drawing.Size(272, 20)
@@ -231,7 +231,7 @@ Partial Class Form2
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(114, 512)
+        Me.Label7.Location = New System.Drawing.Point(114, 538)
         Me.Label7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(13, 13)
@@ -241,7 +241,7 @@ Partial Class Form2
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(28, 512)
+        Me.Label6.Location = New System.Drawing.Point(28, 538)
         Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(66, 13)
@@ -251,7 +251,7 @@ Partial Class Form2
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(114, 528)
+        Me.Label5.Location = New System.Drawing.Point(114, 558)
         Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(13, 13)
@@ -261,7 +261,7 @@ Partial Class Form2
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(28, 527)
+        Me.Label4.Location = New System.Drawing.Point(28, 557)
         Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(84, 13)
@@ -270,7 +270,7 @@ Partial Class Form2
         '
         'Button6
         '
-        Me.Button6.Location = New System.Drawing.Point(423, 127)
+        Me.Button6.Location = New System.Drawing.Point(423, 125)
         Me.Button6.Margin = New System.Windows.Forms.Padding(2)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(121, 32)
@@ -290,7 +290,7 @@ Partial Class Form2
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(423, 89)
+        Me.Button3.Location = New System.Drawing.Point(423, 88)
         Me.Button3.Margin = New System.Windows.Forms.Padding(2)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(121, 31)
@@ -301,7 +301,7 @@ Partial Class Form2
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(255, 468)
+        Me.Button2.Location = New System.Drawing.Point(255, 494)
         Me.Button2.Margin = New System.Windows.Forms.Padding(2)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(63, 33)
@@ -311,7 +311,7 @@ Partial Class Form2
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(192, 468)
+        Me.Button1.Location = New System.Drawing.Point(192, 494)
         Me.Button1.Margin = New System.Windows.Forms.Padding(2)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(63, 33)
@@ -321,7 +321,7 @@ Partial Class Form2
         '
         'TextBox3
         '
-        Me.TextBox3.Location = New System.Drawing.Point(121, 108)
+        Me.TextBox3.Location = New System.Drawing.Point(119, 107)
         Me.TextBox3.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.Size = New System.Drawing.Size(272, 20)
@@ -341,23 +341,9 @@ Partial Class Form2
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'OpenFileDialog2
-        '
-        Me.OpenFileDialog2.FileName = "OpenFileDialog2"
-        '
-        'ImageList1
-        '
-        Me.ImageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit
-        Me.ImageList1.ImageSize = New System.Drawing.Size(16, 16)
-        Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
-        '
-        'OpenFileDialog3
-        '
-        Me.OpenFileDialog3.FileName = "OpenFileDialog3"
-        '
         'cmdAdelante
         '
-        Me.cmdAdelante.Location = New System.Drawing.Point(423, 208)
+        Me.cmdAdelante.Location = New System.Drawing.Point(423, 205)
         Me.cmdAdelante.Name = "cmdAdelante"
         Me.cmdAdelante.Size = New System.Drawing.Size(121, 36)
         Me.cmdAdelante.TabIndex = 26
@@ -366,18 +352,37 @@ Partial Class Form2
         '
         'cmdAtras
         '
-        Me.cmdAtras.Location = New System.Drawing.Point(423, 250)
+        Me.cmdAtras.Location = New System.Drawing.Point(423, 247)
         Me.cmdAtras.Name = "cmdAtras"
         Me.cmdAtras.Size = New System.Drawing.Size(121, 36)
         Me.cmdAtras.TabIndex = 27
         Me.cmdAtras.Text = "Mover Atrás --> "
         Me.cmdAtras.UseVisualStyleBackColor = True
         '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(31, 199)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(54, 13)
+        Me.Label11.TabIndex = 28
+        Me.Label11.Text = "Habilitado"
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(119, 197)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(181, 17)
+        Me.CheckBox1.TabIndex = 29
+        Me.CheckBox1.Text = "(Indica si se muestra el producto)"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
         'Form2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(606, 568)
+        Me.ClientSize = New System.Drawing.Size(608, 649)
         Me.Controls.Add(Me.GroupBox1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(2)
@@ -417,9 +422,8 @@ Partial Class Form2
     Friend WithEvents cmdSelecImage As Button
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
-    Friend WithEvents OpenFileDialog2 As OpenFileDialog
-    Friend WithEvents ImageList1 As ImageList
-    Friend WithEvents OpenFileDialog3 As OpenFileDialog
     Friend WithEvents cmdAtras As Button
     Friend WithEvents cmdAdelante As Button
+    Friend WithEvents Label11 As Label
+    Friend WithEvents CheckBox1 As CheckBox
 End Class

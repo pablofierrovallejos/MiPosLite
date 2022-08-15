@@ -53,27 +53,29 @@
 
     Private Sub setearLabel(nroCol As Integer, currentField As String)
         Select Case nroCol
-            Case 1
+            Case 1                                ' Columna del archivo con el nombre del producto
                 TextBox1.Text = currentField
-            Case 2
+            Case 2                                ' Columna del archivo con el precio
                 TextBox2.Text = currentField
-            Case 3
+            Case 3                                ' Columna del archivo con el UPC
                 TextBox3.Text = currentField
-            Case 4
+            Case 4                                ' Columna que no se ocupa  
                 TextBox4.Text = currentField
-            Case 5
+            Case 5                                ' Columna del archivo con el nombre de archivo de imagen
                 TextBox5.Text = currentField
                 If Len(currentField) > 3 Then
                     PictureBox1.Image = Image.FromFile(currentField)
                     PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
                 Else
-                    ' PictureBox1.Dispose()
-
                     PictureBox1.ImageLocation = ""
                     PictureBox1.Image = Nothing
-
                     PictureBox1.Refresh()
-
+                End If
+            Case 6
+                If currentField.Trim = "ENABLED" Then
+                    CheckBox1.Checked = True
+                Else
+                    CheckBox1.Checked = False
                 End If
             Case Else
                 'nada
@@ -194,6 +196,11 @@
             TextBox3.Text & ";" &
             TextBox4.Text & ";" &
             TextBox5.Text
+            If CheckBox1.Checked Then
+                sregistro = sregistro & ";ENABLED"
+            Else
+                sregistro = sregistro & ";DISABLED"
+            End If
 
             actualizarBase(Integer.Parse(Label7.Text), sregistro)
 

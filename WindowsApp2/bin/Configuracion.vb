@@ -88,5 +88,4 @@ Public Class Configuracion
         mINI.IniWrite(sFicINI, sSeccion, sClave, sValor)
     End Sub
 
-
 End Class

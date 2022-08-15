@@ -12,21 +12,7 @@ c:\ventasPOS
 Dentro de ella copiar los archivos de configuracion en imagenes
 
 
-
 SDK .NET  -> https://www.nuget.org/packages/TransbankPosSDK/
 PM> Install-Package TransbankPosSDK
 
-<p align="center">
-   <img src ="https://github.com/pablofierrovallejos/MiPosLite/blob/master/pantalla1.PNG" />
-</p>
-
-<p align="center">
-   <img src ="https://github.com/pablofierrovallejos/MiPosLite/blob/master/cierrecaja.PNG" />
-</p>
-
-
-<p align="center">
-   <img src ="https://github.com/pablofierrovallejos/MiPosLite/blob/master/mantenedor.PNG" />
-</p>
-
-
+dotnet add package TransbankPosSDK --version 3.0.2
