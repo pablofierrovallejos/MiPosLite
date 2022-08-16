@@ -1,11 +1,22 @@
 ﻿Public Class Form2
     Dim nroRegistroActual As Integer
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        Dim texto As String = TextBox1.Text & ";" & TextBox2.Text & ";" & TextBox3.Text
+        Dim texto As String =
+            TextBox1.Text & ";" &   ' Nombre producto
+            TextBox2.Text & ";" &   ' Precio
+            TextBox3.Text & ";" &   ' UPC
+            TextBox4.Text & ";" &   ' Correlativo
+            TextBox5.Text & ";" &   ' Archivo de imagen
+            "ENABLED"               ' Estado del producto default ENABLED
         agregarRegistro(texto)
         Label7.Text = Integer.Parse(Label7.Text) + 1
         nroRegistroActual = Integer.Parse(Label7.Text) + 1
         Label5.Text = Integer.Parse(Label5.Text) + 1
+
+        'Refrescar pantalla
+        Form1.Close()
+        Form1.Show()
+        Me.BringToFront()
     End Sub
 
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -32,17 +43,12 @@
                     nroCol = 1
                     currentRow = MyReader.ReadFields()
                     If nroFila = nroRegSolicitado Then
-
-
                         Dim currentField As String
                         For Each currentField In currentRow
                             setearLabel(nroCol, currentField)
                             nroCol = nroCol + 1
                         Next
-
                     End If
-
-
                 Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
                     MsgBox("Line " & ex.Message & "is not valid and will be skipped.")
                 End Try
@@ -126,6 +132,10 @@
             End If
         End If
 
+        'Refrescar pantalla
+        Form1.Close()
+        Form1.Show()
+        Me.BringToFront()
     End Sub
     Private Function contarRegistros() As Integer
         Dim nroreg As Integer = 0
@@ -188,7 +198,10 @@
         End Using
     End Sub
 
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+    Private Sub BtnGuardaRegActual_Click(sender As Object, e As EventArgs) Handles btnGuardaRegActual.Click
+        guardarRegistroActual()
+    End Sub
+    Public Sub guardarRegistroActual()
         If Integer.Parse(Label5.Text) > 0 Then
             Dim sregistro As String
             sregistro = TextBox1.Text & ";" &
@@ -213,6 +226,11 @@
 
             End If
         End If
+
+        'Refrescar pantalla
+        Form1.Close()
+        Form1.Show()
+        Me.BringToFront()
     End Sub
 
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
@@ -256,7 +274,6 @@
         Form1.Close()
         Form1.Show()
         Me.BringToFront()
-        '  Form2.Show()
     End Sub
 
     Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs) Handles TextBox2.TextChanged
@@ -385,5 +402,13 @@
             agregarRegistro(sLine)
             'Console.WriteLine(sLine)
         Next
+    End Sub
+
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
+        'guardarRegistroActual()
+    End Sub
+
+    Private Sub CheckBox1_Click(sender As Object, e As EventArgs) Handles CheckBox1.Click
+        guardarRegistroActual()
     End Sub
 End Class

@@ -28,6 +28,10 @@ Partial Class Form2
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.cmdAtras = New System.Windows.Forms.Button()
+        Me.cmdAdelante = New System.Windows.Forms.Button()
         Me.cmdSelecImage = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -42,7 +46,7 @@ Partial Class Form2
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.Button6 = New System.Windows.Forms.Button()
+        Me.btnGuardaRegActual = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
@@ -50,10 +54,6 @@ Partial Class Form2
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.cmdAdelante = New System.Windows.Forms.Button()
-        Me.cmdAtras = New System.Windows.Forms.Button()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -119,7 +119,7 @@ Partial Class Form2
         Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.Label4)
-        Me.GroupBox1.Controls.Add(Me.Button6)
+        Me.GroupBox1.Controls.Add(Me.btnGuardaRegActual)
         Me.GroupBox1.Controls.Add(Me.Button4)
         Me.GroupBox1.Controls.Add(Me.Button3)
         Me.GroupBox1.Controls.Add(Me.Button2)
@@ -136,6 +136,43 @@ Partial Class Form2
         Me.GroupBox1.TabIndex = 4
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Mantenedor"
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(119, 197)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(181, 17)
+        Me.CheckBox1.TabIndex = 29
+        Me.CheckBox1.Text = "(Indica si se muestra el producto)"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(31, 199)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(54, 13)
+        Me.Label11.TabIndex = 28
+        Me.Label11.Text = "Habilitado"
+        '
+        'cmdAtras
+        '
+        Me.cmdAtras.Location = New System.Drawing.Point(423, 247)
+        Me.cmdAtras.Name = "cmdAtras"
+        Me.cmdAtras.Size = New System.Drawing.Size(121, 36)
+        Me.cmdAtras.TabIndex = 27
+        Me.cmdAtras.Text = "Mover Atrás --> "
+        Me.cmdAtras.UseVisualStyleBackColor = True
+        '
+        'cmdAdelante
+        '
+        Me.cmdAdelante.Location = New System.Drawing.Point(423, 205)
+        Me.cmdAdelante.Name = "cmdAdelante"
+        Me.cmdAdelante.Size = New System.Drawing.Size(121, 36)
+        Me.cmdAdelante.TabIndex = 26
+        Me.cmdAdelante.Text = "<-- Mover Adelante"
+        Me.cmdAdelante.UseVisualStyleBackColor = True
         '
         'cmdSelecImage
         '
@@ -268,15 +305,15 @@ Partial Class Form2
         Me.Label4.TabIndex = 12
         Me.Label4.Text = "Total productos:"
         '
-        'Button6
+        'btnGuardaRegActual
         '
-        Me.Button6.Location = New System.Drawing.Point(423, 125)
-        Me.Button6.Margin = New System.Windows.Forms.Padding(2)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(121, 32)
-        Me.Button6.TabIndex = 11
-        Me.Button6.Text = "Guardar Actual"
-        Me.Button6.UseVisualStyleBackColor = True
+        Me.btnGuardaRegActual.Location = New System.Drawing.Point(423, 125)
+        Me.btnGuardaRegActual.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnGuardaRegActual.Name = "btnGuardaRegActual"
+        Me.btnGuardaRegActual.Size = New System.Drawing.Size(121, 32)
+        Me.btnGuardaRegActual.TabIndex = 11
+        Me.btnGuardaRegActual.Text = "Guardar Actual"
+        Me.btnGuardaRegActual.UseVisualStyleBackColor = True
         '
         'Button4
         '
@@ -341,43 +378,6 @@ Partial Class Form2
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'cmdAdelante
-        '
-        Me.cmdAdelante.Location = New System.Drawing.Point(423, 205)
-        Me.cmdAdelante.Name = "cmdAdelante"
-        Me.cmdAdelante.Size = New System.Drawing.Size(121, 36)
-        Me.cmdAdelante.TabIndex = 26
-        Me.cmdAdelante.Text = "<-- Mover Adelante"
-        Me.cmdAdelante.UseVisualStyleBackColor = True
-        '
-        'cmdAtras
-        '
-        Me.cmdAtras.Location = New System.Drawing.Point(423, 247)
-        Me.cmdAtras.Name = "cmdAtras"
-        Me.cmdAtras.Size = New System.Drawing.Size(121, 36)
-        Me.cmdAtras.TabIndex = 27
-        Me.cmdAtras.Text = "Mover Atrás --> "
-        Me.cmdAtras.UseVisualStyleBackColor = True
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(31, 199)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(54, 13)
-        Me.Label11.TabIndex = 28
-        Me.Label11.Text = "Habilitado"
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(119, 197)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(181, 17)
-        Me.CheckBox1.TabIndex = 29
-        Me.CheckBox1.Text = "(Indica si se muestra el producto)"
-        Me.CheckBox1.UseVisualStyleBackColor = True
-        '
         'Form2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -408,7 +408,7 @@ Partial Class Form2
     Friend WithEvents Label3 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
-    Friend WithEvents Button6 As Button
+    Friend WithEvents btnGuardaRegActual As Button
     Friend WithEvents Label7 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents Button8 As Button

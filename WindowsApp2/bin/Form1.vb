@@ -11,24 +11,55 @@ Public Class Form1
     Public Sub cargarMarizProductosyPrecios()
         Dim nroCol As Integer = 1
         Dim nroFila As Integer = 1
+        Dim sNombreProducto As String = ""
+        Dim sPrecio As String = ""
+        Dim sArchivoImagen As String = ""
+        Dim bEnabled As Boolean = True
+
         Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser("C:\ventasPOS\productos.txt")
             MyReader.TextFieldType = FileIO.FieldType.Delimited
             MyReader.SetDelimiters(";")
             Dim currentRow As String()
             While Not MyReader.EndOfData
+                sNombreProducto = ""
+                sPrecio = ""
+                sArchivoImagen = ""
+                bEnabled = True
                 Try
                     nroCol = 1
                     currentRow = MyReader.ReadFields()
                     Dim currentField As String
+
                     For Each currentField In currentRow
-                        setearLabel(nroFila, nroCol, currentField)
-                        'MsgBox(currentField)
+                        If (nroCol = 6) Then
+                            If (currentField.Trim = "ENABLED") Then
+                                bEnabled = True
+                            Else
+                                bEnabled = False
+                            End If
+                        End If
+                        If (nroCol = 1) Then
+                            sNombreProducto = currentField
+                        End If
+                        If (nroCol = 2) Then
+                            sPrecio = currentField
+                        End If
+                        If (nroCol = 5) Then
+                            sArchivoImagen = currentField
+                        End If
                         nroCol = nroCol + 1
                     Next
+                    If bEnabled Then
+                        setearLabel(nroFila, 1, sNombreProducto)
+                        setearLabel(nroFila, 2, sPrecio)
+                        setearLabel(nroFila, 5, sArchivoImagen)
+                        nroFila = nroFila + 1
+                    End If
+
                 Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
                     MsgBox("Line " & ex.Message & "is not valid and will be skipped.")
                 End Try
-                nroFila = nroFila + 1
+                'nroFila = nroFila + 1
             End While
         End Using
     End Sub
@@ -1206,11 +1237,12 @@ Public Class Form1
                 xPos = 15
                 yPos = yPos + 230
             End If
-            Panel2.Controls.Add(btnMatriz(i))   ' Let panel hold the Buttons
+            Panel2.Controls.Add(btnMatriz(i))    ' Agrega los botons al panel con productos
             AddHandler btnMatriz(i).Click, AddressOf Me.ClickButton
 
-            Panel2.Controls.Add(tbNombreProd(i))
-            Panel2.Controls.Add(tbPrecio(i))
+            Panel2.Controls.Add(tbNombreProd(i)) ' Agrega el nombre del producto al panel
+            Panel2.Controls.Add(tbPrecio(i))     ' Agrega el precio del producto al panel
+
             tbNombreProd(i).BringToFront()
             tbPrecio(i).BringToFront()
         Next i

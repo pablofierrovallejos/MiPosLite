@@ -474,7 +474,7 @@ Partial Class Form1
         '
         Me.TextBox23.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox23.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.TextBox23.Location = New System.Drawing.Point(501, 217)
+        Me.TextBox23.Location = New System.Drawing.Point(501, 211)
         Me.TextBox23.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox23.Name = "TextBox23"
         Me.TextBox23.ReadOnly = True
@@ -485,7 +485,7 @@ Partial Class Form1
         '
         Me.TextBox24.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox24.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.TextBox24.Location = New System.Drawing.Point(501, 188)
+        Me.TextBox24.Location = New System.Drawing.Point(501, 183)
         Me.TextBox24.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox24.Name = "TextBox24"
         Me.TextBox24.ReadOnly = True
@@ -496,7 +496,7 @@ Partial Class Form1
         '
         Me.TextBox25.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox25.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.TextBox25.Location = New System.Drawing.Point(501, 159)
+        Me.TextBox25.Location = New System.Drawing.Point(501, 155)
         Me.TextBox25.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox25.Name = "TextBox25"
         Me.TextBox25.ReadOnly = True
@@ -507,7 +507,7 @@ Partial Class Form1
         '
         Me.TextBox26.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox26.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.TextBox26.Location = New System.Drawing.Point(501, 130)
+        Me.TextBox26.Location = New System.Drawing.Point(501, 127)
         Me.TextBox26.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox26.Name = "TextBox26"
         Me.TextBox26.ReadOnly = True
@@ -518,7 +518,7 @@ Partial Class Form1
         '
         Me.TextBox27.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox27.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.TextBox27.Location = New System.Drawing.Point(501, 101)
+        Me.TextBox27.Location = New System.Drawing.Point(501, 99)
         Me.TextBox27.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox27.Name = "TextBox27"
         Me.TextBox27.ReadOnly = True
@@ -529,7 +529,7 @@ Partial Class Form1
         '
         Me.TextBox28.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox28.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.TextBox28.Location = New System.Drawing.Point(501, 72)
+        Me.TextBox28.Location = New System.Drawing.Point(501, 71)
         Me.TextBox28.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox28.Name = "TextBox28"
         Me.TextBox28.ReadOnly = True
@@ -719,7 +719,7 @@ Partial Class Form1
         Me.TextBox16.Enabled = False
         Me.TextBox16.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox16.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.TextBox16.Location = New System.Drawing.Point(583, 217)
+        Me.TextBox16.Location = New System.Drawing.Point(583, 211)
         Me.TextBox16.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox16.Name = "TextBox16"
         Me.TextBox16.ReadOnly = True
@@ -731,7 +731,7 @@ Partial Class Form1
         Me.TextBox17.Enabled = False
         Me.TextBox17.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox17.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.TextBox17.Location = New System.Drawing.Point(583, 188)
+        Me.TextBox17.Location = New System.Drawing.Point(583, 183)
         Me.TextBox17.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox17.Name = "TextBox17"
         Me.TextBox17.ReadOnly = True
@@ -743,7 +743,7 @@ Partial Class Form1
         Me.TextBox18.Enabled = False
         Me.TextBox18.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox18.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.TextBox18.Location = New System.Drawing.Point(583, 159)
+        Me.TextBox18.Location = New System.Drawing.Point(583, 155)
         Me.TextBox18.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox18.Name = "TextBox18"
         Me.TextBox18.ReadOnly = True
@@ -755,7 +755,7 @@ Partial Class Form1
         Me.TextBox19.Enabled = False
         Me.TextBox19.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox19.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.TextBox19.Location = New System.Drawing.Point(583, 130)
+        Me.TextBox19.Location = New System.Drawing.Point(583, 127)
         Me.TextBox19.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox19.Name = "TextBox19"
         Me.TextBox19.ReadOnly = True
@@ -767,7 +767,7 @@ Partial Class Form1
         Me.TextBox20.Enabled = False
         Me.TextBox20.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox20.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.TextBox20.Location = New System.Drawing.Point(583, 101)
+        Me.TextBox20.Location = New System.Drawing.Point(583, 99)
         Me.TextBox20.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox20.Name = "TextBox20"
         Me.TextBox20.ReadOnly = True
@@ -779,7 +779,7 @@ Partial Class Form1
         Me.TextBox21.Enabled = False
         Me.TextBox21.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox21.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.TextBox21.Location = New System.Drawing.Point(583, 72)
+        Me.TextBox21.Location = New System.Drawing.Point(583, 71)
         Me.TextBox21.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox21.Name = "TextBox21"
         Me.TextBox21.ReadOnly = True
@@ -825,7 +825,7 @@ Partial Class Form1
         Me.TextBox15.Enabled = False
         Me.TextBox15.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox15.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.TextBox15.Location = New System.Drawing.Point(460, 217)
+        Me.TextBox15.Location = New System.Drawing.Point(460, 211)
         Me.TextBox15.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox15.Name = "TextBox15"
         Me.TextBox15.ReadOnly = True
@@ -837,7 +837,7 @@ Partial Class Form1
         Me.TextBox14.Enabled = False
         Me.TextBox14.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox14.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.TextBox14.Location = New System.Drawing.Point(460, 188)
+        Me.TextBox14.Location = New System.Drawing.Point(460, 183)
         Me.TextBox14.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox14.Name = "TextBox14"
         Me.TextBox14.ReadOnly = True
@@ -849,7 +849,7 @@ Partial Class Form1
         Me.TextBox13.Enabled = False
         Me.TextBox13.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox13.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.TextBox13.Location = New System.Drawing.Point(460, 159)
+        Me.TextBox13.Location = New System.Drawing.Point(460, 155)
         Me.TextBox13.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox13.Name = "TextBox13"
         Me.TextBox13.ReadOnly = True
@@ -861,7 +861,7 @@ Partial Class Form1
         Me.TextBox12.Enabled = False
         Me.TextBox12.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox12.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.TextBox12.Location = New System.Drawing.Point(460, 130)
+        Me.TextBox12.Location = New System.Drawing.Point(460, 127)
         Me.TextBox12.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox12.Name = "TextBox12"
         Me.TextBox12.ReadOnly = True
@@ -873,7 +873,7 @@ Partial Class Form1
         Me.TextBox11.Enabled = False
         Me.TextBox11.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox11.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.TextBox11.Location = New System.Drawing.Point(460, 101)
+        Me.TextBox11.Location = New System.Drawing.Point(460, 99)
         Me.TextBox11.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox11.Name = "TextBox11"
         Me.TextBox11.ReadOnly = True
@@ -885,7 +885,7 @@ Partial Class Form1
         Me.TextBox10.Enabled = False
         Me.TextBox10.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox10.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.TextBox10.Location = New System.Drawing.Point(460, 72)
+        Me.TextBox10.Location = New System.Drawing.Point(460, 71)
         Me.TextBox10.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox10.Name = "TextBox10"
         Me.TextBox10.ReadOnly = True
@@ -941,7 +941,7 @@ Partial Class Form1
         '
         Me.TextBox8.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox8.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.TextBox8.Location = New System.Drawing.Point(101, 217)
+        Me.TextBox8.Location = New System.Drawing.Point(101, 211)
         Me.TextBox8.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox8.Name = "TextBox8"
         Me.TextBox8.ReadOnly = True
@@ -952,7 +952,7 @@ Partial Class Form1
         '
         Me.TextBox7.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox7.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.TextBox7.Location = New System.Drawing.Point(101, 188)
+        Me.TextBox7.Location = New System.Drawing.Point(101, 183)
         Me.TextBox7.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox7.Name = "TextBox7"
         Me.TextBox7.ReadOnly = True
@@ -963,7 +963,7 @@ Partial Class Form1
         '
         Me.TextBox6.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox6.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.TextBox6.Location = New System.Drawing.Point(101, 159)
+        Me.TextBox6.Location = New System.Drawing.Point(101, 155)
         Me.TextBox6.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox6.Name = "TextBox6"
         Me.TextBox6.ReadOnly = True
@@ -974,7 +974,7 @@ Partial Class Form1
         '
         Me.TextBox5.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox5.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.TextBox5.Location = New System.Drawing.Point(101, 130)
+        Me.TextBox5.Location = New System.Drawing.Point(101, 127)
         Me.TextBox5.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox5.Name = "TextBox5"
         Me.TextBox5.ReadOnly = True
@@ -985,7 +985,7 @@ Partial Class Form1
         '
         Me.TextBox4.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox4.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.TextBox4.Location = New System.Drawing.Point(101, 101)
+        Me.TextBox4.Location = New System.Drawing.Point(101, 99)
         Me.TextBox4.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.ReadOnly = True
@@ -996,7 +996,7 @@ Partial Class Form1
         '
         Me.TextBox3.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox3.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.TextBox3.Location = New System.Drawing.Point(101, 72)
+        Me.TextBox3.Location = New System.Drawing.Point(101, 71)
         Me.TextBox3.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.ReadOnly = True
@@ -1234,408 +1234,444 @@ Partial Class Form1
         Me.Label35.AutoSize = True
         Me.Label35.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label35.ForeColor = System.Drawing.Color.Navy
-        Me.Label35.Location = New System.Drawing.Point(146, 1165)
+        Me.Label35.Location = New System.Drawing.Point(18, 874)
         Me.Label35.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label35.Name = "Label35"
         Me.Label35.Size = New System.Drawing.Size(46, 24)
         Me.Label35.TabIndex = 38
         Me.Label35.Text = "100"
+        Me.Label35.Visible = False
         '
         'Label36
         '
         Me.Label36.AutoSize = True
         Me.Label36.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label36.ForeColor = System.Drawing.Color.Navy
-        Me.Label36.Location = New System.Drawing.Point(140, 1206)
+        Me.Label36.Location = New System.Drawing.Point(17, 778)
         Me.Label36.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label36.Name = "Label36"
         Me.Label36.Size = New System.Drawing.Size(63, 24)
         Me.Label36.TabIndex = 37
         Me.Label36.Text = "otro6"
+        Me.Label36.Visible = False
         '
         'Button52
         '
         Me.Button52.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button52.Location = New System.Drawing.Point(11, 1106)
+        Me.Button52.Location = New System.Drawing.Point(225, 1260)
         Me.Button52.Margin = New System.Windows.Forms.Padding(2)
         Me.Button52.Name = "Button52"
-        Me.Button52.Size = New System.Drawing.Size(220, 190)
+        Me.Button52.Size = New System.Drawing.Size(26, 21)
         Me.Button52.TabIndex = 36
         Me.Button52.UseVisualStyleBackColor = True
+        Me.Button52.Visible = False
         '
         'Label33
         '
         Me.Label33.AutoSize = True
         Me.Label33.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label33.ForeColor = System.Drawing.Color.Navy
-        Me.Label33.Location = New System.Drawing.Point(97, 1192)
+        Me.Label33.Location = New System.Drawing.Point(22, 1234)
         Me.Label33.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label33.Name = "Label33"
         Me.Label33.Size = New System.Drawing.Size(46, 24)
         Me.Label33.TabIndex = 35
         Me.Label33.Text = "100"
+        Me.Label33.Visible = False
         '
         'Label34
         '
         Me.Label34.AutoSize = True
         Me.Label34.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label34.ForeColor = System.Drawing.Color.Navy
-        Me.Label34.Location = New System.Drawing.Point(135, 1136)
+        Me.Label34.Location = New System.Drawing.Point(22, 1112)
         Me.Label34.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label34.Name = "Label34"
         Me.Label34.Size = New System.Drawing.Size(63, 24)
         Me.Label34.TabIndex = 34
         Me.Label34.Text = "otro5"
+        Me.Label34.Visible = False
         '
         'Button51
         '
         Me.Button51.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button51.Location = New System.Drawing.Point(21, 1106)
+        Me.Button51.Location = New System.Drawing.Point(247, 1262)
         Me.Button51.Margin = New System.Windows.Forms.Padding(2)
         Me.Button51.Name = "Button51"
-        Me.Button51.Size = New System.Drawing.Size(220, 190)
+        Me.Button51.Size = New System.Drawing.Size(21, 21)
         Me.Button51.TabIndex = 33
         Me.Button51.UseVisualStyleBackColor = True
+        Me.Button51.Visible = False
         '
         'Label31
         '
         Me.Label31.AutoSize = True
         Me.Label31.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label31.ForeColor = System.Drawing.Color.Navy
-        Me.Label31.Location = New System.Drawing.Point(134, 1184)
+        Me.Label31.Location = New System.Drawing.Point(19, 850)
         Me.Label31.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label31.Name = "Label31"
         Me.Label31.Size = New System.Drawing.Size(46, 24)
         Me.Label31.TabIndex = 32
         Me.Label31.Text = "100"
+        Me.Label31.Visible = False
         '
         'Label32
         '
         Me.Label32.AutoSize = True
         Me.Label32.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label32.ForeColor = System.Drawing.Color.Navy
-        Me.Label32.Location = New System.Drawing.Point(120, 1136)
+        Me.Label32.Location = New System.Drawing.Point(22, 1088)
         Me.Label32.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label32.Name = "Label32"
         Me.Label32.Size = New System.Drawing.Size(63, 24)
         Me.Label32.TabIndex = 31
         Me.Label32.Text = "otro4"
+        Me.Label32.Visible = False
         '
         'Button50
         '
         Me.Button50.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button50.Location = New System.Drawing.Point(11, 1106)
+        Me.Button50.Location = New System.Drawing.Point(196, 1260)
         Me.Button50.Margin = New System.Windows.Forms.Padding(2)
         Me.Button50.Name = "Button50"
-        Me.Button50.Size = New System.Drawing.Size(220, 190)
+        Me.Button50.Size = New System.Drawing.Size(23, 23)
         Me.Button50.TabIndex = 30
         Me.Button50.UseVisualStyleBackColor = True
+        Me.Button50.Visible = False
         '
         'Label25
         '
         Me.Label25.AutoSize = True
         Me.Label25.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label25.ForeColor = System.Drawing.Color.Navy
-        Me.Label25.Location = New System.Drawing.Point(120, 1160)
+        Me.Label25.Location = New System.Drawing.Point(19, 1064)
         Me.Label25.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(46, 24)
         Me.Label25.TabIndex = 29
         Me.Label25.Text = "100"
+        Me.Label25.Visible = False
         '
         'Label26
         '
         Me.Label26.AutoSize = True
         Me.Label26.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label26.ForeColor = System.Drawing.Color.Navy
-        Me.Label26.Location = New System.Drawing.Point(80, 1168)
+        Me.Label26.Location = New System.Drawing.Point(22, 680)
         Me.Label26.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(63, 24)
         Me.Label26.TabIndex = 28
         Me.Label26.Text = "otro3"
+        Me.Label26.Visible = False
         '
         'Label27
         '
         Me.Label27.AutoSize = True
         Me.Label27.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label27.ForeColor = System.Drawing.Color.Navy
-        Me.Label27.Location = New System.Drawing.Point(170, 1160)
+        Me.Label27.Location = New System.Drawing.Point(19, 898)
         Me.Label27.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label27.Name = "Label27"
         Me.Label27.Size = New System.Drawing.Size(34, 24)
         Me.Label27.TabIndex = 27
         Me.Label27.Text = "10"
+        Me.Label27.Visible = False
         '
         'Label28
         '
         Me.Label28.AutoSize = True
         Me.Label28.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label28.ForeColor = System.Drawing.Color.Navy
-        Me.Label28.Location = New System.Drawing.Point(55, 1168)
+        Me.Label28.Location = New System.Drawing.Point(17, 994)
         Me.Label28.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(66, 24)
         Me.Label28.TabIndex = 26
         Me.Label28.Text = "Otro2"
+        Me.Label28.Visible = False
         '
         'Label29
         '
         Me.Label29.AutoSize = True
         Me.Label29.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label29.ForeColor = System.Drawing.Color.Navy
-        Me.Label29.Location = New System.Drawing.Point(130, 1198)
+        Me.Label29.Location = New System.Drawing.Point(19, 826)
         Me.Label29.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(22, 24)
         Me.Label29.TabIndex = 25
         Me.Label29.Text = "1"
+        Me.Label29.Visible = False
         '
         'Label30
         '
         Me.Label30.AutoSize = True
         Me.Label30.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label30.ForeColor = System.Drawing.Color.Navy
-        Me.Label30.Location = New System.Drawing.Point(110, 1168)
+        Me.Label30.Location = New System.Drawing.Point(19, 1016)
         Me.Label30.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label30.Name = "Label30"
         Me.Label30.Size = New System.Drawing.Size(66, 24)
         Me.Label30.TabIndex = 24
         Me.Label30.Text = "Otro1"
+        Me.Label30.Visible = False
         '
         'Button40
         '
         Me.Button40.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button40.Location = New System.Drawing.Point(11, 1106)
+        Me.Button40.Location = New System.Drawing.Point(165, 1260)
         Me.Button40.Margin = New System.Windows.Forms.Padding(2)
         Me.Button40.Name = "Button40"
-        Me.Button40.Size = New System.Drawing.Size(220, 190)
+        Me.Button40.Size = New System.Drawing.Size(24, 23)
         Me.Button40.TabIndex = 23
         Me.Button40.UseVisualStyleBackColor = True
+        Me.Button40.Visible = False
         '
         'Button41
         '
         Me.Button41.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button41.Location = New System.Drawing.Point(11, 1123)
+        Me.Button41.Location = New System.Drawing.Point(212, 1259)
         Me.Button41.Margin = New System.Windows.Forms.Padding(2)
         Me.Button41.Name = "Button41"
-        Me.Button41.Size = New System.Drawing.Size(220, 190)
+        Me.Button41.Size = New System.Drawing.Size(21, 22)
         Me.Button41.TabIndex = 22
         Me.Button41.UseVisualStyleBackColor = True
+        Me.Button41.Visible = False
         '
         'Button42
         '
         Me.Button42.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button42.Location = New System.Drawing.Point(21, 1106)
+        Me.Button42.Location = New System.Drawing.Point(181, 1260)
         Me.Button42.Margin = New System.Windows.Forms.Padding(2)
         Me.Button42.Name = "Button42"
-        Me.Button42.Size = New System.Drawing.Size(220, 190)
+        Me.Button42.Size = New System.Drawing.Size(27, 23)
         Me.Button42.TabIndex = 21
         Me.Button42.UseVisualStyleBackColor = True
+        Me.Button42.Visible = False
         '
         'Label12
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label12.ForeColor = System.Drawing.Color.Navy
-        Me.Label12.Location = New System.Drawing.Point(158, 1168)
+        Me.Label12.Location = New System.Drawing.Point(18, 970)
         Me.Label12.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(46, 24)
         Me.Label12.TabIndex = 20
         Me.Label12.Text = "500"
+        Me.Label12.Visible = False
         '
         'Label13
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label13.ForeColor = System.Drawing.Color.Navy
-        Me.Label13.Location = New System.Drawing.Point(106, 1168)
+        Me.Label13.Location = New System.Drawing.Point(19, 1040)
         Me.Label13.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(113, 24)
         Me.Label13.TabIndex = 19
         Me.Label13.Text = "Granizado"
+        Me.Label13.Visible = False
         '
         'Label14
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label14.ForeColor = System.Drawing.Color.Navy
-        Me.Label14.Location = New System.Drawing.Point(161, 1165)
+        Me.Label14.Location = New System.Drawing.Point(19, 704)
         Me.Label14.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(58, 24)
         Me.Label14.TabIndex = 18
         Me.Label14.Text = "1800"
+        Me.Label14.Visible = False
         '
         'Label15
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label15.ForeColor = System.Drawing.Color.Navy
-        Me.Label15.Location = New System.Drawing.Point(97, 1174)
+        Me.Label15.Location = New System.Drawing.Point(22, 1134)
         Me.Label15.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(122, 24)
         Me.Label15.TabIndex = 17
         Me.Label15.Text = "Artes. Dobl"
+        Me.Label15.Visible = False
         '
         'Label16
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label16.ForeColor = System.Drawing.Color.Navy
-        Me.Label16.Location = New System.Drawing.Point(130, 1165)
+        Me.Label16.Location = New System.Drawing.Point(22, 946)
         Me.Label16.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(46, 24)
         Me.Label16.TabIndex = 16
         Me.Label16.Text = "800"
+        Me.Label16.Visible = False
         '
         'Label17
         '
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label17.ForeColor = System.Drawing.Color.Navy
-        Me.Label17.Location = New System.Drawing.Point(48, 1182)
+        Me.Label17.Location = New System.Drawing.Point(25, 1182)
         Me.Label17.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(132, 24)
         Me.Label17.TabIndex = 15
         Me.Label17.Text = "Artes. Simpl"
+        Me.Label17.Visible = False
         '
         'Label10
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label10.ForeColor = System.Drawing.Color.Navy
-        Me.Label10.Location = New System.Drawing.Point(149, 1141)
+        Me.Label10.Location = New System.Drawing.Point(22, 922)
         Me.Label10.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(46, 24)
         Me.Label10.TabIndex = 14
         Me.Label10.Text = "650"
+        Me.Label10.Visible = False
         '
         'Label11
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label11.ForeColor = System.Drawing.Color.Navy
-        Me.Label11.Location = New System.Drawing.Point(108, 1160)
+        Me.Label11.Location = New System.Drawing.Point(22, 1158)
         Me.Label11.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(100, 24)
         Me.Label11.TabIndex = 13
         Me.Label11.Text = "Beb.Lata"
+        Me.Label11.Visible = False
         '
         'Label8
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.ForeColor = System.Drawing.Color.Navy
-        Me.Label8.Location = New System.Drawing.Point(97, 1192)
+        Me.Label8.Location = New System.Drawing.Point(18, 802)
         Me.Label8.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(58, 24)
         Me.Label8.TabIndex = 12
         Me.Label8.Text = "1200"
+        Me.Label8.Visible = False
         '
         'Label9
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.ForeColor = System.Drawing.Color.Navy
-        Me.Label9.Location = New System.Drawing.Point(61, 1184)
+        Me.Label9.Location = New System.Drawing.Point(17, 754)
         Me.Label9.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(115, 24)
         Me.Label9.TabIndex = 11
         Me.Label9.Text = "Soft Doble"
+        Me.Label9.Visible = False
         '
         'Label7
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.Color.Navy
-        Me.Label7.Location = New System.Drawing.Point(97, 1168)
+        Me.Label7.Location = New System.Drawing.Point(25, 1206)
         Me.Label7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(46, 24)
         Me.Label7.TabIndex = 10
         Me.Label7.Text = "600"
+        Me.Label7.Visible = False
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.Color.Navy
-        Me.Label6.Location = New System.Drawing.Point(69, 1189)
+        Me.Label6.Location = New System.Drawing.Point(17, 730)
         Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(125, 24)
         Me.Label6.TabIndex = 9
         Me.Label6.Text = "Soft Simple"
+        Me.Label6.Visible = False
         '
         'Button20
         '
         Me.Button20.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button20.Location = New System.Drawing.Point(33, 1121)
+        Me.Button20.Location = New System.Drawing.Point(33, 1260)
         Me.Button20.Margin = New System.Windows.Forms.Padding(2)
         Me.Button20.Name = "Button20"
-        Me.Button20.Size = New System.Drawing.Size(170, 160)
+        Me.Button20.Size = New System.Drawing.Size(22, 21)
         Me.Button20.TabIndex = 8
         Me.Button20.UseVisualStyleBackColor = True
+        Me.Button20.Visible = False
         '
         'Button19
         '
         Me.Button19.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button19.Location = New System.Drawing.Point(33, 1121)
+        Me.Button19.Location = New System.Drawing.Point(52, 1260)
         Me.Button19.Margin = New System.Windows.Forms.Padding(2)
         Me.Button19.Name = "Button19"
-        Me.Button19.Size = New System.Drawing.Size(170, 160)
+        Me.Button19.Size = New System.Drawing.Size(23, 21)
         Me.Button19.TabIndex = 7
         Me.Button19.UseVisualStyleBackColor = True
+        Me.Button19.Visible = False
         '
         'Button18
         '
         Me.Button18.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button18.Location = New System.Drawing.Point(43, 1116)
+        Me.Button18.Location = New System.Drawing.Point(73, 1260)
         Me.Button18.Margin = New System.Windows.Forms.Padding(2)
         Me.Button18.Name = "Button18"
-        Me.Button18.Size = New System.Drawing.Size(170, 160)
+        Me.Button18.Size = New System.Drawing.Size(22, 21)
         Me.Button18.TabIndex = 6
         Me.Button18.UseVisualStyleBackColor = True
+        Me.Button18.Visible = False
         '
         'Button17
         '
         Me.Button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button17.Location = New System.Drawing.Point(45, 1106)
+        Me.Button17.Location = New System.Drawing.Point(84, 1260)
         Me.Button17.Margin = New System.Windows.Forms.Padding(2)
         Me.Button17.Name = "Button17"
-        Me.Button17.Size = New System.Drawing.Size(170, 160)
+        Me.Button17.Size = New System.Drawing.Size(37, 21)
         Me.Button17.TabIndex = 5
         Me.Button17.UseVisualStyleBackColor = True
+        Me.Button17.Visible = False
         '
         'Button16
         '
         Me.Button16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button16.Location = New System.Drawing.Point(45, 1106)
+        Me.Button16.Location = New System.Drawing.Point(114, 1260)
         Me.Button16.Margin = New System.Windows.Forms.Padding(2)
         Me.Button16.Name = "Button16"
-        Me.Button16.Size = New System.Drawing.Size(170, 160)
+        Me.Button16.Size = New System.Drawing.Size(30, 22)
         Me.Button16.TabIndex = 4
         Me.Button16.UseVisualStyleBackColor = True
+        Me.Button16.Visible = False
         '
         'Button15
         '
         Me.Button15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button15.Location = New System.Drawing.Point(38, 1116)
+        Me.Button15.Location = New System.Drawing.Point(145, 1260)
         Me.Button15.Margin = New System.Windows.Forms.Padding(2)
         Me.Button15.Name = "Button15"
-        Me.Button15.Size = New System.Drawing.Size(170, 160)
+        Me.Button15.Size = New System.Drawing.Size(21, 21)
         Me.Button15.TabIndex = 3
         Me.Button15.UseVisualStyleBackColor = True
+        Me.Button15.Visible = False
         '
         'Button14
         '
@@ -1762,12 +1798,6 @@ Partial Class Form1
     End Sub
 
     Friend WithEvents Button43 As Button
-    Friend WithEvents Label25 As Label
-    Friend WithEvents Label26 As Label
-    Friend WithEvents Label27 As Label
-    Friend WithEvents Label28 As Label
-    Friend WithEvents Label29 As Label
-    Friend WithEvents Label30 As Label
     Friend WithEvents Button40 As Button
     Friend WithEvents Button41 As Button
     Friend WithEvents Button42 As Button
@@ -1846,18 +1876,6 @@ Partial Class Form1
     Friend WithEvents TextBox11 As TextBox
     Friend WithEvents TextBox10 As TextBox
     Friend WithEvents TextBox9 As TextBox
-    Friend WithEvents Label12 As Label
-    Friend WithEvents Label13 As Label
-    Friend WithEvents Label14 As Label
-    Friend WithEvents Label15 As Label
-    Friend WithEvents Label16 As Label
-    Friend WithEvents Label17 As Label
-    Friend WithEvents Label10 As Label
-    Friend WithEvents Label11 As Label
-    Friend WithEvents Label8 As Label
-    Friend WithEvents Label9 As Label
-    Friend WithEvents Label7 As Label
-    Friend WithEvents Label6 As Label
     Friend WithEvents TextBox31 As TextBox
     Friend WithEvents TextBox30 As TextBox
     Friend WithEvents Label24 As Label
@@ -1876,14 +1894,8 @@ Partial Class Form1
     Friend WithEvents Button44 As Button
     Friend WithEvents Button48 As Button
     Friend WithEvents Button49 As Button
-    Friend WithEvents Label35 As Label
-    Friend WithEvents Label36 As Label
     Friend WithEvents Button52 As Button
-    Friend WithEvents Label33 As Label
-    Friend WithEvents Label34 As Label
     Friend WithEvents Button51 As Button
-    Friend WithEvents Label31 As Label
-    Friend WithEvents Label32 As Label
     Friend WithEvents Button50 As Button
     Friend WithEvents CajaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AperturaDeCajaToolStripMenuItem As ToolStripMenuItem
@@ -1896,4 +1908,28 @@ Partial Class Form1
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents VentasToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Label35 As Label
+    Friend WithEvents Label33 As Label
+    Friend WithEvents Label31 As Label
+    Friend WithEvents Label25 As Label
+    Friend WithEvents Label27 As Label
+    Friend WithEvents Label29 As Label
+    Friend WithEvents Label12 As Label
+    Friend WithEvents Label14 As Label
+    Friend WithEvents Label16 As Label
+    Friend WithEvents Label10 As Label
+    Friend WithEvents Label8 As Label
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label36 As Label
+    Friend WithEvents Label34 As Label
+    Friend WithEvents Label32 As Label
+    Friend WithEvents Label26 As Label
+    Friend WithEvents Label28 As Label
+    Friend WithEvents Label30 As Label
+    Friend WithEvents Label13 As Label
+    Friend WithEvents Label15 As Label
+    Friend WithEvents Label17 As Label
+    Friend WithEvents Label11 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Label6 As Label
 End Class
