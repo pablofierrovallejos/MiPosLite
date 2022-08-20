@@ -1,13 +1,13 @@
-﻿Imports Transbank.POSIntegrado
+﻿Imports Transbank.POSAutoservicio
 Imports Transbank.Responses.CommonResponses
 Imports Transbank.Responses.IntegradoResponse
-
 
 Public Class Form1
     Dim mfocus As Integer
     Dim btnMatriz(30) As System.Windows.Forms.Button      ' Botones de productos
     Dim tbNombreProd(30) As TextBox                       ' Textbox para nombre de productos
     Dim tbPrecio(30) As TextBox                           ' Textbox para precio de cada producto
+    Dim Task_resp  ' objeto respuesta transbank
     Public Sub cargarMarizProductosyPrecios()
         Dim nroCol As Integer = 1
         Dim nroFila As Integer = 1
@@ -65,8 +65,6 @@ Public Class Form1
     End Sub
 
 
-
-
     Private Sub setearLabel(nroFila As Integer, nroCol As Integer, currentField As String)
         If nroCol = 1 Then   ' Seteamos los nombres de productos en los botones
             Try
@@ -87,69 +85,7 @@ Public Class Form1
             Catch ex As System.IO.FileNotFoundException
                 btnMatriz(nroFila - 1).BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
             End Try
-
-
-            'Select Case nroFila
-            '    Case 1
-            '        Try
-            '            Button15.BackgroundImage = Image.FromFile(currentField)
-            '        Catch ex As System.IO.FileNotFoundException
-            '            Button15.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
-            '        End Try
-            '    Case 2
-            '        Try
-            '            Button16.BackgroundImage = Image.FromFile(currentField)
-            '        Catch ex As System.IO.FileNotFoundException
-            '            Button16.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
-            '        End Try
-            '    Case 3
-            '        Try
-            '            Button17.BackgroundImage = Image.FromFile(currentField)
-            '        Catch ex As System.IO.FileNotFoundException
-            '            Button17.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
-            '        End Try
-            '    Case 4
-            '        Try
-            '            Button18.BackgroundImage = Image.FromFile(currentField)
-            '        Catch ex As System.IO.FileNotFoundException
-            '            Button18.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
-            '        End Try
-            '    Case 5
-            '        Try
-            '            Button19.BackgroundImage = Image.FromFile(currentField)
-            '        Catch ex As System.IO.FileNotFoundException
-            '            Button19.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
-            '        End Try
-            '    Case 6
-            '        Try
-            '            Button20.BackgroundImage = Image.FromFile(currentField)
-            '        Catch ex As System.IO.FileNotFoundException
-            '            Button20.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
-            '        End Try
-            '    Case 7
-            '        Try
-            '            Button42.BackgroundImage = Image.FromFile(currentField)
-            '        Catch ex As System.IO.FileNotFoundException
-            '            Button42.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
-            '        End Try
-            '    Case 8
-            '        Try
-            '            Button41.BackgroundImage = Image.FromFile(currentField)
-            '        Catch ex As System.IO.FileNotFoundException
-            '            Button41.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
-            '        End Try
-            '    Case 9
-            '        Try
-            '            Button40.BackgroundImage = Image.FromFile(currentField)
-            '        Catch ex As System.IO.FileNotFoundException
-            '            Button40.BackgroundImage = Image.FromFile("C:\ventasPOS\img\nodisponible.jpeg")
-            '        End Try
-            '    Case Else
-            '        'nada
-            'End Select
         End If
-
-
     End Sub
     Private Function obtenerEstadoCaja() As Boolean
         Dim objReader As New IO.StreamReader("C:\ventasPOS\config.ini")
@@ -174,6 +110,8 @@ Public Class Form1
 
     Private Sub actualizaTotaPagar()
         Label19.Text = 0
+
+
         If TextBox9.Text.Trim <> "" Then
             Label19.Text = FormatNumber(Integer.Parse(Label19.Text.Replace(".", "")) + Integer.Parse(TextBox22.Text.Trim), 0)
         End If
@@ -199,6 +137,7 @@ Public Class Form1
         If TextBox31.Text.Trim <> "" Then
             TextBox31.Text = TextBox30.Text - Integer.Parse(Label19.Text.Replace(".", ""))
         End If
+
 
     End Sub
     Private Sub actualizaTotalCantidades()
@@ -543,17 +482,14 @@ Public Class Form1
 
     Public Function validarPago() As Boolean
         If TextBox30.Text <> "" Then
-
             If TextBox30.Text.Trim = "0" Then
                 Return False
-
             Else
                 Return True
-
             End If
-
         End If
     End Function
+
     Public Function validarVenta() As Boolean
         If TextBox2.Text <> "" And TextBox22.Text <> "" Then
             Return True
@@ -628,8 +564,6 @@ Public Class Form1
         If isizeFile = 0 Then ' si el arcchivo esta vacío escribir cabecera
             file.WriteLine("Fecha; Hora; Secuencia; Producto ; Cantidad; Valor; Subtotal; Cantidad Total;Monto Total;P3;P4")
         End If
-
-
 
         If TextBox2.Text.Trim.Length > 0 Then
             bLinea = hLinea & TextBox2.Text & ";" & TextBox9.Text & ";" & TextBox29.Text & ";" & TextBox22.Text & ";" & sTotales
@@ -758,11 +692,7 @@ Public Class Form1
         Button39.BackgroundImage = Image.FromFile("C:\ventasPOS\img\billete2mil.jpeg")
         Button38.BackgroundImage = Image.FromFile("C:\ventasPOS\img\billete1mil.jpeg")
 
-
-
     End Sub
-
-
 
     Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click
         insertaCompra(Label6.Text, Label7.Text)
@@ -774,7 +704,6 @@ Public Class Form1
 
     Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click
         insertaCompra(Label9.Text, Label8.Text)
-
         actualizaTotalesManuales()
         actualizaTotalCantidades()
         actualizaTotaPagar()
@@ -982,20 +911,15 @@ Public Class Form1
         End If
     End Sub
 
-
-
     Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
         actualizaTotalesManuales()
         actualizaTotalCantidades()
         actualizaTotaPagar()
     End Sub
 
-
     Private Sub TextBox29_FOCUS(sender As Object, e As EventArgs) Handles TextBox29.TextChanged, TextBox29.Click
         IndiceFocus = 9
     End Sub
-
-
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Select Case mfocus
@@ -1025,15 +949,12 @@ Public Class Form1
         End Select
     End Sub
 
-
-
     Private Sub Button35_Click(sender As Object, e As EventArgs) Handles Button35.Click
         If TextBox30.Text.Trim = "" Then
             TextBox30.Text = 0
         End If
         TextBox30.Text = Integer.Parse(TextBox30.Text) + 20000
         TextBox31.Text = TextBox30.Text - Integer.Parse(Label19.Text)
-
     End Sub
 
     Private Sub Button36_Click(sender As Object, e As EventArgs) Handles Button36.Click
@@ -1105,17 +1026,11 @@ Public Class Form1
         TextBox31.Text = TextBox30.Text - Integer.Parse(Label19.Text)
     End Sub
 
-
-
-
     Private Sub TextBox30_TextChanged(sender As Object, e As EventArgs) Handles TextBox30.Enter
-
         If TextBox31.Text.Trim <> "" Then
             TextBox31.Text = TextBox30.Text - Integer.Parse(Label19.Text)
         End If
     End Sub
-
-
 
     Private Sub btnImprimirSimple_Click(sender As Object, e As EventArgs) Handles btnImprimirSimple.Click
         generarVenta()
@@ -1123,20 +1038,26 @@ Public Class Form1
 
     Private Sub generarVenta()
         If obtenerEstadoCaja() Then
+
             actualizaTotalesManuales()
             actualizaTotalCantidades()
-            actualizaTotaPagar()
+            'actualizaTotaPagar()
 
             If validarVenta() Then
                 If validarPago() Then
                     If Integer.Parse(TextBox31.Text) >= 0 Then
-                        If MessageBox.Show("Ingresar venta?", Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Information) = Windows.Forms.DialogResult.Yes Then
+                        'If MessageBox.Show("Ingresar venta?", Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Information) = Windows.Forms.DialogResult.Yes Then
+
+                        If generaVentaTransbk(Label19.Text) Then
                             If getConfigPrintTicket() Then
                                 PrintDocument1.Print()
                             End If
-                            escribeArchivoVentas()
-                            limpiaPantalla()
                         End If
+
+                        escribeArchivoVentas()
+
+                        limpiaPantalla()
+                        ' End If
                     Else
                         MsgBox("Aún resta por pagar " & TextBox31.Text, , "MiPOSLite")
                     End If
@@ -1152,9 +1073,6 @@ Public Class Form1
         Else
             MsgBox("Caja se encuentra Cerrada, proceda a apertura desde Menu->Caja->Apertura/Cierre de Caja", "MiPOSLite")
         End If
-
-
-
     End Sub
 
     Private Function getConfigPrintTicket() As Boolean
@@ -1162,9 +1080,7 @@ Public Class Form1
         Dim sfile As String
 
         sfile = "C:\ventasPOS\config\impresion_ticket.ini"
-
         Dim objReader As New IO.StreamReader(sfile)
-
         Dim imprimeTicket As Boolean
 
         Do
@@ -1175,7 +1091,6 @@ Public Class Form1
 
                 ElseIf sLine.Trim = "IMPRIMIR_TICKET=NO" Then
                     imprimeTicket = False
-
                 Else
                     imprimeTicket = False
                 End If
@@ -1192,9 +1107,7 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         'Genera la matriz de botones
-
         Dim xPos As Integer = 15
         Dim yPos As Integer = 0
         Dim columna As Integer = 0
@@ -1249,75 +1162,10 @@ Public Class Form1
 
         initScreen()
 
-        ' Pruebas POS ########################################################
-        Dim lcoms = POSIntegrado.Instance.ListPorts()
-        If (lcoms IsNot Nothing) Then
-            For Each item As String In lcoms
-                Debug.Print(item)
-            Next
-        End If
-        ' Pruebas POS ########################################################
-        Dim portName As String = "COM1"
-        'POSIntegrado.Instance.OpenPort(portName)   ' Abrir puerto com
-        ' POSIntegrado.Instance.ClosePort()          ' Cerrar puerto com
-        'POSIntegrado.Instance.IntermediateResponseChange += NewIntermediateMessageReceived   ' EventHandler para los mensajes intermedios.
 
-        Dim Task_resp = POSIntegrado.Instance.Sale(999, "Ticket", False)
-        Try
-            Dim miFunction = Task_resp.Result.Amount '": 210,
-            Dim miResponse = Task_resp.Result.Response '" :  "Aprobado",
-            Dim miResponseCode = Task_resp.Result.ResponseCode '" :  "Aprobado",
-            Dim miResponseMsg = Task_resp.Result.ResponseMessage '" :  "Aprobado",
-            Dim miComerceCode = Task_resp.Result.CommerceCode '"Commerce Code": 550062700310,
-            Dim miTerminalId = Task_resp.Result.TerminalId '"Terminal Id": "ABC1234C",
-            Dim miTicket = Task_resp.Result.Ticket '"Ticket" :  "ABC123",
-            Dim miAuthCode = Task_resp.Result.AuthorizationCode '"Authorization Code": "XZ123456",
-            Dim miMonto = Task_resp.Result.Amount
-            Dim miSharesNumber = Task_resp.Result.SharesNumber '"Shares Number": 3,
-            Dim miSharesAount = Task_resp.Result.SharesAmount  '"Shares Amount" :  5000,
-            Dim miLast4Digit = Task_resp.Result.Last4Digits '"Last 4 Digits": 6677,
-            Dim miOperationNumber = Task_resp.Result.OperationNumber  '"Operation Number" :  60,
-            Dim miCardType = Task_resp.Result.CardType '"Card Type": "CR",
-            Dim miAccountingDate = Task_resp.Result.AccountingDate '"Accounting Date" : "28/10/2019 22:35:12",
-            Dim miAccountNumber = Task_resp.Result.AccountNumber '"Account Number":"300000000",
-            Dim miCardBrand = Task_resp.Result.CardBrand '"Card Brand" :  "AX",
-            Dim miRealDate = Task_resp.Result.RealDate '"Real Date": "28/10/2019 22:35:12",
-            Dim miEmployeId = Task_resp.Result.EmployeeId '"Employee Id" : 1,
-            Dim miTip = Task_resp.Result.Tip '"Tip": 1500,
-            '  Dim miChange = Task_resp.Result.c '"Change" :  150,
-            'Dim miCommerceProviderCode = Task_resp.Result.co  '"CommerceProviderCode:": 550062712310
-            'MsgBox(Monto)
-
-            Debug.Print(miFunction)
-            Debug.Print(miResponse)
-            Debug.Print(miResponseCode)
-            Debug.Print(miResponseMsg)
-            Debug.Print(miComerceCode)
-            Debug.Print(miTerminalId)
-            Debug.Print(miTicket)
-            Debug.Print(miAuthCode)
-            Debug.Print(miMonto)
-            Debug.Print(miSharesNumber)
-            Debug.Print(miSharesAount)
-            Debug.Print(miLast4Digit)
-            Debug.Print(miOperationNumber)
-            Debug.Print(miCardType)
-            Debug.Print(miAccountingDate)
-            Debug.Print(miAccountNumber)
-            Debug.Print(miCardBrand)
-            Debug.Print(miRealDate)
-            Debug.Print(miEmployeId)
-            Debug.Print(miTip)
-        Catch ex As Exception
-            'MsgBox(ex.StackTrace.ToString)
-            Debug.Print(ex.StackTrace.ToString)
-        End Try
-        'Manejador de mensajes intermedios...
     End Sub
     Private Sub ClickButton(ByVal sender As Object, ByVal e As System.EventArgs) 'Eventos para el arreglo de botones
-
         Dim btn As Button = CType(sender, Button)
-
         'MessageBox.Show(btn.Location.ToString & " Name: " & btn.Name)
 
         If btn.Name.Length > 3 Then
@@ -1332,14 +1180,6 @@ Public Class Form1
             actualizaTotaPagar()
         End If
     End Sub
-
-    ' Pruebas POS ########################################################
-    Private Sub NewIntermediateMessageReceived(sender As Object, IntermediateResponse As Object)
-
-
-    End Sub
-    ' Pruebas POS ########################################################
-
 
     Private Sub initScreen()
         cargarProducto() 'Carga imagenes de productos
@@ -1375,8 +1215,6 @@ Public Class Form1
     Private Sub Button43_Click(sender As Object, e As EventArgs) Handles Button43.Click
         limpiaPantalla()
     End Sub
-
-
 
     Private Sub MantenedorDeProductosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MantenedorDeProductosToolStripMenuItem.Click
         Dim form2 As New Form2()
@@ -1700,10 +1538,6 @@ Public Class Form1
         End Select
     End Sub
 
-    Private Sub Label24_Click(sender As Object, e As EventArgs) Handles Label24.Click
-
-    End Sub
-
     Private Sub Button49_Click(sender As Object, e As EventArgs) Handles Button49.Click
         TextBox30.Text = 0
         TextBox31.Text = 0
@@ -1793,9 +1627,6 @@ Public Class Form1
         Me.Hide()
     End Sub
 
-
-
-
     Private Sub Form1_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
         If obtenerEstadoCaja() Then
             Label38.Text = "Abierta"
@@ -1828,5 +1659,85 @@ Public Class Form1
         ventas.Show()
     End Sub
 
+
+    Public Function generaVentaTransbk(smonto As String) As Boolean
+        '  POS ########################################################
+        smonto = smonto.Replace(".", "")
+        Dim lcoms = POSAutoservicio.Instance.ListPorts()
+        If (lcoms IsNot Nothing) Then
+            For Each item As String In lcoms
+                Debug.Print(item)
+            Next
+        End If
+        Dim portName As String = "COM6"
+        'POSIntegrado.Instance.OpenPort(portName)   ' Abrir puerto com
+        'POSIntegrado.Instance.IntermediateResponseChange += NewIntermediateMessageReceived()   ' EventHandler para los mensajes intermedios.
+        POSAutoservicio.Instance.OpenPort(portName)
+        Dim miResponseMsg As String = ""
+
+        Task_resp = POSAutoservicio.Instance.Sale(Integer.Parse(smonto), "Ticket", False, True)
+        Try
+            Dim miResponse = Task_resp.Result.Response                  '" :  "Aprobado",
+            Dim miResponseCode = Task_resp.Result.ResponseCode          '" :  "Aprobado",
+            miResponseMsg = Task_resp.Result.ResponseMessage        '" :  "Aprobado",
+            Dim miComerceCode = Task_resp.Result.CommerceCode           '"Commerce Code": 550062700310,
+            Dim miTerminalId = Task_resp.Result.TerminalId              '"Terminal Id": "ABC1234C",
+            Dim miTicket = Task_resp.Result.Ticket                      '"Ticket" :  "ABC123",
+            Dim miAuthCode = Task_resp.Result.AuthorizationCode         '"Authorization Code": "XZ123456",
+            Dim miMonto = Task_resp.Result.Amount                       ' Monto
+            Dim miSharesNumber = Task_resp.Result.SharesNumber          '"Shares Number": 3,
+            Dim miSharesAount = Task_resp.Result.SharesAmount           '"Shares Amount" :  5000,
+            Dim miLast4Digit = Task_resp.Result.Last4Digits             '"Last 4 Digits": 6677,
+            Dim miOperationNumber = Task_resp.Result.OperationNumber    '"Operation Number" :  60,
+            Dim miCardType = Task_resp.Result.CardType                  '"Card Type": "CR",
+            Dim miAccountingDate = Task_resp.Result.AccountingDate      '"Accounting Date" : "28/10/2019 22:35:12",
+            Dim miAccountNumber = Task_resp.Result.AccountNumber        '"Account Number":"300000000",
+            Dim miCardBrand = Task_resp.Result.CardBrand                '"Card Brand" :  "AX",
+            Dim miRealDate = Task_resp.Result.RealDate                  '"Real Date": "28/10/2019 22:35:12",
+            ' Dim miEmployeId = Task_resp.Result.EmployeeId '"Employee Id" : 1,
+            ' Dim miTip = Task_resp.Result.Tip '"Tip": 1500,
+            '  Dim miChange = Task_resp.Result.c '"Change" :  150,
+            'Dim miCommerceProviderCode = Task_resp.Result.co  '"CommerceProviderCode:": 550062712310
+            'MsgBox(Monto)
+
+            Debug.Print("Response          :" & miResponse)
+            Debug.Print("ResponseCode      :" & miResponseCode)
+            Debug.Print("ResponseMessage   :" & miResponseMsg)
+            Debug.Print("CommerceCode      :" & miComerceCode)
+            Debug.Print("TerminalId        :" & miTerminalId)
+            Debug.Print("Ticket            :" & miTicket)
+            Debug.Print("AuthorizationCode :" & miAuthCode)
+            Debug.Print("Amount            :" & miMonto)
+            Debug.Print("SharesNumber      :" & miSharesNumber)
+            Debug.Print("SharesAmount      :" & miSharesAount)
+            Debug.Print("Last4Digits       :" & miLast4Digit)
+            Debug.Print("OperationNumber   :" & miOperationNumber)
+            Debug.Print("CardType          :" & miCardType)
+            Debug.Print("AccountingDate    :" & miAccountingDate)
+            Debug.Print("AccountNumber     :" & miAccountNumber)
+            Debug.Print("CardBrand         :" & miCardBrand)
+            Debug.Print("RealDate          :" & miRealDate)
+            ' Debug.Print("EmployeeId        :" & miEmployeId)
+            ' Debug.Print("Tip               :" & miTip)
+        Catch ex As Exception
+            'MsgBox(ex.StackTrace.ToString)
+            Debug.Print(ex.StackTrace.ToString)
+        End Try
+        'Manejador de mensajes intermedios...
+
+        POSAutoservicio.Instance.ClosePort()
+
+        If miResponseMsg = "Aprobado" Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
+
+    Private Sub NewIntermediateMessageReceived(sender As Object, IntermediateResponse As Object)
+        Debug.Print(" HIT>>>>>>>>>> ")
+
+    End Sub
 
 End Class

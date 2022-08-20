@@ -28,13 +28,14 @@ Partial Class Form3
         '
         'TextBox1
         '
+        Me.TextBox1.BackColor = System.Drawing.SystemColors.Control
         Me.TextBox1.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.TextBox1.Location = New System.Drawing.Point(24, 34)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(743, 383)
         Me.TextBox1.TabIndex = 0
-        Me.TextBox1.Text = "Ayuda" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "2" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "3" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "4"
+        Me.TextBox1.Text = resources.GetString("TextBox1.Text")
         '
         'Form3
         '
