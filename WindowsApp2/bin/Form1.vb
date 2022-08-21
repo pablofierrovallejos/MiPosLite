@@ -8,6 +8,8 @@ Public Class Form1
     Dim tbNombreProd(30) As TextBox                       ' Textbox para nombre de productos
     Dim tbPrecio(30) As TextBox                           ' Textbox para precio de cada producto
     Dim Task_resp  ' objeto respuesta transbank
+    Dim sRespuestaTktTransb As String = ""
+
     Public Sub cargarMarizProductosyPrecios()
         Dim nroCol As Integer = 1
         Dim nroFila As Integer = 1
@@ -544,7 +546,7 @@ Public Class Form1
         TextBox30.Text = ""
         TextBox31.Text = ""
     End Sub
-    Private Sub escribeArchivoVentas()
+    Private Sub escribeArchivoVentas(sMensajeTbk As String)
         Dim dt As Date = Today
         Dim sdate As String = Replace(dt, "-", "")
         Dim file As System.IO.StreamWriter
@@ -562,42 +564,42 @@ Public Class Form1
         sTotales = Label18.Text & ";" & Label19.Text.Replace(".", "") & ";" & TextBox30.Text.Replace(".", "") & ";" & TextBox31.Text
 
         If isizeFile = 0 Then ' si el arcchivo esta vacío escribir cabecera
-            file.WriteLine("Fecha; Hora; Secuencia; Producto ; Cantidad; Valor; Subtotal; Cantidad Total;Monto Total;P3;P4")
+            file.WriteLine("Fecha; Hora; Secuencia; Producto ; Cantidad; Valor; Subtotal; Cantidad Total;Monto Total;P3;P4; Msg Transbk; Comprobante Transbk")
         End If
 
         If TextBox2.Text.Trim.Length > 0 Then
             bLinea = hLinea & TextBox2.Text & ";" & TextBox9.Text & ";" & TextBox29.Text & ";" & TextBox22.Text & ";" & sTotales
-            file.WriteLine(bLinea)
+            file.WriteLine(bLinea & sMensajeTbk)
         End If
 
         If TextBox3.Text.Trim.Length > 0 Then
             bLinea = hLinea & TextBox3.Text & ";" & TextBox10.Text & ";" & TextBox28.Text & ";" & TextBox21.Text & ";" & sTotales
-            file.WriteLine(bLinea)
+            file.WriteLine(bLinea & sMensajeTbk)
         End If
 
         If TextBox4.Text.Trim.Length > 0 Then
             bLinea = hLinea & TextBox4.Text & ";" & TextBox11.Text & ";" & TextBox27.Text & ";" & TextBox20.Text & ";" & sTotales
-            file.WriteLine(bLinea)
+            file.WriteLine(bLinea & sMensajeTbk)
         End If
 
         If TextBox5.Text.Trim.Length > 0 Then
             bLinea = hLinea & TextBox5.Text & ";" & TextBox12.Text & ";" & TextBox26.Text & ";" & TextBox19.Text & ";" & sTotales
-            file.WriteLine(bLinea)
+            file.WriteLine(bLinea & sMensajeTbk)
         End If
 
         If TextBox6.Text.Trim.Length > 0 Then
             bLinea = hLinea & TextBox6.Text & ";" & TextBox13.Text & ";" & TextBox25.Text & ";" & TextBox18.Text & ";" & sTotales
-            file.WriteLine(bLinea)
+            file.WriteLine(bLinea & sMensajeTbk)
         End If
 
         If TextBox7.Text.Trim.Length > 0 Then
             bLinea = hLinea & TextBox7.Text & ";" & TextBox14.Text & ";" & TextBox24.Text & ";" & TextBox17.Text & ";" & sTotales
-            file.WriteLine(bLinea)
+            file.WriteLine(bLinea & sMensajeTbk)
         End If
 
         If TextBox8.Text.Trim.Length > 0 Then
             bLinea = hLinea & TextBox8.Text & ";" & TextBox15.Text & ";" & TextBox23.Text & ";" & TextBox16.Text & ";" & sTotales
-            file.WriteLine(bLinea)
+            file.WriteLine(bLinea & sMensajeTbk)
         End If
         'oSW.WriteLine(Linea)
 
@@ -1049,12 +1051,15 @@ Public Class Form1
                         'If MessageBox.Show("Ingresar venta?", Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Information) = Windows.Forms.DialogResult.Yes Then
 
                         If generaVentaTransbk(Label19.Text) Then
-                            If getConfigPrintTicket() Then
+
+                            'If getConfigPrintTicket() Then
+                            If readConfig("PRINT_TKT_INTERNO") = "SI" Then
                                 PrintDocument1.Print()
                             End If
+                            escribeArchivoVentas(";EXITOSA;" & sRespuestaTktTransb)
+                        Else
+                            escribeArchivoVentas(";FALLIDA;" & sRespuestaTktTransb)
                         End If
-
-                        escribeArchivoVentas()
 
                         limpiaPantalla()
                         ' End If
@@ -1661,7 +1666,6 @@ Public Class Form1
 
 
     Public Function generaVentaTransbk(smonto As String) As Boolean
-        '  POS ########################################################
         smonto = smonto.Replace(".", "")
         Dim lcoms = POSAutoservicio.Instance.ListPorts()
         If (lcoms IsNot Nothing) Then
@@ -1669,15 +1673,16 @@ Public Class Form1
                 Debug.Print(item)
             Next
         End If
-        Dim portName As String = "COM6"
+        Dim portName As String = readConfig("COM_TRANSBANK")    'Viene de modulo bass
         'POSIntegrado.Instance.OpenPort(portName)   ' Abrir puerto com
         'POSIntegrado.Instance.IntermediateResponseChange += NewIntermediateMessageReceived()   ' EventHandler para los mensajes intermedios.
         POSAutoservicio.Instance.OpenPort(portName)
         Dim miResponseMsg As String = ""
+        Dim miResponse As Object
 
         Task_resp = POSAutoservicio.Instance.Sale(Integer.Parse(smonto), "Ticket", False, True)
         Try
-            Dim miResponse = Task_resp.Result.Response                  '" :  "Aprobado",
+            miResponse = Task_resp.Result.Response                  '" :  "Aprobado",
             Dim miResponseCode = Task_resp.Result.ResponseCode          '" :  "Aprobado",
             miResponseMsg = Task_resp.Result.ResponseMessage        '" :  "Aprobado",
             Dim miComerceCode = Task_resp.Result.CommerceCode           '"Commerce Code": 550062700310,
@@ -1723,9 +1728,10 @@ Public Class Form1
             'MsgBox(ex.StackTrace.ToString)
             Debug.Print(ex.StackTrace.ToString)
         End Try
-        'Manejador de mensajes intermedios...
 
         POSAutoservicio.Instance.ClosePort()
+
+        sRespuestaTktTransb = miResponse.ToString
 
         If miResponseMsg = "Aprobado" Then
             Return True
@@ -1737,7 +1743,6 @@ Public Class Form1
 
     Private Sub NewIntermediateMessageReceived(sender As Object, IntermediateResponse As Object)
         Debug.Print(" HIT>>>>>>>>>> ")
-
     End Sub
 
 End Class

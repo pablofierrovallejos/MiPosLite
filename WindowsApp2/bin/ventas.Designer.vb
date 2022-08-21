@@ -51,7 +51,7 @@ Partial Class ventas
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(105, 30)
         Me.Button1.TabIndex = 1
-        Me.Button1.Text = "Ver ventas"
+        Me.Button1.Text = "Refrescar"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Label1

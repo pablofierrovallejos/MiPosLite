@@ -45,18 +45,35 @@
                     TEXTLINE = OBJREADER.ReadLine()
                     SPLITLINE = Split(TEXTLINE, DELIMITADOR)
                     If numeroLinea > 0 Then
-                        totalMonto = totalMonto + Integer.Parse(SPLITLINE.GetValue(5))
-                        totalArticulos = totalArticulos + Integer.Parse(SPLITLINE.GetValue(4))
+
+                        If SPLITLINE.GetValue(11) = "EXITOSA" Then   ' Valida si transaccion es EXITOSA o FALLIDA por transbank
+                            totalMonto = totalMonto + Integer.Parse(SPLITLINE.GetValue(5)) * Integer.Parse(SPLITLINE.GetValue(4))       ' Sumatoria de los montos
+                            totalArticulos = totalArticulos + Integer.Parse(SPLITLINE.GetValue(4))  ' Sumatoria de artículos
+                        End If
+
                         secuenciaActual = Integer.Parse(SPLITLINE.GetValue(2))
                         If (secuenciaActual <> secuenciaAnterior) Then
                             secuenciaAnterior = secuenciaActual
-                            totalVentas = totalVentas + 1
+
+                            If SPLITLINE.GetValue(11) = "EXITOSA" Then
+                                totalVentas = totalVentas + 1
+                            End If
+
                         Else
                             secuenciaAnterior = secuenciaActual
                         End If
                     End If
                     TABLA.ColumnCount = SPLITLINE.Length - 1
                     TABLA.Rows.Add(SPLITLINE)
+                    TABLA.AutoResizeColumn(0)
+                    TABLA.AutoResizeColumn(1)
+                    TABLA.AutoResizeColumn(2)
+                    TABLA.AutoResizeColumn(4)
+                    TABLA.AutoResizeColumn(5)
+                    TABLA.AutoResizeColumn(6)
+                    TABLA.AutoResizeColumn(7)
+                    TABLA.AutoResizeColumn(8)
+                    TABLA.BackgroundColor = Color.White
                     numeroLinea = numeroLinea + 1
                 Loop
                 OBJREADER.Close()

@@ -32,18 +32,18 @@ Partial Class administraciontbk
         '
         'cmdPolling
         '
-        Me.cmdPolling.Location = New System.Drawing.Point(39, 191)
+        Me.cmdPolling.Location = New System.Drawing.Point(39, 259)
         Me.cmdPolling.Name = "cmdPolling"
-        Me.cmdPolling.Size = New System.Drawing.Size(141, 26)
+        Me.cmdPolling.Size = New System.Drawing.Size(144, 40)
         Me.cmdPolling.TabIndex = 0
-        Me.cmdPolling.Text = "Polling"
+        Me.cmdPolling.Text = "Polling(OK)"
         Me.cmdPolling.UseVisualStyleBackColor = True
         '
         'cmdManualTbk
         '
-        Me.cmdManualTbk.Location = New System.Drawing.Point(39, 156)
+        Me.cmdManualTbk.Location = New System.Drawing.Point(39, 211)
         Me.cmdManualTbk.Name = "cmdManualTbk"
-        Me.cmdManualTbk.Size = New System.Drawing.Size(141, 29)
+        Me.cmdManualTbk.Size = New System.Drawing.Size(144, 40)
         Me.cmdManualTbk.TabIndex = 1
         Me.cmdManualTbk.Text = "Cambio POSTbk Manual"
         Me.cmdManualTbk.UseVisualStyleBackColor = True
@@ -52,27 +52,27 @@ Partial Class administraciontbk
         '
         Me.cmdCargaLlaves.Location = New System.Drawing.Point(39, 67)
         Me.cmdCargaLlaves.Name = "cmdCargaLlaves"
-        Me.cmdCargaLlaves.Size = New System.Drawing.Size(144, 25)
+        Me.cmdCargaLlaves.Size = New System.Drawing.Size(144, 40)
         Me.cmdCargaLlaves.TabIndex = 2
         Me.cmdCargaLlaves.Text = "Carga de Llaves"
         Me.cmdCargaLlaves.UseVisualStyleBackColor = True
         '
         'cmdDetalleVentas
         '
-        Me.cmdDetalleVentas.Location = New System.Drawing.Point(39, 98)
+        Me.cmdDetalleVentas.Location = New System.Drawing.Point(39, 115)
         Me.cmdDetalleVentas.Name = "cmdDetalleVentas"
-        Me.cmdDetalleVentas.Size = New System.Drawing.Size(144, 23)
+        Me.cmdDetalleVentas.Size = New System.Drawing.Size(144, 40)
         Me.cmdDetalleVentas.TabIndex = 3
         Me.cmdDetalleVentas.Text = "Detalle de Ventas"
         Me.cmdDetalleVentas.UseVisualStyleBackColor = True
         '
         'cmdUltmaVenta
         '
-        Me.cmdUltmaVenta.Location = New System.Drawing.Point(39, 127)
+        Me.cmdUltmaVenta.Location = New System.Drawing.Point(39, 163)
         Me.cmdUltmaVenta.Name = "cmdUltmaVenta"
-        Me.cmdUltmaVenta.Size = New System.Drawing.Size(144, 23)
+        Me.cmdUltmaVenta.Size = New System.Drawing.Size(144, 40)
         Me.cmdUltmaVenta.TabIndex = 4
-        Me.cmdUltmaVenta.Text = "Ultima Venta"
+        Me.cmdUltmaVenta.Text = "Ultima Venta(OK)"
         Me.cmdUltmaVenta.UseVisualStyleBackColor = True
         '
         'administraciontbk
