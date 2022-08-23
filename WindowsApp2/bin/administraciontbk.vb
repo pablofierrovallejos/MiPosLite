@@ -7,19 +7,26 @@ Imports Transbank.Responses
 Imports Transbank.Responses.AutoservicioResponse.LastSaleResponse
 'Imports Transbank.Responses.AutoservicioResponse
 Imports Transbank.Responses.IntegradoResponses
+Imports System.Threading
 
 Public Class administraciontbk
-
+    Dim posTimeout As String = Integer.Parse(readConfig("POS_TIMEOUT_MS"))
     Private Sub cmdPolling_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdPolling.Click
         Try
             Dim portName As String = readConfig("COM_TRANSBANK")    'Viene de modulo bass
-            POSAutoservicio.Instance.OpenPort(portName)
+            Dim miPos = POSIntegrado.Instance
 
-            Dim pollResult As Task(Of Boolean) = Task.Run(Async Function() Await POSAutoservicio.Instance.Poll())
-            Dim sout = pollResult.Wait(30000)
+            If Not iscomopen Then
+                miPos.OpenPort(portName)
+                iscomopen = True
+            End If
+
+
+
+            Dim pollResult As Task(Of Boolean) = Task.Run(Async Function() Await POSIntegrado.Instance.Poll())
+            Dim sout = pollResult.Wait(posTimeout)
 
             If sout Then  'If pollResult.Result Then
-                'MessageBox.Show("POS conectado correctamente a PC Autoatención.", "Polling the POS")
                 MsgBox("POS conectado correctamente a PC Autoatención.", vbInformation, "miAutoPOS")
             Else
                 MsgBox("Error en Comunicación con POS,no se pudo realizar Poll ", vbInformation, "miAutoPOS")
@@ -39,7 +46,7 @@ Public Class administraciontbk
 
             If dialogResult = DialogResult.Yes Then
                 Dim result As Task(Of Boolean) = Task.Run(Async Function() Await POSIntegrado.Instance.SetNormalMode())
-                Dim sout = result.Wait(30000)
+                Dim sout = result.Wait(posTimeout)
 
                 If sout Then  'If result.Result Then
                     MsgBox("POS configurado en Modo Normal", vbInformation, "miAutoPOS")
@@ -52,12 +59,6 @@ Public Class administraciontbk
         End Try
     End Sub
 
-    ' Private Sub cmdUltmaVenta_Click(sender As Object, e As EventArgs) Handles cmdUltmaVenta.Click
-    ' Dim portName As String = readConfig("COM_TRANSBANK")    'Viene de modulo bass
-    '    POSAutoservicio.Instance.OpenPort(portName)
-    ' Dim lastStaleResponse = POSAutoservicio.Instance.LastSale()
-    '     Debug.Print(lastStaleResponse.Result.ToString)
-    ' End Sub
 
     Private Sub cmdUltmaVenta_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdUltmaVenta.Click
         Try
@@ -65,7 +66,7 @@ Public Class administraciontbk
             POSAutoservicio.Instance.OpenPort(portName)
 
             Dim response As Task(Of LastSaleResponse) = Task.Run(Async Function() Await POSIntegrado.Instance.LastSale())
-            Dim sout = response.Wait(30000)
+            Dim sout = response.Wait(posTimeout)
 
             If sout Then
                 If response.Result.Success Then
@@ -88,7 +89,7 @@ Public Class administraciontbk
 
 
             Dim details As Task(Of List(Of DetailResponse)) = Task.Run(Async Function() Await POSIntegrado.Instance.Details(False))
-            Dim resp = details.Wait(30000)
+            Dim resp = details.Wait(posTimeout)
             Dim stmp As String = ""
 
             If resp Then
@@ -120,7 +121,7 @@ Public Class administraciontbk
 
             TextBox1.Text = ""
             Dim details As Task(Of List(Of DetailResponse)) = Task.Run(Async Function() Await POSIntegrado.Instance.Details(True))
-            Dim resp = details.Wait(30000)
+            Dim resp = details.Wait(posTimeout)
             Dim stmp As String = ""
 
             If resp Then
@@ -150,7 +151,7 @@ Public Class administraciontbk
             POSIntegrado.Instance.OpenPort(portName)
 
             Dim response As Task(Of CloseResponse) = Task.Run(Async Function() Await POSIntegrado.Instance.Close())
-            Dim resp = response.Wait(30000)
+            Dim resp = response.Wait(posTimeout)
 
             If resp Then
                 If response.Result.Success Then
@@ -165,14 +166,37 @@ Public Class administraciontbk
         End Try
     End Sub
 
+    Public Function mitarea() As Boolean
+        Thread.Sleep(100)
+        Return True
+    End Function
+
+
     Private Sub cmdCargaLlaves_Click(sender As Object, e As EventArgs) Handles cmdCargaLlaves.Click
-
         Try
-            Dim portName As String = readConfig("COM_TRANSBANK")    'Viene de modulo bass
-            POSIntegrado.Instance.OpenPort(portName)
 
-            Dim response As Task(Of LoadKeysResponse) = Task.Run(Async Function() Await POSIntegrado.Instance.LoadKeys())
-            Dim resp = response.Wait(30000)
+            Dim tokenSource = New CancellationTokenSource()
+            Dim token = tokenSource.Token
+
+
+
+            Dim portName As String = readConfig("COM_TRANSBANK")    'Viene de modulo bass
+            Dim miPos = POSIntegrado.Instance '.OpenPort(portName) ' POSIntegrado.Instance.OpenPort(portName)
+            miPos.OpenPort(portName)
+
+
+
+            Dim response As Task(Of LoadKeysResponse) = Task.Run(Async Function()
+                                                                     If token.IsCancellationRequested Then
+                                                                         token.ThrowIfCancellationRequested()
+                                                                     End If
+                                                                     Return Await miPos.LoadKeys()
+                                                                 End Function)
+            lblEstado.Text = "Solicitando llaves..."
+            lblEstado.Text = response.Status.ToString
+
+            Dim resp = response.Wait(posTimeout)
+
 
             If resp Then
                 If response.Result.Success Then
@@ -181,9 +205,26 @@ Public Class administraciontbk
             Else
                 MsgBox("Error en Comunicación, no se pudo cargar Keys", vbInformation, "miAutoPOS")
             End If
+            lblEstado.Text = ""
+
+            tokenSource.Cancel()
+
+            If miPos.IsPortOpen Then
+                'POSIntegrado.Instance.ClosePort()
+                'POSIntegrado.Instance.Close()
+                ' miPos.ClosePort()
+                Me.Close()
+                Dim formtbk As New administraciontbk()
+                formtbk.Show()
+            End If
+
         Catch a As TransbankException
             MessageBox.Show(a.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.[Error])
         End Try
 
+    End Sub
+
+    Private Sub administraciontbk_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        iscomopen = False
     End Sub
 End Class

@@ -2,6 +2,14 @@
 Imports Transbank.Responses.CommonResponses
 Imports Transbank.Responses.IntegradoResponse
 
+Imports Transbank.POSIntegrado
+Imports Transbank.Exceptions.CommonExceptions
+Imports Transbank.Exceptions.IntegradoExceptions
+Imports Transbank.Responses
+Imports Transbank.Responses.AutoservicioResponse.LastSaleResponse
+Imports Transbank.Responses.AutoservicioResponse
+
+
 Public Class Form1
     Dim mfocus As Integer
     Dim btnMatriz(30) As System.Windows.Forms.Button      ' Botones de productos
@@ -9,7 +17,7 @@ Public Class Form1
     Dim tbPrecio(30) As TextBox                           ' Textbox para precio de cada producto
     Dim Task_resp  ' objeto respuesta transbank
     Dim sRespuestaTktTransb As String = ""
-
+    Dim posTimeout As String = Integer.Parse(readConfig("POS_TIMEOUT_MS"))
     Public Sub cargarMarizProductosyPrecios()
         Dim nroCol As Integer = 1
         Dim nroFila As Integer = 1
@@ -1058,6 +1066,7 @@ Public Class Form1
                             End If
                             escribeArchivoVentas(";EXITOSA;" & sRespuestaTktTransb)
                         Else
+                            MsgBox("Error de comunicación con POS Transbank ", , "MiPOSLite")
                             escribeArchivoVentas(";FALLIDA;" & sRespuestaTktTransb)
                         End If
 
@@ -1673,65 +1682,76 @@ Public Class Form1
                 Debug.Print(item)
             Next
         End If
-        Dim portName As String = readConfig("COM_TRANSBANK")    'Viene de modulo bass
-        'POSIntegrado.Instance.OpenPort(portName)   ' Abrir puerto com
-        'POSIntegrado.Instance.IntermediateResponseChange += NewIntermediateMessageReceived()   ' EventHandler para los mensajes intermedios.
-        POSAutoservicio.Instance.OpenPort(portName)
         Dim miResponseMsg As String = ""
-        Dim miResponse As Object
-
-        Task_resp = POSAutoservicio.Instance.Sale(Integer.Parse(smonto), "Ticket", False, True)
         Try
-            miResponse = Task_resp.Result.Response                  '" :  "Aprobado",
-            Dim miResponseCode = Task_resp.Result.ResponseCode          '" :  "Aprobado",
-            miResponseMsg = Task_resp.Result.ResponseMessage        '" :  "Aprobado",
-            Dim miComerceCode = Task_resp.Result.CommerceCode           '"Commerce Code": 550062700310,
-            Dim miTerminalId = Task_resp.Result.TerminalId              '"Terminal Id": "ABC1234C",
-            Dim miTicket = Task_resp.Result.Ticket                      '"Ticket" :  "ABC123",
-            Dim miAuthCode = Task_resp.Result.AuthorizationCode         '"Authorization Code": "XZ123456",
-            Dim miMonto = Task_resp.Result.Amount                       ' Monto
-            Dim miSharesNumber = Task_resp.Result.SharesNumber          '"Shares Number": 3,
-            Dim miSharesAount = Task_resp.Result.SharesAmount           '"Shares Amount" :  5000,
-            Dim miLast4Digit = Task_resp.Result.Last4Digits             '"Last 4 Digits": 6677,
-            Dim miOperationNumber = Task_resp.Result.OperationNumber    '"Operation Number" :  60,
-            Dim miCardType = Task_resp.Result.CardType                  '"Card Type": "CR",
-            Dim miAccountingDate = Task_resp.Result.AccountingDate      '"Accounting Date" : "28/10/2019 22:35:12",
-            Dim miAccountNumber = Task_resp.Result.AccountNumber        '"Account Number":"300000000",
-            Dim miCardBrand = Task_resp.Result.CardBrand                '"Card Brand" :  "AX",
-            Dim miRealDate = Task_resp.Result.RealDate                  '"Real Date": "28/10/2019 22:35:12",
-            ' Dim miEmployeId = Task_resp.Result.EmployeeId '"Employee Id" : 1,
-            ' Dim miTip = Task_resp.Result.Tip '"Tip": 1500,
-            '  Dim miChange = Task_resp.Result.c '"Change" :  150,
-            'Dim miCommerceProviderCode = Task_resp.Result.co  '"CommerceProviderCode:": 550062712310
-            'MsgBox(Monto)
+            Dim portName As String = readConfig("COM_TRANSBANK")    'Viene de modulo bass
+            'POSIntegrado.Instance.OpenPort(portName)   ' Abrir puerto com
+            'POSIntegrado.Instance.IntermediateResponseChange += NewIntermediateMessageReceived()   ' EventHandler para los mensajes intermedios.
+            POSAutoservicio.Instance.OpenPort(portName)
 
-            Debug.Print("Response          :" & miResponse)
-            Debug.Print("ResponseCode      :" & miResponseCode)
-            Debug.Print("ResponseMessage   :" & miResponseMsg)
-            Debug.Print("CommerceCode      :" & miComerceCode)
-            Debug.Print("TerminalId        :" & miTerminalId)
-            Debug.Print("Ticket            :" & miTicket)
-            Debug.Print("AuthorizationCode :" & miAuthCode)
-            Debug.Print("Amount            :" & miMonto)
-            Debug.Print("SharesNumber      :" & miSharesNumber)
-            Debug.Print("SharesAmount      :" & miSharesAount)
-            Debug.Print("Last4Digits       :" & miLast4Digit)
-            Debug.Print("OperationNumber   :" & miOperationNumber)
-            Debug.Print("CardType          :" & miCardType)
-            Debug.Print("AccountingDate    :" & miAccountingDate)
-            Debug.Print("AccountNumber     :" & miAccountNumber)
-            Debug.Print("CardBrand         :" & miCardBrand)
-            Debug.Print("RealDate          :" & miRealDate)
-            ' Debug.Print("EmployeeId        :" & miEmployeId)
-            ' Debug.Print("Tip               :" & miTip)
+            Dim miResponse As Object
+
+            'Task_resp = POSAutoservicio.Instance.Sale(Integer.Parse(smonto), "Ticket", False, True)
+            ' Dim response As Task(Of LoadKeysResponse) = Task.Run(Async Function() Await POSIntegrado.Instance.LoadKeys())
+            ' Dim resp = response.Wait(30000)
+            Dim imonto As Integer = Integer.Parse(smonto)
+
+            Dim response As Task(Of SaleResponse) = Task.Run(Async Function() Await POSAutoservicio.Instance.Sale(imonto, "Ticket", False, True))
+            Dim bresp = response.Wait(posTimeout)
+            If bresp Then
+                miResponse = Task_resp.Result.Response                      '" :  "Aprobado",
+                Dim miResponseCode = Task_resp.Result.ResponseCode          '" :  "Aprobado",
+                miResponseMsg = Task_resp.Result.ResponseMessage            '" :  "Aprobado",
+                Dim miComerceCode = Task_resp.Result.CommerceCode           '"Commerce Code": 550062700310,
+                Dim miTerminalId = Task_resp.Result.TerminalId              '"Terminal Id": "ABC1234C",
+                Dim miTicket = Task_resp.Result.Ticket                      '"Ticket" :  "ABC123",
+                Dim miAuthCode = Task_resp.Result.AuthorizationCode         '"Authorization Code": "XZ123456",
+                Dim miMonto = Task_resp.Result.Amount                       ' Monto
+                Dim miSharesNumber = Task_resp.Result.SharesNumber          '"Shares Number": 3,
+                Dim miSharesAount = Task_resp.Result.SharesAmount           '"Shares Amount" :  5000,
+                Dim miLast4Digit = Task_resp.Result.Last4Digits             '"Last 4 Digits": 6677,
+                Dim miOperationNumber = Task_resp.Result.OperationNumber    '"Operation Number" :  60,
+                Dim miCardType = Task_resp.Result.CardType                  '"Card Type": "CR",
+                Dim miAccountingDate = Task_resp.Result.AccountingDate      '"Accounting Date" : "28/10/2019 22:35:12",
+                Dim miAccountNumber = Task_resp.Result.AccountNumber        '"Account Number":"300000000",
+                Dim miCardBrand = Task_resp.Result.CardBrand                '"Card Brand" :  "AX",
+                Dim miRealDate = Task_resp.Result.RealDate                  '"Real Date": "28/10/2019 22:35:12",
+
+                ' Dim miEmployeId = Task_resp.Result.EmployeeId '"Employee Id" : 1,
+                ' Dim miTip = Task_resp.Result.Tip '"Tip": 1500,
+                ' Dim miChange = Task_resp.Result.c '"Change" :  150,
+                ' Dim miCommerceProviderCode = Task_resp.Result.co  '"CommerceProviderCode:": 550062712310
+                ' MsgBox(Monto)
+
+                Debug.Print("Response          :" & miResponse)
+                Debug.Print("ResponseCode      :" & miResponseCode)
+                Debug.Print("ResponseMessage   :" & miResponseMsg)
+                Debug.Print("CommerceCode      :" & miComerceCode)
+                Debug.Print("TerminalId        :" & miTerminalId)
+                Debug.Print("Ticket            :" & miTicket)
+                Debug.Print("AuthorizationCode :" & miAuthCode)
+                Debug.Print("Amount            :" & miMonto)
+                Debug.Print("SharesNumber      :" & miSharesNumber)
+                Debug.Print("SharesAmount      :" & miSharesAount)
+                Debug.Print("Last4Digits       :" & miLast4Digit)
+                Debug.Print("OperationNumber   :" & miOperationNumber)
+                Debug.Print("CardType          :" & miCardType)
+                Debug.Print("AccountingDate    :" & miAccountingDate)
+                Debug.Print("AccountNumber     :" & miAccountNumber)
+                Debug.Print("CardBrand         :" & miCardBrand)
+                Debug.Print("RealDate          :" & miRealDate)
+                ' Debug.Print("EmployeeId        :" & miEmployeId)
+                ' Debug.Print("Tip               :" & miTip)
+
+                POSAutoservicio.Instance.ClosePort()
+                sRespuestaTktTransb = miResponse.ToString
+            Else
+                miResponseMsg = "Rechazado"
+            End If
         Catch ex As Exception
             'MsgBox(ex.StackTrace.ToString)
             Debug.Print(ex.StackTrace.ToString)
         End Try
-
-        POSAutoservicio.Instance.ClosePort()
-
-        sRespuestaTktTransb = miResponse.ToString
 
         If miResponseMsg = "Aprobado" Then
             Return True
@@ -1740,9 +1760,11 @@ Public Class Form1
         End If
     End Function
 
-
     Private Sub NewIntermediateMessageReceived(sender As Object, IntermediateResponse As Object)
         Debug.Print(" HIT>>>>>>>>>> ")
     End Sub
 
+    Private Sub CajaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CajaToolStripMenuItem.Click
+
+    End Sub
 End Class

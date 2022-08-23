@@ -2,6 +2,7 @@
     Private mINI As New cIniArray
 
     Public miComm As String
+    Public iscomopen As Boolean
 
     Public Function writeConfig(scampoClave As String, sValor As String) As Boolean
         Dim sFicINI As String = Application.StartupPath & "\configparams.ini"

@@ -31,6 +31,7 @@ Partial Class administraciontbk
         Me.cmdCierre = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.cmdPrintVentasPos = New System.Windows.Forms.Button()
+        Me.lblEstado = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'cmdPolling
@@ -107,11 +108,21 @@ Partial Class administraciontbk
         Me.cmdPrintVentasPos.Text = "Imprimir Ventas en POS"
         Me.cmdPrintVentasPos.UseVisualStyleBackColor = True
         '
+        'lblEstado
+        '
+        Me.lblEstado.AutoSize = True
+        Me.lblEstado.Location = New System.Drawing.Point(332, 517)
+        Me.lblEstado.Name = "lblEstado"
+        Me.lblEstado.Size = New System.Drawing.Size(10, 13)
+        Me.lblEstado.TabIndex = 8
+        Me.lblEstado.Text = "."
+        '
         'administraciontbk
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(790, 583)
+        Me.Controls.Add(Me.lblEstado)
         Me.Controls.Add(Me.cmdPrintVentasPos)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.cmdCierre)
@@ -136,4 +147,5 @@ Partial Class administraciontbk
     Friend WithEvents cmdCierre As Button
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents cmdPrintVentasPos As Button
+    Friend WithEvents lblEstado As Label
 End Class
