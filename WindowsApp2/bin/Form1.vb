@@ -16,8 +16,8 @@ Public Class Form1
     Dim tbNombreProd(30) As TextBox                       ' Textbox para nombre de productos
     Dim tbPrecio(30) As TextBox                           ' Textbox para precio de cada producto
     Dim Task_resp  ' objeto respuesta transbank
-    Dim sRespuestaTktTransb As String = ""
-    Dim posTimeout As String = Integer.Parse(readConfig("POS_TIMEOUT_MS"))
+
+    Dim posTimeout As String = Integer.Parse(readConfig("POS_TIMEOUT_VENTA_MS"))
     Public Sub cargarMarizProductosyPrecios()
         Dim nroCol As Integer = 1
         Dim nroFila As Integer = 1
@@ -1043,9 +1043,15 @@ Public Class Form1
     End Sub
 
     Private Sub btnImprimirSimple_Click(sender As Object, e As EventArgs) Handles btnImprimirSimple.Click
+        Module1.smontoVenta = Label19.Text
+        Dim mitarjeta As New tarjeta()
+        mitarjeta.Show()
         generarVenta()
     End Sub
-
+    Public Sub mostrarimgPosForm()
+        Dim mitarjeta As New tarjeta()
+        mitarjeta.Show()
+    End Sub
     Private Sub generarVenta()
         If obtenerEstadoCaja() Then
 
@@ -1056,18 +1062,15 @@ Public Class Form1
             If validarVenta() Then
                 If validarPago() Then
                     If Integer.Parse(TextBox31.Text) >= 0 Then
-                        'If MessageBox.Show("Ingresar venta?", Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Information) = Windows.Forms.DialogResult.Yes Then
 
-                        If generaVentaTransbk(Label19.Text) Then
-
-                            'If getConfigPrintTicket() Then
+                        If Module1.bsRespuestaTktTransb Then
                             If readConfig("PRINT_TKT_INTERNO") = "SI" Then
                                 PrintDocument1.Print()
                             End If
-                            escribeArchivoVentas(";EXITOSA;" & sRespuestaTktTransb)
+                            escribeArchivoVentas(";EXITOSA;" & Module1.sRespuestaTktTransb)
                         Else
                             MsgBox("Error de comunicación con POS Transbank ", , "MiPOSLite")
-                            escribeArchivoVentas(";FALLIDA;" & sRespuestaTktTransb)
+                            escribeArchivoVentas(";FALLIDA;" & Module1.sRespuestaTktTransb)
                         End If
 
                         limpiaPantalla()
@@ -1078,7 +1081,6 @@ Public Class Form1
                 Else
                     TextBox30.Text = Label19.Text   ' Si no se agrega el monto con el que paga cliente se asume monto exacto
                     TextBox31.Text = 0              ' Se asume vuelto = 0
-                    ' MsgBox("No ha ingresado el monto del pago.", , "MiPOSLite")
                     generarVenta()
                 End If
             Else
@@ -1675,6 +1677,7 @@ Public Class Form1
 
 
     Public Function generaVentaTransbk(smonto As String) As Boolean
+
         smonto = smonto.Replace(".", "")
         Dim lcoms = POSAutoservicio.Instance.ListPorts()
         If (lcoms IsNot Nothing) Then
@@ -1696,8 +1699,8 @@ Public Class Form1
             ' Dim resp = response.Wait(30000)
             Dim imonto As Integer = Integer.Parse(smonto)
 
-            Dim response As Task(Of SaleResponse) = Task.Run(Async Function() Await POSAutoservicio.Instance.Sale(imonto, "Ticket", False, True))
-            Dim bresp = response.Wait(posTimeout)
+            Dim Task_resp As Task(Of SaleResponse) = Task.Run(Async Function() Await POSAutoservicio.Instance.Sale(imonto, "Ticket", False, True))
+            Dim bresp = Task_resp.Wait(posTimeout)
             If bresp Then
                 miResponse = Task_resp.Result.Response                      '" :  "Aprobado",
                 Dim miResponseCode = Task_resp.Result.ResponseCode          '" :  "Aprobado",
@@ -1744,7 +1747,7 @@ Public Class Form1
                 ' Debug.Print("Tip               :" & miTip)
 
                 POSAutoservicio.Instance.ClosePort()
-                sRespuestaTktTransb = miResponse.ToString
+                Module1.sRespuestaTktTransb = miResponse.ToString
             Else
                 miResponseMsg = "Rechazado"
             End If

@@ -129,6 +129,12 @@
     <Compile Include="bin\Configuracion.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="bin\tarjeta.Designer.vb">
+      <DependentUpon>tarjeta.vb</DependentUpon>
+    </Compile>
+    <Compile Include="bin\tarjeta.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="bin\ventas.Designer.vb">
       <DependentUpon>ventas.vb</DependentUpon>
     </Compile>
@@ -182,6 +188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="bin\administraciontbk.resx">
       <DependentUpon>administraciontbk.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bin\tarjeta.resx">
+      <DependentUpon>tarjeta.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="bin\ventas.resx">
       <DependentUpon>ventas.vb</DependentUpon>

@@ -3,6 +3,9 @@
 
     Public miComm As String
     Public iscomopen As Boolean
+    Public sRespuestaTktTransb As String = ""   ' La respuesta de transbank
+    Public bsRespuestaTktTransb As Boolean = False
+    Public smontoVenta As String = ""
 
     Public Function writeConfig(scampoClave As String, sValor As String) As Boolean
         Dim sFicINI As String = Application.StartupPath & "\configparams.ini"
