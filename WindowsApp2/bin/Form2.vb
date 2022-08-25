@@ -14,8 +14,8 @@
         Label5.Text = Integer.Parse(Label5.Text) + 1
 
         'Refrescar pantalla
-        Form1.Close()
-        Form1.Show()
+        frmMenu.Close()
+        frmMenu.Show()
         Me.BringToFront()
     End Sub
 
@@ -133,8 +133,8 @@
         End If
 
         'Refrescar pantalla
-        Form1.Close()
-        Form1.Show()
+        frmMenu.Close()
+        frmMenu.Show()
         Me.BringToFront()
     End Sub
     Private Function contarRegistros() As Integer
@@ -228,8 +228,8 @@
         End If
 
         'Refrescar pantalla
-        Form1.Close()
-        Form1.Show()
+        frmMenu.Close()
+        frmMenu.Show()
         Me.BringToFront()
     End Sub
 
@@ -271,8 +271,8 @@
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         'Dim form1 As New Form1()
-        Form1.Close()
-        Form1.Show()
+        frmMenu.Close()
+        frmMenu.Show()
         Me.BringToFront()
     End Sub
 
@@ -320,8 +320,8 @@
             Label7.Text = nuevaPosicReg
 
             'Refresca´pantalla
-            Form1.Close()
-            Form1.Show()
+            frmMenu.Close()
+            frmMenu.Show()
             Me.BringToFront()
         End If
     End Sub
@@ -366,8 +366,8 @@
             Label7.Text = nuevaPosicReg
 
             'Refresca´pantalla
-            Form1.Close()
-            Form1.Show()
+            frmMenu.Close()
+            frmMenu.Show()
             Me.BringToFront()
         End If
     End Sub

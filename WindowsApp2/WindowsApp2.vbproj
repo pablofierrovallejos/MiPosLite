@@ -110,11 +110,11 @@
     <Compile Include="bin\Form2.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="bin\Form1.vb">
+    <Compile Include="bin\frmMenu.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="bin\Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="bin\frmMenu.Designer.vb">
+      <DependentUpon>frmMenu.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="bin\Form3.Designer.vb">
@@ -177,8 +177,8 @@
     <EmbeddedResource Include="bin\Form2.resx">
       <DependentUpon>Form2.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="bin\Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <EmbeddedResource Include="bin\frmMenu.resx">
+      <DependentUpon>frmMenu.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="bin\Form3.resx">
       <DependentUpon>Form3.vb</DependentUpon>
