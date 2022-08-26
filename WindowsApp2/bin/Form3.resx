@@ -123,7 +123,8 @@
 Escrito por Pablo Fierro Vallejos.
 Agosto 2022.
 
-Permite realizar ventas mediante pantalla touch y generando registro de ventas.
+Permite realizar ventas mediante pantalla touch.
+Genera registro de ventas.
 Permite enviar la venta a POS Transbank para realizar el pago mediante tarjeta.
 
 

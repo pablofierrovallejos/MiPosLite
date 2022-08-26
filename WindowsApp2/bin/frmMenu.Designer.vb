@@ -26,6 +26,9 @@ Partial Class frmMenu
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMenu))
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.lbltitulo2 = New System.Windows.Forms.Label()
+        Me.lbltitulo1 = New System.Windows.Forms.Label()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.lblPeso = New System.Windows.Forms.Label()
         Me.lblsubtotalh = New System.Windows.Forms.Label()
@@ -45,19 +48,18 @@ Partial Class frmMenu
         Me.AdministraciónTBKToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.VentasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AyudaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.lbltitulo1 = New System.Windows.Forms.Label()
-        Me.lbltitulo2 = New System.Windows.Forms.Label()
+        Me.lblUnidades = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
         '
         Me.Panel1.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Panel1.BackColor = System.Drawing.Color.White
+        Me.Panel1.Controls.Add(Me.lblUnidades)
         Me.Panel1.Controls.Add(Me.lbltitulo2)
         Me.Panel1.Controls.Add(Me.lbltitulo1)
         Me.Panel1.Controls.Add(Me.PictureBox1)
@@ -73,6 +75,39 @@ Partial Class frmMenu
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1084, 386)
         Me.Panel1.TabIndex = 0
+        '
+        'lbltitulo2
+        '
+        Me.lbltitulo2.AutoSize = True
+        Me.lbltitulo2.Font = New System.Drawing.Font("Script MT Bold", 24.0!, System.Drawing.FontStyle.Bold)
+        Me.lbltitulo2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lbltitulo2.Location = New System.Drawing.Point(853, 319)
+        Me.lbltitulo2.Name = "lbltitulo2"
+        Me.lbltitulo2.Size = New System.Drawing.Size(117, 38)
+        Me.lbltitulo2.TabIndex = 78
+        Me.lbltitulo2.Text = "Serrano"
+        '
+        'lbltitulo1
+        '
+        Me.lbltitulo1.AutoSize = True
+        Me.lbltitulo1.Font = New System.Drawing.Font("Script MT Bold", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbltitulo1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lbltitulo1.Location = New System.Drawing.Point(833, 287)
+        Me.lbltitulo1.Name = "lbltitulo1"
+        Me.lbltitulo1.Size = New System.Drawing.Size(150, 38)
+        Me.lbltitulo1.TabIndex = 77
+        Me.lbltitulo1.Text = "Heladería"
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.InitialImage = CType(resources.GetObject("PictureBox1.InitialImage"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(730, 3)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(342, 306)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 76
+        Me.PictureBox1.TabStop = False
         '
         'btnLimpiar
         '
@@ -239,38 +274,13 @@ Partial Class frmMenu
         Me.AyudaToolStripMenuItem.Size = New System.Drawing.Size(53, 22)
         Me.AyudaToolStripMenuItem.Text = "Ayuda"
         '
-        'PictureBox1
+        'lblUnidades
         '
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.InitialImage = CType(resources.GetObject("PictureBox1.InitialImage"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(730, 3)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(342, 306)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 76
-        Me.PictureBox1.TabStop = False
-        '
-        'lbltitulo1
-        '
-        Me.lbltitulo1.AutoSize = True
-        Me.lbltitulo1.Font = New System.Drawing.Font("Script MT Bold", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbltitulo1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lbltitulo1.Location = New System.Drawing.Point(833, 287)
-        Me.lbltitulo1.Name = "lbltitulo1"
-        Me.lbltitulo1.Size = New System.Drawing.Size(150, 38)
-        Me.lbltitulo1.TabIndex = 77
-        Me.lbltitulo1.Text = "Heladería"
-        '
-        'lbltitulo2
-        '
-        Me.lbltitulo2.AutoSize = True
-        Me.lbltitulo2.Font = New System.Drawing.Font("Script MT Bold", 24.0!, System.Drawing.FontStyle.Bold)
-        Me.lbltitulo2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lbltitulo2.Location = New System.Drawing.Point(853, 319)
-        Me.lbltitulo2.Name = "lbltitulo2"
-        Me.lbltitulo2.Size = New System.Drawing.Size(117, 38)
-        Me.lbltitulo2.TabIndex = 78
-        Me.lbltitulo2.Text = "Serrano"
+        Me.lblUnidades.AutoSize = True
+        Me.lblUnidades.Location = New System.Drawing.Point(462, 338)
+        Me.lblUnidades.Name = "lblUnidades"
+        Me.lblUnidades.Size = New System.Drawing.Size(0, 13)
+        Me.lblUnidades.TabIndex = 79
         '
         'frmMenu
         '
@@ -292,10 +302,10 @@ Partial Class frmMenu
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -324,4 +334,5 @@ Partial Class frmMenu
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents lbltitulo2 As Label
     Friend WithEvents lbltitulo1 As Label
+    Friend WithEvents lblUnidades As Label
 End Class

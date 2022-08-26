@@ -27,15 +27,6 @@
 
             Dim RUTA As String = "C:\ventasPOS\baseventas\ventasPOS" & sdate & ".csv"
 
-            ' OFD.InitialDirectory = "C:\TEMP\"
-            'OFD.Filter = "CSV FILES (*.CSV)|*.CSV"
-            'OFD.FilterIndex = 2
-            'OFD.RestoreDirectory = True
-
-            'If (OFD.ShowDialog() = Windows.Forms.DialogResult.OK) Then
-            'RUTA = OFD.FileName
-            'End If
-
             Dim TEXTLINE As String = ""
             Dim SPLITLINE() As String
 
@@ -46,8 +37,8 @@
                     SPLITLINE = Split(TEXTLINE, DELIMITADOR)
                     If numeroLinea > 0 Then
 
-                        If SPLITLINE.GetValue(11) = "EXITOSA" Then   ' Valida si transaccion es EXITOSA o FALLIDA por transbank
-                            totalMonto = totalMonto + Integer.Parse(SPLITLINE.GetValue(5)) * Integer.Parse(SPLITLINE.GetValue(4))       ' Sumatoria de los montos
+                        If SPLITLINE.GetValue(10) = "Aprobado" Then   ' Valida si transaccion es EXITOSA o FALLIDA por transbank
+                            totalMonto = totalMonto + Integer.Parse(SPLITLINE.GetValue(5).ToString.Replace(".", "")) * Integer.Parse(SPLITLINE.GetValue(4).ToString.Replace(".", ""))       ' Sumatoria de los montos
                             totalArticulos = totalArticulos + Integer.Parse(SPLITLINE.GetValue(4))  ' Sumatoria de artículos
                         End If
 
@@ -55,24 +46,26 @@
                         If (secuenciaActual <> secuenciaAnterior) Then
                             secuenciaAnterior = secuenciaActual
 
-                            If SPLITLINE.GetValue(11) = "EXITOSA" Then
+                            If SPLITLINE.GetValue(10) = "Aprobado" Then
                                 totalVentas = totalVentas + 1
                             End If
-
                         Else
                             secuenciaAnterior = secuenciaActual
                         End If
                     End If
                     TABLA.ColumnCount = SPLITLINE.Length - 1
                     TABLA.Rows.Add(SPLITLINE)
-                    TABLA.AutoResizeColumn(0)
-                    TABLA.AutoResizeColumn(1)
-                    TABLA.AutoResizeColumn(2)
-                    TABLA.AutoResizeColumn(4)
-                    TABLA.AutoResizeColumn(5)
-                    TABLA.AutoResizeColumn(6)
-                    TABLA.AutoResizeColumn(7)
-                    TABLA.AutoResizeColumn(8)
+                    TABLA.AutoResizeColumn(0)       'Fecha
+                    TABLA.AutoResizeColumn(1)       'Hora
+                    TABLA.AutoResizeColumn(2)       'Secuencia
+                    TABLA.AutoResizeColumn(3)       'Producto
+                    TABLA.AutoResizeColumn(4)       'Cantidad
+                    TABLA.AutoResizeColumn(5)       'Valor
+                    TABLA.AutoResizeColumn(6)       'SubTotal
+                    TABLA.AutoResizeColumn(7)       'Cantidad Total
+                    TABLA.AutoResizeColumn(8)       'Monto Total
+                    TABLA.AutoResizeColumn(9)      'Comunicacion POS
+                    TABLA.AutoResizeColumn(10)      'Comprobante transbank
                     TABLA.BackgroundColor = Color.White
                     numeroLinea = numeroLinea + 1
                 Loop
@@ -102,16 +95,4 @@
         IMPORTARCSV(DataGridView1, ";")
     End Sub
 
-    Private Sub MonthCalendar1_Click(sender As Object, e As EventArgs) Handles MonthCalendar1.Click
-
-
-    End Sub
-
-    Private Sub MonthCalendar1_DoubleClick(sender As Object, e As EventArgs) Handles MonthCalendar1.DoubleClick
-
-    End Sub
-
-    Private Sub MonthCalendar1_MouseClick(sender As Object, e As MouseEventArgs) Handles MonthCalendar1.MouseClick
-
-    End Sub
 End Class

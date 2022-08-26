@@ -20,6 +20,7 @@ Public Class frmMenu
     Dim tbHValor(12) As TextBox                         ' Columna de Textbox para valor de productos comprados
     Dim tbHSubT(12) As TextBox                          ' Columna de Textbox para subtotal productos comprados
     Dim indexCompras As Integer ' Guarda el indice de la compra actual
+    Dim itotalProductos As Integer = 0
 
     Dim posTimeout As String = Integer.Parse(readConfig("POS_TIMEOUT_VENTA_MS"))
     Public Sub cargarMarizProductosyPrecios()
@@ -152,11 +153,7 @@ Public Class frmMenu
             Dim subIndx = sNombre.Substring(3, (nlargo - 3))
             Dim nindex = Integer.Parse(subIndx)
 
-            'insertaCompra(tbNombreProd(nindex).Text, tbPrecio(nindex).Text.Replace("$", ""))
             putSaleOnList(tbNombreProd(nindex).Text, tbPrecio(nindex).Text.Replace("$", ""))
-            'actualizaTotalesManuales()
-            'actualizaTotalCantidades()
-            'actualizaTotaPagar()
         End If
     End Sub
 
@@ -390,7 +387,8 @@ Public Class frmMenu
         Else
             MsgBox("Ha alcanzado el máximo de productos por compra. ", vbInformation, "MiPOSLite")
         End If
-
+        itotalProductos = itotalProductos + 1
+        lblUnidades.Text = itotalProductos
     End Sub
 
     Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
@@ -413,6 +411,7 @@ Public Class frmMenu
     End Sub
     Public Sub ejecutarPosForm()
         Module1.smontoVenta = lblnumTotal.Text
+        Module1.stotalProductos = itotalProductos
         Module1.tbHProd = Me.tbHProd
         Module1.tbHUnid = Me.tbHUnid
         Module1.tbHValor = Me.tbHValor

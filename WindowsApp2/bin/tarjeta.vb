@@ -14,6 +14,7 @@ Public Class tarjeta
     Dim contador As Integer = 60
     Dim posTimeout As String = Integer.Parse(readConfig("POS_TIMEOUT_VENTA_MS"))
     Dim miResponseMsglocal As String
+    Dim miResponseMsglocalLong As String
     Dim enespera As Boolean = False
     Private Sub tarjeta_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.CenterToScreen()
@@ -35,18 +36,22 @@ Public Class tarjeta
         If contador = 60 Then
             bsRespuestaTktTransb = generaVentaTransbk(Module1.smontoVenta)
 
-            Module1.escribeArchivoVentas(miResponseMsglocal, bsRespuestaTktTransb)
+            Module1.escribeArchivoVentas(miResponseMsglocal, miResponseMsglocalLong, bsRespuestaTktTransb)
             If bsRespuestaTktTransb Then
                 Timer1.Enabled = False
                 Module1.sRespuestaTktTransb = miResponseMsglocal
                 Module1.bsRespuestaTktTransb = False
+                If miResponseMsglocal.Trim = "Aprobado" Then
+                    If readConfig("PRINT_TKT_INTERNO") = "SI" Then
+                        PrintDocument1.Print()
+                    End If
+                End If
                 Me.Close()
             End If
         End If
         If contador <= 0 Then
             Me.Close()
         End If
-        'decrementa()
     End Sub
     Private Sub wait(ByVal interval As Integer)
         Dim sw As New Stopwatch
@@ -60,7 +65,6 @@ Public Class tarjeta
     Public Function generaVentaTransbk(smonto As String) As Boolean
         smonto = smonto.Replace(".", "")
         Dim bresp = False
-        Dim miResponseMsg As String = ""
         Try
             Dim portName As String = readConfig("COM_TRANSBANK")    'Viene de modulo bass
             Dim imonto As Integer = Integer.Parse(smonto)
@@ -77,20 +81,18 @@ Public Class tarjeta
                 Label1.Text = contador
                 Me.Refresh()
                 wait(1000)
-
             Loop
             enespera = False
             bresp = Task_resp.Wait(posTimeout)
 
-            If bresp Then
-                miResponseMsg = Task_resp.Result.ResponseMessage
-                POSAutoservicio.Instance.ClosePort()
-                miResponseMsglocal = miResponseMsg.ToString
-            End If
+            ' If bresp Then
+            miResponseMsglocal = Task_resp.Result.ResponseMessage
+            miResponseMsglocalLong = Task_resp.Result.ToString
+            POSAutoservicio.Instance.ClosePort()
+            'End If
         Catch ex As Exception
             Debug.Print(ex.StackTrace.ToString)
         End Try
-
         Return bresp
     End Function
 
@@ -103,4 +105,81 @@ Public Class tarjeta
             Return False
         End If
     End Function
+
+    Private Sub PrintDocument1_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
+        Try
+            Dim margenIzq As Integer
+            Dim ilinea As Integer
+            Dim ipaso As Integer
+            Dim sCompra As String
+            Dim mrelleno As Integer
+            Dim mrellenoc As Integer
+
+            Dim numAleatorio As New Random()
+            Dim valorAleatorio As Integer = numAleatorio.Next(100, 999) ' Numero aleatorio para el ticket
+
+
+            mrelleno = 17  'Relleno largo  del nombre del producto
+            mrellenoc = 2  'Relleno largo  de cantidad de productos
+            margenIzq = 0
+            ilinea = 2
+            ipaso = 20
+            ' La fuente a usar
+            Dim prFont As New Font("Consolas", 9, FontStyle.Regular)
+
+            ' La fuente del titulo
+            Dim prFontTit As New Font("Arial", 14, FontStyle.Regular)
+
+            'imprimimos la fecha y hora
+            e.Graphics.DrawString(Date.Now.ToShortDateString.ToString & " " & Date.Now.ToShortTimeString.ToString, prFont, Brushes.Black, margenIzq, ilinea)
+
+            'imprimimos el nombre del Local
+            ilinea = ilinea + ipaso
+            e.Graphics.DrawString("  Heladería Serrano", prFontTit, Brushes.Black, margenIzq, ilinea)
+
+            'Imprimir numero de ticket
+            ilinea = ilinea + ipaso
+            e.Graphics.DrawString("Ticket: " & Date.Now.ToShortDateString.ToString.Replace("-", "") & Date.Now.ToShortTimeString.ToString.Replace(":", "") & valorAleatorio, prFont, Brushes.Black, margenIzq, ilinea)
+
+            'Salto de linea
+            ilinea = ilinea + ipaso
+            e.Graphics.DrawString(" ", prFont, Brushes.Black, margenIzq, ilinea)
+
+
+            'imprimimos Detalle de la compra
+            sCompra = "Producto       Uni  Sub"
+            ilinea = ilinea + ipaso
+            e.Graphics.DrawString(sCompra, prFont, Brushes.Black, margenIzq, ilinea)
+
+            For i As Integer = 0 To Module1.indexCompras - 1   ' 
+                ilinea = ilinea + ipaso
+                sCompra = tbHProd(i).Text.PadRight(mrelleno, " ") & tbHUnid(i).Text.PadRight(mrellenoc, " ") & " $" & FormatNumber(Integer.Parse(tbHSubT(i).Text.Replace(".", "")), 0)
+                e.Graphics.DrawString(sCompra, prFont, Brushes.Black, margenIzq, ilinea)
+            Next
+
+            'Imprime el total
+            ilinea = ilinea + ipaso
+            e.Graphics.DrawString(" ", prFont, Brushes.Black, margenIzq, ilinea) ' hace un salto de linea
+
+            ilinea = ilinea + ipaso
+            sCompra = "Total: " & Module1.smontoVenta
+            e.Graphics.DrawString(sCompra, prFont, Brushes.Black, margenIzq, ilinea)
+
+
+
+            ' ilinea = ilinea + ipaso
+            ' e.Graphics.DrawString(". ", prFont, Brushes.Black, margenIzq, ilinea)
+            ilinea = ilinea + ipaso
+            e.Graphics.DrawString(":) ", prFont, Brushes.Black, margenIzq, ilinea)
+
+            e.HasMorePages = False
+
+        Catch ex As Exception
+            MessageBox.Show("ERROR: " & ex.Message, "Administrador", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+    End Sub
+
+
+
 End Class
