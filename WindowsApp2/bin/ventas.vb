@@ -10,7 +10,6 @@
         IMPORTARCSV(DataGridView1, ";")
     End Sub
 
-    ' Sub IMPORTARCSV(ByVal OFD As OpenFileDialog, ByVal TABLA As DataGridView, ByVal DELIMITADOR As String)
     Sub IMPORTARCSV(ByVal TABLA As DataGridView, ByVal DELIMITADOR As String)
         Dim numeroLinea As Integer = 0
         Dim secuenciaActual As Integer = 0
@@ -18,15 +17,11 @@
         totalVentas = 0
         totalMonto = 0
         totalArticulos = 0
-
-
         Label5.Text = dt
         Dim sdate As String = Replace(dt, "-", "")
 
         Try
-
             Dim RUTA As String = "C:\ventasPOS\baseventas\ventasPOS" & sdate & ".csv"
-
             Dim TEXTLINE As String = ""
             Dim SPLITLINE() As String
 
@@ -68,15 +63,16 @@
                     TABLA.AutoResizeColumn(10)      'Comprobante transbank
                     TABLA.BackgroundColor = Color.White
                     numeroLinea = numeroLinea + 1
+
+                    ' TABLA.CurrentCell = TABLA.Rows(TABLA.Rows.Count - 1).Cells(TABLA.CurrentCell.ColumnIndex)
+                    DataGridView1.FirstDisplayedScrollingRowIndex = DataGridView1.Rows.Count - 1
                 Loop
                 OBJREADER.Close()
             Else
                 MsgBox("ARCHIVO INEXISTENTE", MsgBoxStyle.Information, "CSV INEXISTENTE " & RUTA)
             End If
-
-
         Catch EX As Exception
-            MsgBox("ERROR DE IMPORTACION: " + EX.ToString)
+            MsgBox("ERROR DE IMPORTACION: " + EX.ToString + " numeroLinea: " + numeroLinea.ToString)
         End Try
         TextBox1.Text = totalMonto
         TextBox2.Text = totalArticulos

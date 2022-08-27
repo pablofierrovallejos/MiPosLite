@@ -48,6 +48,7 @@ Public Class tarjeta
                 End If
                 Me.Close()
             End If
+            cleanScreen()
         End If
         If contador <= 0 Then
             Me.Close()
@@ -180,6 +181,16 @@ Public Class tarjeta
 
     End Sub
 
-
+    Public Sub cleanScreen()
+        For i As Integer = 0 To 11   ' Inicializa Vector columnas productos, unidades, valor y subtotal donde se muestran las compras seleccionadas por cliente
+            frmMenu.indexCompras = 0
+            frmMenu.lblnumTotal.Text = ""
+            frmMenu.lblUnidades.Text = ""
+            frmMenu.tbHProd(i).Text = ""
+            frmMenu.tbHUnid(i).Text = ""
+            frmMenu.tbHValor(i).Text = ""
+            frmMenu.tbHSubT(i).Text = ""
+        Next
+    End Sub
 
 End Class

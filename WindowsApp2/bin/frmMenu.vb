@@ -11,18 +11,21 @@ Imports Transbank.Responses.AutoservicioResponse
 
 
 Public Class frmMenu
-
     Dim btnMatriz(30) As System.Windows.Forms.Button    ' Botones de productos
     Dim tbNombreProd(30) As TextBox                     ' Textbox para nombre de productos
     Dim tbPrecio(30) As TextBox                         ' Textbox para precio de cada producto
-    Dim tbHProd(12) As TextBox                          ' Columna de Textbox para los nombres de productos comprados
-    Dim tbHUnid(12) As TextBox                          ' Columna de Textbox para las cantidades de productos comprados       
-    Dim tbHValor(12) As TextBox                         ' Columna de Textbox para valor de productos comprados
-    Dim tbHSubT(12) As TextBox                          ' Columna de Textbox para subtotal productos comprados
-    Dim indexCompras As Integer ' Guarda el indice de la compra actual
+    Public tbHProd(12) As TextBox                          ' Columna de Textbox para los nombres de productos comprados
+    Public tbHUnid(12) As TextBox                          ' Columna de Textbox para las cantidades de productos comprados       
+    Public tbHValor(12) As TextBox                         ' Columna de Textbox para valor de productos comprados
+    Public tbHSubT(12) As TextBox                          ' Columna de Textbox para subtotal productos comprados
+    Public indexCompras As Integer ' Guarda el indice de la compra actual
     Dim itotalProductos As Integer = 0
 
     Dim posTimeout As String = Integer.Parse(readConfig("POS_TIMEOUT_VENTA_MS"))
+    Dim habilitarMenu As String = readConfig("HABILITAR_MENU")
+    Dim habilitarSonido As String = readConfig("HABILITAR_SONIDO")
+    Dim sonidoHabilitado As Boolean = True
+
     Public Sub cargarMarizProductosyPrecios()
         Dim nroCol As Integer = 1
         Dim nroFila As Integer = 1
@@ -117,55 +120,35 @@ Public Class frmMenu
         Return s
     End Function
 
-    Private Function getConfigPrintTicket() As Boolean
-        Dim sLine As String = ""
-        Dim sfile As String
-
-        sfile = "C:\ventasPOS\config\impresion_ticket.ini"
-        Dim objReader As New IO.StreamReader(sfile)
-        Dim imprimeTicket As Boolean
-
-        Do
-            sLine = objReader.ReadLine()
-            If Not sLine Is Nothing Then
-                If sLine.Trim = "IMPRIMIR_TICKET=SI" Then
-                    imprimeTicket = True
-
-                ElseIf sLine.Trim = "IMPRIMIR_TICKET=NO" Then
-                    imprimeTicket = False
-                Else
-                    imprimeTicket = False
-                End If
-            End If
-        Loop Until sLine Is Nothing
-        objReader.Close()
-        Return imprimeTicket
-
-    End Function
-
     Private Sub ClickButton(ByVal sender As Object, ByVal e As System.EventArgs) 'Eventos para el arreglo de botones
         Dim btn As Button = CType(sender, Button)
-        'MessageBox.Show(btn.Location.ToString & " Name: " & btn.Name)
 
         If btn.Name.Length > 3 Then
+            If sonidoHabilitado Then playsoundbtn("sound5.wav")
             Dim sNombre = btn.Name
             Dim nlargo = sNombre.Length
             Dim subIndx = sNombre.Substring(3, (nlargo - 3))
             Dim nindex = Integer.Parse(subIndx)
 
             putSaleOnList(tbNombreProd(nindex).Text, tbPrecio(nindex).Text.Replace("$", ""))
+        Else
+            If sonidoHabilitado Then playsoundbtn("sound0.wav")
         End If
     End Sub
 
     Private Sub MantenedorDeProductosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MantenedorDeProductosToolStripMenuItem.Click
-        Dim form2 As New Form2()
-        form2.Show()
+        If habilitarMenu = "SI" Then
+            Dim form2 As New Form2()
+            form2.Show()
+        End If
     End Sub
 
     Private Sub AperturaDeCajaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AperturaDeCajaToolStripMenuItem.Click
-        Dim AperturaCaja As New AperturaCaja()
-        AperturaCaja.Show()
-        Me.Hide()
+        If habilitarMenu = "SI" Then
+            Dim AperturaCaja As New AperturaCaja()
+            AperturaCaja.Show()
+            Me.Hide()
+        End If
     End Sub
 
     Private Sub AyudaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AyudaToolStripMenuItem.Click
@@ -174,23 +157,28 @@ Public Class frmMenu
     End Sub
 
     Private Sub ConfiguraciónToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConfiguraciónToolStripMenuItem.Click
-        Dim configuracion As New Configuracion()
-        configuracion.Show()
+        If habilitarMenu = "SI" Then
+            Dim configuracion As New Configuracion()
+            configuracion.Show()
+        End If
     End Sub
 
     Private Sub AdministraciónTBKToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AdministraciónTBKToolStripMenuItem.Click
-        Dim administraciontbk As New administraciontbk()
-        administraciontbk.Show()
+        If habilitarMenu = "SI" Then
+            Dim administraciontbk As New administraciontbk()
+            administraciontbk.Show()
+        End If
     End Sub
 
     Private Sub VentasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles VentasToolStripMenuItem.Click
-        Dim ventas As New ventas()
-        ventas.Show()
+        If habilitarMenu = "SI" Then
+            Dim ventas As New ventas()
+            ventas.Show()
+        End If
     End Sub
 
 
     Public Function generaVentaTransbk(smonto As String) As Boolean
-
         smonto = smonto.Replace(".", "")
         Dim lcoms = POSAutoservicio.Instance.ListPorts()
         If (lcoms IsNot Nothing) Then
@@ -359,6 +347,12 @@ Public Class frmMenu
 
         cargarMarizProductosyPrecios()
 
+        If habilitarSonido = "SI" Then
+            sonidoHabilitado = True
+        Else
+            sonidoHabilitado = False
+        End If
+
     End Sub
 
     Public Sub putSaleOnList(sNomProd As String, sPrecio As String)
@@ -393,6 +387,7 @@ Public Class frmMenu
 
     Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
         If indexCompras > 0 Then
+            If sonidoHabilitado Then playsoundbtn("sound3.wav")
             indexCompras -= 1
             lblnumTotal.Text = Integer.Parse(lblnumTotal.Text.Replace(".", "")) - Integer.Parse(tbHSubT(indexCompras).Text.Replace(".", ""))
             tbHProd(indexCompras).Text = ""
@@ -406,6 +401,7 @@ Public Class frmMenu
         If lblnumTotal.Text = "0" Then
             MsgBox("No ha seleccionado ningún producto para pagar.", vbInformation, "MiPOSLite")
         Else
+            If sonidoHabilitado Then playsoundbtn("sound3.wav")
             ejecutarPosForm()
         End If
     End Sub
@@ -420,4 +416,17 @@ Public Class frmMenu
         Dim mitarjeta As New tarjeta()
         mitarjeta.Show()
     End Sub
+
+    Public Sub playsoundbtn(sfilesound As String)
+        Dim player = New Media.SoundPlayer()
+        player.SoundLocation = "C:\ventasPOS\img\sound\" & sfilesound
+        player.LoadAsync()
+        player.PlaySync()
+    End Sub
+
+    Private Sub btnsalir_Click(sender As Object, e As EventArgs) Handles btnsalir.Click
+        Me.Close()
+    End Sub
+
+
 End Class

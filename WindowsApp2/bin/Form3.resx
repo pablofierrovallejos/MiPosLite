@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="TextBox1.Text" xml:space="preserve">
+  <data name="RichTextBox1.Text" xml:space="preserve">
     <value>AutoPOSLite.
 
 Escrito por Pablo Fierro Vallejos.
@@ -128,7 +128,9 @@ Genera registro de ventas.
 Permite enviar la venta a POS Transbank para realizar el pago mediante tarjeta.
 
 
-Heladería Serrano Laja.</value>
+Heladería Serrano Laja.
+pablofierrovallejos@hotmail.com
+</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

@@ -26,6 +26,7 @@ Partial Class frmMenu
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMenu))
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.lblUnidades = New System.Windows.Forms.Label()
         Me.lbltitulo2 = New System.Windows.Forms.Label()
         Me.lbltitulo1 = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
@@ -48,7 +49,7 @@ Partial Class frmMenu
         Me.AdministraciónTBKToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.VentasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AyudaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.lblUnidades = New System.Windows.Forms.Label()
+        Me.btnsalir = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
@@ -75,6 +76,14 @@ Partial Class frmMenu
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1084, 386)
         Me.Panel1.TabIndex = 0
+        '
+        'lblUnidades
+        '
+        Me.lblUnidades.AutoSize = True
+        Me.lblUnidades.Location = New System.Drawing.Point(462, 338)
+        Me.lblUnidades.Name = "lblUnidades"
+        Me.lblUnidades.Size = New System.Drawing.Size(0, 13)
+        Me.lblUnidades.TabIndex = 79
         '
         'lbltitulo2
         '
@@ -274,13 +283,14 @@ Partial Class frmMenu
         Me.AyudaToolStripMenuItem.Size = New System.Drawing.Size(53, 22)
         Me.AyudaToolStripMenuItem.Text = "Ayuda"
         '
-        'lblUnidades
+        'btnsalir
         '
-        Me.lblUnidades.AutoSize = True
-        Me.lblUnidades.Location = New System.Drawing.Point(462, 338)
-        Me.lblUnidades.Name = "lblUnidades"
-        Me.lblUnidades.Size = New System.Drawing.Size(0, 13)
-        Me.lblUnidades.TabIndex = 79
+        Me.btnsalir.Location = New System.Drawing.Point(1063, 0)
+        Me.btnsalir.Name = "btnsalir"
+        Me.btnsalir.Size = New System.Drawing.Size(21, 31)
+        Me.btnsalir.TabIndex = 80
+        Me.btnsalir.Text = "x"
+        Me.btnsalir.UseVisualStyleBackColor = True
         '
         'frmMenu
         '
@@ -288,10 +298,11 @@ Partial Class frmMenu
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.ClientSize = New System.Drawing.Size(1084, 1740)
+        Me.Controls.Add(Me.btnsalir)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.Panel2)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Margin = New System.Windows.Forms.Padding(2)
@@ -335,4 +346,5 @@ Partial Class frmMenu
     Friend WithEvents lbltitulo2 As Label
     Friend WithEvents lbltitulo1 As Label
     Friend WithEvents lblUnidades As Label
+    Friend WithEvents btnsalir As Button
 End Class

@@ -23,34 +23,32 @@ Partial Class Form3
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form3))
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.SuspendLayout()
         '
-        'TextBox1
+        'RichTextBox1
         '
-        Me.TextBox1.BackColor = System.Drawing.Color.White
-        Me.TextBox1.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.TextBox1.Location = New System.Drawing.Point(24, 34)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(743, 383)
-        Me.TextBox1.TabIndex = 0
-        Me.TextBox1.Text = resources.GetString("TextBox1.Text")
+        Me.RichTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.RichTextBox1.ForeColor = System.Drawing.Color.Black
+        Me.RichTextBox1.Location = New System.Drawing.Point(35, 36)
+        Me.RichTextBox1.Name = "RichTextBox1"
+        Me.RichTextBox1.Size = New System.Drawing.Size(399, 196)
+        Me.RichTextBox1.TabIndex = 0
+        Me.RichTextBox1.Text = resources.GetString("RichTextBox1.Text")
         '
         'Form3
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(800, 450)
-        Me.Controls.Add(Me.TextBox1)
+        Me.ClientSize = New System.Drawing.Size(455, 279)
+        Me.Controls.Add(Me.RichTextBox1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form3"
         Me.Text = "Ayuda"
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents RichTextBox1 As RichTextBox
 End Class
