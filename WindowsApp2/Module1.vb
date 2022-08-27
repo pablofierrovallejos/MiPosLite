@@ -38,6 +38,7 @@
     End Function
 
     Public Sub escribeArchivoVentas(sMensajeTbk As String, SMensajeTbkLong As String, brespPos As Boolean)
+        Logger.i("escribeArchivoVentas: ", New StackFrame(True))
         Dim dt As Date = Today
         Dim sdate As String = Replace(dt, "-", "")
         Dim file As System.IO.StreamWriter

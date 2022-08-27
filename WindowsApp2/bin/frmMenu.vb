@@ -25,6 +25,11 @@ Public Class frmMenu
     Dim habilitarMenu As String = readConfig("HABILITAR_MENU")
     Dim habilitarSonido As String = readConfig("HABILITAR_SONIDO")
     Dim sonidoHabilitado As Boolean = True
+    ' Logger.Nivel = Logger.TipoMensaje.WARNING
+    ' Logger.e("Error con excepción", ex)
+    'Logger.d("Debug con traza", New StackFrame(True))
+    'Logger.i("Info sin traza", New StackFrame(True))
+    'Logger.e("Error con excepción y traza", ex, New StackFrame(True))
 
     Public Sub cargarMarizProductosyPrecios()
         Dim nroCol As Integer = 1
@@ -122,7 +127,7 @@ Public Class frmMenu
 
     Private Sub ClickButton(ByVal sender As Object, ByVal e As System.EventArgs) 'Eventos para el arreglo de botones
         Dim btn As Button = CType(sender, Button)
-
+        Logger.i("ClickButton: btn.Name: " & btn.Name & " ", New StackFrame(True))
         If btn.Name.Length > 3 Then
             If sonidoHabilitado Then playsoundbtn("sound5.wav")
             Dim sNombre = btn.Name
@@ -130,10 +135,12 @@ Public Class frmMenu
             Dim subIndx = sNombre.Substring(3, (nlargo - 3))
             Dim nindex = Integer.Parse(subIndx)
 
+            Logger.i("putSaleOnList: tbNombreProd: " & tbNombreProd(nindex).Text & ", tbPrecio: " & tbPrecio(nindex).Text.Replace("$", ""), New StackFrame(True))
             putSaleOnList(tbNombreProd(nindex).Text, tbPrecio(nindex).Text.Replace("$", ""))
         Else
             If sonidoHabilitado Then playsoundbtn("sound0.wav")
         End If
+
     End Sub
 
     Private Sub MantenedorDeProductosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MantenedorDeProductosToolStripMenuItem.Click
@@ -250,6 +257,8 @@ Public Class frmMenu
 
     Private Sub frmMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Genera la matriz de botones
+        Logger.i("frmMenu_Load ", New StackFrame(True))
+
         Dim xPos As Integer = 15
         Dim yPos As Integer = 0
         Dim xPosV As Integer = 100     'Posición inicial de vector columnas textbox con ventas
@@ -398,6 +407,7 @@ Public Class frmMenu
     End Sub
 
     Private Sub btnPagar_Click(sender As Object, e As EventArgs) Handles btnPagar.Click
+        Logger.i("btnPagar_Click: lblnumTotal: " & lblnumTotal.Text & " ", New StackFrame(True))
         If lblnumTotal.Text = "0" Then
             MsgBox("No ha seleccionado ningún producto para pagar.", vbInformation, "MiPOSLite")
         Else
@@ -413,6 +423,7 @@ Public Class frmMenu
         Module1.tbHValor = Me.tbHValor
         Module1.tbHSubT = Me.tbHSubT
         Module1.indexCompras = Me.indexCompras
+        Logger.i("ejecutarPosForm: smontoVenta: " & Module1.smontoVenta & " stotalProductos: " & Module1.stotalProductos, New StackFrame(True))
         Dim mitarjeta As New tarjeta()
         mitarjeta.Show()
     End Sub
@@ -425,6 +436,7 @@ Public Class frmMenu
     End Sub
 
     Private Sub btnsalir_Click(sender As Object, e As EventArgs) Handles btnsalir.Click
+        Logger.i("btnsalir_Click", New StackFrame(True))
         Me.Close()
     End Sub
 

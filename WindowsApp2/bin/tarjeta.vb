@@ -17,6 +17,7 @@ Public Class tarjeta
     Dim miResponseMsglocalLong As String
     Dim enespera As Boolean = False
     Private Sub tarjeta_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Logger.i("tarjeta_Load: ", New StackFrame(True))
         Me.CenterToScreen()
         Timer1.Interval = 1000
         Timer1.Enabled = True
@@ -89,6 +90,7 @@ Public Class tarjeta
             ' If bresp Then
             miResponseMsglocal = Task_resp.Result.ResponseMessage
             miResponseMsglocalLong = Task_resp.Result.ToString
+            Logger.i("generaVentaTransbk: miResponseMsglocalLong " & miResponseMsglocalLong.Replace(vbLf, "|"), New StackFrame(True))
             POSAutoservicio.Instance.ClosePort()
             'End If
         Catch ex As Exception
