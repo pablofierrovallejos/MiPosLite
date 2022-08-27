@@ -74,7 +74,7 @@
             End If
             For i As Integer = 0 To indexCompras - 1   ' 
                 bLinea = hLinea & tbHProd(i).Text & ";" & tbHUnid(i).Text & ";" & tbHValor(i).Text & ";" & tbHSubT(i).Text & "; " & stotalProductos & ";" & sTotales & ";" & resultadoTran
-                file.WriteLine(bLinea & ";" & sMensajeTbk & ";" & SMensajeTbkLong.Replace(vbLf, "|"))
+                file.WriteLine(bLinea & ";" & sMensajeTbk & ";" & SMensajeTbkLong.Replace(vbLf, "|") & ";")
             Next
 
             file.Close()

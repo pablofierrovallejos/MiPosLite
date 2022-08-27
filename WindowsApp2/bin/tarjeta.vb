@@ -69,13 +69,19 @@ Public Class tarjeta
         Dim bresp = False
         Try
             Dim portName As String = readConfig("COM_TRANSBANK")    'Viene de modulo bass
+            Dim boucherTbk As String = readConfig("PRINT_TKT_TRANSBK")
+            Dim imprimeBoucher As Boolean = False
+            If boucherTbk = "SI" Then imprimeBoucher = True
             Dim imonto As Integer = Integer.Parse(smonto)
-
-            POSAutoservicio.Instance.OpenPort(portName)
             Dim Task_resp As Task(Of SaleResponse)
 
+            POSAutoservicio.Instance.OpenPort(portName)
+
+
             If Not enespera Then
-                Task_resp = Task.Run(Async Function() Await POSAutoservicio.Instance.Sale(imonto, "Ticket", False, True))
+                Task_resp = Task.Run(Async Function() Await POSAutoservicio.Instance.Sale(imonto, "Ticket", True, True))
+                'Task_resp = Task.Run(Async Function() Await POSIntegrado.Instance.Sale(imonto, "Ticket", imprimeBoucher))
+
             End If
 
             Do While (Not Task_resp.IsCompleted)
@@ -126,19 +132,19 @@ Public Class tarjeta
             mrellenoc = 2  'Relleno largo  de cantidad de productos
             margenIzq = 0
             ilinea = 2
-            ipaso = 20
+            ipaso = 18
             ' La fuente a usar
             Dim prFont As New Font("Consolas", 9, FontStyle.Regular)
 
             ' La fuente del titulo
-            Dim prFontTit As New Font("Arial", 14, FontStyle.Regular)
+            Dim prFontTit As New Font("Arial", 12, FontStyle.Regular)
 
             'imprimimos la fecha y hora
             e.Graphics.DrawString(Date.Now.ToShortDateString.ToString & " " & Date.Now.ToShortTimeString.ToString, prFont, Brushes.Black, margenIzq, ilinea)
 
             'imprimimos el nombre del Local
             ilinea = ilinea + ipaso
-            e.Graphics.DrawString("  Heladería Serrano", prFontTit, Brushes.Black, margenIzq, ilinea)
+            e.Graphics.DrawString("    Heladería Serrano", prFontTit, Brushes.Black, margenIzq, ilinea)
 
             'Imprimir numero de ticket
             ilinea = ilinea + ipaso

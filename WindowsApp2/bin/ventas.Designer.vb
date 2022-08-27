@@ -34,6 +34,7 @@ Partial Class ventas
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.MonthCalendar1 = New System.Windows.Forms.MonthCalendar()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -164,4 +165,5 @@ Partial Class ventas
     Friend WithEvents TextBox3 As TextBox
     Friend WithEvents MonthCalendar1 As MonthCalendar
     Friend WithEvents Label5 As Label
+    Friend WithEvents PrintDocument1 As Printing.PrintDocument
 End Class

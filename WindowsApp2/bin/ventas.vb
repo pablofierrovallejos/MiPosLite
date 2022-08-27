@@ -3,7 +3,7 @@
     Dim totalMonto As Integer
     Dim totalArticulos As Integer
     Dim dt As Date = Today
-
+    Dim lstOfStrings As List(Of String)
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         DataGridView1.Rows.Clear()
         DataGridView1.Columns.Clear()
@@ -91,4 +91,63 @@
         IMPORTARCSV(DataGridView1, ";")
     End Sub
 
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
+    End Sub
+
+    Private Sub DataGridView1_CellClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellClick
+        Dim i, j As Integer
+        i = e.RowIndex
+        j = e.ColumnIndex
+        Dim spayload = DataGridView1.Item(j, i).Value
+        If spayload.ToString.Length > 100 Then
+            Dim resp = MsgBox("Imprimir Boucher TBK?", vbYesNo, "MiPosLite")
+            If resp = vbYes Then
+                lstOfStrings = formatBoucher(spayload)
+                PrintDocument1.Print()
+            End If
+        End If
+    End Sub
+
+    Public Function formatBoucher(sdata As String)
+        Dim labelInicial As String = "Shares Type Gloss:"
+        Dim format As String = ""
+
+        Dim lstOfStrings As New List(Of String)
+        Dim slinea As String = ""
+        Dim posIni = InStr(sdata, "Shares Type Gloss:")
+        If posIni = 0 Then
+            Return sdata
+        Else
+            sdata = sdata.Substring(posIni + labelInicial.Length)
+            sdata = "          " & sdata
+
+            While sdata.Length > 39
+                slinea = sdata.Substring(0, 40)
+                sdata = sdata.Substring(40)
+                lstOfStrings.Add(slinea)
+                Logger.i(slinea)
+            End While
+            Return lstOfStrings
+        End If
+    End Function
+
+
+    Private Sub PrintDocument1_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
+        Try
+            Dim ilinea As Integer = 2
+            Dim ipaso As Integer = 13
+            Dim prFont As New Font("Consolas", 6, FontStyle.Bold)
+
+            For Each item In lstOfStrings
+                ilinea = ilinea + ipaso
+                e.Graphics.DrawString(item, prFont, Brushes.Black, 0, ilinea)
+            Next
+
+            e.HasMorePages = False
+        Catch ex As Exception
+            MessageBox.Show("ERROR: " & ex.Message, "Administrador", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+    End Sub
 End Class
