@@ -63,14 +63,14 @@ Public Class administraciontbk
     Private Sub cmdUltmaVenta_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdUltmaVenta.Click
         Try
             Dim portName As String = readConfig("COM_TRANSBANK")    'Viene de modulo bass
-            POSAutoservicio.Instance.OpenPort(portName)
+            POSIntegrado.Instance.OpenPort(portName)
 
             Dim response As Task(Of LastSaleResponse) = Task.Run(Async Function() Await POSIntegrado.Instance.LastSale())
             Dim sout = response.Wait(posTimeout)
 
             If sout Then
                 If response.Result.Success Then
-                    MessageBox.Show(response.Result.ToString(), "Última venta obtenida satisfacoriamente.")
+                    MessageBox.Show(response.Result.ToString(), "Impresión de última venta OK")
                 End If
             Else
                 MessageBox.Show("Falló la conexión con POS.")

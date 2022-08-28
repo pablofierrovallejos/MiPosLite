@@ -148,7 +148,7 @@ Public Class tarjeta
 
             'Imprimir numero de ticket
             ilinea = ilinea + ipaso
-            e.Graphics.DrawString("Ticket: " & Date.Now.ToShortDateString.ToString.Replace("-", "") & Date.Now.ToShortTimeString.ToString.Replace(":", "") & valorAleatorio, prFont, Brushes.Black, margenIzq, ilinea)
+            e.Graphics.DrawString("Ticket: " & Date.Now.ToShortDateString.ToString.Replace("-", "") & Date.Now.ToShortTimeString.ToString.Replace(":", "") & "-" & valorAleatorio, prFont, Brushes.Black, margenIzq, ilinea)
 
             'Salto de linea
             ilinea = ilinea + ipaso
