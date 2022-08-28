@@ -18,7 +18,7 @@ Public Class frmMenu
     Public tbHUnid(12) As TextBox                          ' Columna de Textbox para las cantidades de productos comprados       
     Public tbHValor(12) As TextBox                         ' Columna de Textbox para valor de productos comprados
     Public tbHSubT(12) As TextBox                          ' Columna de Textbox para subtotal productos comprados
-    Public indexCompras As Integer ' Guarda el indice de la compra actual
+    Public indexCompras As Integer = 0 ' Guarda el indice de la compra actual
     Dim itotalProductos As Integer = 0
 
     Dim posTimeout As String = Integer.Parse(readConfig("POS_TIMEOUT_VENTA_MS"))
@@ -365,35 +365,49 @@ Public Class frmMenu
     End Sub
 
     Public Sub putSaleOnList(sNomProd As String, sPrecio As String)
+
+        If indexCompras < 12 Then
+            addItemLst(sNomProd, sPrecio)
+        Else
+            If existeProductoEnLista(sNomProd) Then
+                addItemLst(sNomProd, sPrecio)
+            Else
+                MsgBox("Ha alcanzado el máximo de productos por compra. ", vbInformation, "MiPOSLite")
+            End If
+        End If
+    End Sub
+    Public Function existeProductoEnLista(sNomProd As String) As Boolean
+        For i As Integer = 0 To (indexCompras - 1)
+            If tbHProd(i).Text = sNomProd Then
+                Return True
+            End If
+        Next
+        Return False
+    End Function
+    Public Sub addItemLst(sNomProd As String, sPrecio As String)
         Dim existProd As Boolean = False
         Dim totalMonto As Integer = 0
-        If indexCompras < 12 Then
-            For i As Integer = 0 To 11
-                If tbHProd(i).Text = sNomProd Then
-                    existProd = True
-                    tbHUnid(i).Text = Integer.Parse(tbHUnid(i).Text + 1)
-                    tbHSubT(i).Text = FormatNumber(Integer.Parse(tbHUnid(i).Text.Replace(".", "") * sPrecio), 0)
-                End If
-                If tbHSubT(i).Text.Length > 0 Then
-                    totalMonto = totalMonto + Integer.Parse(tbHSubT(i).Text.Replace(".", ""))
-                End If
-            Next
-            If Not existProd Then
-                tbHProd(indexCompras).Text = sNomProd
-                tbHValor(indexCompras).Text = FormatNumber(sPrecio, 0)
-                tbHUnid(indexCompras).Text = 1
-                tbHSubT(indexCompras).Text = FormatNumber(sPrecio, 0)
-                totalMonto = totalMonto + Integer.Parse(sPrecio)
-                indexCompras += 1
+        For i As Integer = 0 To 11
+            If tbHProd(i).Text = sNomProd Then
+                existProd = True
+                tbHUnid(i).Text = Integer.Parse(tbHUnid(i).Text + 1)
+                tbHSubT(i).Text = FormatNumber(Integer.Parse(tbHUnid(i).Text.Replace(".", "") * sPrecio), 0)
             End If
-            lblnumTotal.Text = FormatNumber(totalMonto, 0)
-        Else
-            MsgBox("Ha alcanzado el máximo de productos por compra. ", vbInformation, "MiPOSLite")
+            If tbHSubT(i).Text.Length > 0 Then
+                totalMonto = totalMonto + Integer.Parse(tbHSubT(i).Text.Replace(".", ""))
+            End If
+        Next
+        If Not existProd Then
+            tbHProd(indexCompras).Text = sNomProd
+            tbHValor(indexCompras).Text = FormatNumber(sPrecio, 0)
+            tbHUnid(indexCompras).Text = 1
+            tbHSubT(indexCompras).Text = FormatNumber(sPrecio, 0)
+            totalMonto = totalMonto + Integer.Parse(sPrecio)
+            indexCompras += 1
         End If
-        itotalProductos = itotalProductos + 1
-        lblUnidades.Text = itotalProductos
+        lblnumTotal.Text = FormatNumber(totalMonto, 0)
+        lblUnidades.Text = sumarProductos()
     End Sub
-
     Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
         If indexCompras > 0 Then
             If sonidoHabilitado Then playsoundbtn("sound3.wav")
@@ -403,9 +417,17 @@ Public Class frmMenu
             tbHValor(indexCompras).Text = ""
             tbHUnid(indexCompras).Text = ""
             tbHSubT(indexCompras).Text = ""
+            ' itotalProductos = itotalProductos - 1
+            lblUnidades.Text = sumarProductos()
         End If
     End Sub
-
+    Public Function sumarProductos() As Integer
+        Dim totprod As Integer = 0
+        For i As Integer = 0 To (indexCompras - 1)
+            totprod = totprod + Integer.Parse(tbHUnid(i).Text)
+        Next
+        Return totprod
+    End Function
     Private Sub btnPagar_Click(sender As Object, e As EventArgs) Handles btnPagar.Click
         Logger.i("btnPagar_Click: lblnumTotal: " & lblnumTotal.Text & " ", New StackFrame(True))
         If lblnumTotal.Text = "0" Then

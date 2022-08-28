@@ -1,4 +1,6 @@
-﻿Public Class ventas
+﻿Imports System.Data.Common.CommandTrees.ExpressionBuilder
+
+Public Class ventas
     Dim totalVentas As Integer
     Dim totalMonto As Integer
     Dim totalArticulos As Integer
@@ -24,10 +26,16 @@
             Dim RUTA As String = "C:\ventasPOS\baseventas\ventasPOS" & sdate & ".csv"
             Dim TEXTLINE As String = ""
             Dim SPLITLINE() As String
-
+            '  Dim row As DataGridViewRow
             If System.IO.File.Exists(RUTA) = True Then
                 Dim OBJREADER As New System.IO.StreamReader(RUTA)
                 Do While OBJREADER.Peek() <> -1
+
+                    'row = New DataGridViewRow()
+                    ' row.CreateCells(DataGridView1)
+                    ' row.Cells(0).Value = "sss"
+                    '  row.Cells(1).Value = "ttttt"
+
                     TEXTLINE = OBJREADER.ReadLine()
                     SPLITLINE = Split(TEXTLINE, DELIMITADOR)
                     If numeroLinea > 0 Then
@@ -50,17 +58,18 @@
                     End If
                     TABLA.ColumnCount = SPLITLINE.Length - 1
                     TABLA.Rows.Add(SPLITLINE)
-                    TABLA.AutoResizeColumn(0)       'Fecha
-                    TABLA.AutoResizeColumn(1)       'Hora
-                    TABLA.AutoResizeColumn(2)       'Secuencia
-                    TABLA.AutoResizeColumn(3)       'Producto
-                    TABLA.AutoResizeColumn(4)       'Cantidad
-                    TABLA.AutoResizeColumn(5)       'Valor
-                    TABLA.AutoResizeColumn(6)       'SubTotal
-                    TABLA.AutoResizeColumn(7)       'Cantidad Total
-                    TABLA.AutoResizeColumn(8)       'Monto Total
-                    TABLA.AutoResizeColumn(9)      'Comunicacion POS
-                    TABLA.AutoResizeColumn(10)      'Comprobante transbank
+
+                    ' TABLA.AutoResizeColumn(0)       'Fecha
+                    ' TABLA.AutoResizeColumn(1)       'Hora
+                    ' TABLA.AutoResizeColumn(2)       'Secuencia
+                    ' TABLA.AutoResizeColumn(3)       'Producto
+                    ' TABLA.AutoResizeColumn(4)       'Cantidad
+                    ' TABLA.AutoResizeColumn(5)       'Valor
+                    ' TABLA.AutoResizeColumn(6)       'SubTotal
+                    ' TABLA.AutoResizeColumn(7)       'Cantidad Total
+                    ' TABLA.AutoResizeColumn(8)       'Monto Total
+                    ' TABLA.AutoResizeColumn(9)      'Comunicacion POS
+                    ' TABLA.AutoResizeColumn(10)      'Comprobante transbank
                     TABLA.BackgroundColor = Color.White
                     numeroLinea = numeroLinea + 1
 
@@ -91,10 +100,6 @@
         IMPORTARCSV(DataGridView1, ";")
     End Sub
 
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
-
-    End Sub
-
     Private Sub DataGridView1_CellClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellClick
         Dim i, j As Integer
         i = e.RowIndex
@@ -110,15 +115,13 @@
     End Sub
 
     Public Function formatBoucher(sdata As String)
-        Dim labelInicial As String = "Shares Type Gloss:"
-        Dim format As String = ""
-
         Dim lstOfStrings As New List(Of String)
         Dim slinea As String = ""
         Dim posIni = InStr(sdata, "Shares Type Gloss:")
         If posIni = 0 Then
             Return sdata
         Else
+            Dim labelInicial As String = "Shares Type Gloss:"
             sdata = sdata.Substring(posIni + labelInicial.Length)
             sdata = "          " & sdata
 

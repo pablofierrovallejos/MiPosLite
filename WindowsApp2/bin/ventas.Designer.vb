@@ -129,6 +129,9 @@ Partial Class ventas
         Me.Label5.TabIndex = 10
         Me.Label5.Text = "()"
         '
+        'PrintDocument1
+        '
+        '
         'ventas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)

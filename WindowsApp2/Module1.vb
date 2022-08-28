@@ -57,7 +57,7 @@
             sTotales = smontoVenta
 
             If isizeFile = 0 Then ' si el arcchivo esta vacío escribir cabecera
-                file.WriteLine("Fecha; Hora; Secuencia; Producto ; Cantidad; Valor; Subtotal; Cantidad Total;Monto Total; Comunicacion POS; Resultado Transbank;Comprobante Transbk")
+                file.WriteLine("Fecha; Hora; Secuencia; Producto ; Cantidad; Valor; Subtotal; CantTot;Monto Total; Comunicacion POS; Resultado Transbank;Comprobante Transbk")
             End If
 
             If brespPos Then

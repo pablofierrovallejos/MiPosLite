@@ -175,9 +175,6 @@ Public Class tarjeta
             e.Graphics.DrawString(sCompra, prFont, Brushes.Black, margenIzq, ilinea)
 
 
-
-            ' ilinea = ilinea + ipaso
-            ' e.Graphics.DrawString(". ", prFont, Brushes.Black, margenIzq, ilinea)
             ilinea = ilinea + ipaso
             e.Graphics.DrawString(":) ", prFont, Brushes.Black, margenIzq, ilinea)
 
