@@ -21,19 +21,27 @@ Public Class administraciontbk
                 iscomopen = True
             End If
 
-
-
             Dim pollResult As Task(Of Boolean) = Task.Run(Async Function() Await POSIntegrado.Instance.Poll())
             Dim sout = pollResult.Wait(posTimeout)
 
             If sout Then  'If pollResult.Result Then
-                MsgBox("POS conectado correctamente a PC Autoatención.", vbInformation, "miAutoPOS")
+                MsgBox("Polling OK", vbInformation, "miAutoPOS")
             Else
                 MsgBox("Error en Comunicación con POS,no se pudo realizar Poll ", vbInformation, "miAutoPOS")
             End If
-
+        Catch a As InvalidOperationException
+            MessageBox.Show(a.Message & " Problema de conexión con POS", "Error", MessageBoxButtons.OK, MessageBoxIcon.[Error])
         Catch a As TransbankException
-            MessageBox.Show(a.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.[Error])
+            MessageBox.Show(a.Message & " Problema de conexión con POS", "Error", MessageBoxButtons.OK, MessageBoxIcon.[Error])
+        Catch a As Exception
+            Console.WriteLine([String].Concat(a.StackTrace, a.Message))
+            If a.InnerException Is Nothing Then
+                Console.WriteLine("Inner Exception")
+                Console.WriteLine([String].Concat(a.InnerException.StackTrace, a.InnerException.Message))
+                MessageBox.Show(a.Message & " Problema de conexión con POS", "Error", MessageBoxButtons.OK, MessageBoxIcon.[Error])
+            Else
+                MessageBox.Show(a.InnerException.Message & " Problema de conexión con POS", "Error", MessageBoxButtons.OK, MessageBoxIcon.[Error])
+            End If
         End Try
     End Sub
 
@@ -49,7 +57,7 @@ Public Class administraciontbk
                 Dim sout = result.Wait(posTimeout)
 
                 If sout Then  'If result.Result Then
-                    MsgBox("POS configurado en Modo Normal", vbInformation, "miAutoPOS")
+                    MsgBox("Cambio Modo Normal OK", vbInformation, "miAutoPOS")
                 Else
                     MsgBox("Error en Comunicación, no se pudo cambiar POS a modo Normal", vbInformation, "miAutoPOS")
                 End If
