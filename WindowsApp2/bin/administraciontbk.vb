@@ -91,66 +91,111 @@ Public Class administraciontbk
 
 
     Private Sub cmdDetalleVentas_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdDetalleVentas.Click
+        Dim countListSales = getListDetailSales()
+        If countListSales = 0 Then
+            MsgBox("No Existen Ventas", vbInformation, "miAutoPOS")
+        Else
+            MsgBox("Detalle de Ventas OK", vbInformation, "miAutoPOS")
+        End If
+    End Sub
+
+    Public Function getListDetailSales() As Integer
+        Dim totalDimList As Integer = 0
         Try
+            TextBox1.Text = ""
             Dim portName As String = readConfig("COM_TRANSBANK")    'Viene de modulo bass
             POSIntegrado.Instance.OpenPort(portName)
-
-
             Dim details As Task(Of List(Of DetailResponse)) = Task.Run(Async Function() Await POSIntegrado.Instance.Details(False))
+            lblEstado.Text = If(details.Status = 1, "WaitingForActivation", "")
+
             Dim resp = details.Wait(posTimeout)
             Dim stmp As String = ""
+            stmp = "Detalle de Ventas" & vbNewLine
+
+            totalDimList = details.Result.Count
 
             If resp Then
                 For Each detail As DetailResponse In details.Result
                     'stmp = detail.CardType
-                    stmp = "Tipo de Tarjeta : " & detail.CardType
-
+                    stmp = stmp & "Tipo Tarjeta : " & detail.CardType
                     stmp = stmp & "     Total : " & detail.Amount
-
                     stmp = stmp & "     Ultimos 4Digitos : " & detail.Last4Digits
-
                     stmp = stmp & "     Fecha : " & detail.RealDate & vbNewLine
-
-
                     TextBox1.Text = TextBox1.Text & stmp
                 Next
+                ' If details.resResponseCode = 3 Then
+                ' MsgBox("Reintente -Conexión falló", vbInformation, "miAutoPOS")
+                ' End If
+                'If details.Result.Count = 0 Then
+                'MsgBox("No Existen Ventas", vbInformation, "miAutoPOS")
+                ' Else
+                'MsgBox("Detalle de Ventas OK", vbInformation, "miAutoPOS")
+                'End If
             Else
-                MsgBox("Error en Comunicación, no se pudo obtener detalle de Ventas", vbInformation, "miAutoPOS")
+                lblEstado.Text = ""
+                MsgBox("Error en Comunicación, no se pudo obtener detalle de Ventas o no hay Ventas", vbInformation, "miAutoPOS")
+                totalDimList = -1
             End If
+            lblEstado.Text = ""
+            POSIntegrado.Instance.ClosePort()
+
         Catch a As TransbankException
             MessageBox.Show(a.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.[Error])
+            totalDimList = -1
+        Catch a As Exception
+            Console.WriteLine([String].Concat(a.StackTrace, a.Message))
+            If a.InnerException Is Nothing Then
+                Console.WriteLine("Inner Exception")
+                Console.WriteLine([String].Concat(a.InnerException.StackTrace, a.InnerException.Message))
+                MessageBox.Show(a.Message & " Problema de conexión con POS", "Error", MessageBoxButtons.OK, MessageBoxIcon.[Error])
+            Else
+                MessageBox.Show(a.InnerException.Message & " Problema de conexión con POS", "Error", MessageBoxButtons.OK, MessageBoxIcon.[Error])
+            End If
+            totalDimList = -1
         End Try
-    End Sub
+        Return totalDimList
+    End Function
 
     Private Sub cmdPrintVentasPos_Click(sender As Object, e As EventArgs) Handles cmdPrintVentasPos.Click
         Try
-            Dim portName As String = readConfig("COM_TRANSBANK")    'Viene de modulo bass
-            POSIntegrado.Instance.OpenPort(portName)
+            Dim countListSales = getListDetailSales()
+            If countListSales = 0 Then
+                MsgBox("No Existen Ventas", vbInformation, "miAutoPOS")
+            ElseIf countListSales > 0 Then
 
-            TextBox1.Text = ""
-            Dim details As Task(Of List(Of DetailResponse)) = Task.Run(Async Function() Await POSIntegrado.Instance.Details(True))
-            Dim resp = details.Wait(posTimeout)
-            Dim stmp As String = ""
 
-            If resp Then
-                For Each detail As DetailResponse In details.Result
+                Dim portName As String = readConfig("COM_TRANSBANK")    'Viene de modulo bass
+                Thread.Sleep(3000)
 
-                    stmp = "Tipo de Tarjeta : " & detail.CardType
+                POSIntegrado.Instance.OpenPort(portName)
 
-                    stmp = stmp & "     Total : " & detail.Amount
+                Dim details As Task(Of List(Of DetailResponse)) = Task.Run(Async Function() Await POSIntegrado.Instance.Details(True))
 
-                    stmp = stmp & "     Ultimos 4Digitos : " & detail.Last4Digits
+                lblEstado.Text = If(details.Status = 1, "WaitingForActivation", "")
+                Dim resp = details.Wait(posTimeout)
+                Dim stmp As String = ""
+                lblEstado.Text = ""
+                If resp Then
+                    MsgBox("Detalle de Ventas OK", vbInformation, "miAutoPOS")
+                Else
+                    MsgBox("Error en Comunicación, no se pudo obtener detalle de Ventas", vbInformation, "miAutoPOS")
+                End If
 
-                    stmp = stmp & "     Fecha : " & detail.RealDate & vbNewLine
-
-                    TextBox1.Text = TextBox1.Text & stmp
-                Next
-            Else
-                MsgBox("Error en Comunicación, no se pudo obtener detalle de Ventas", vbInformation, "miAutoPOS")
+                POSIntegrado.Instance.ClosePort()
             End If
         Catch a As TransbankException
             MessageBox.Show(a.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.[Error])
+        Catch a As Exception
+            Console.WriteLine([String].Concat(a.StackTrace, a.Message))
+            If a.InnerException Is Nothing Then
+                Console.WriteLine("Inner Exception")
+                Console.WriteLine([String].Concat(a.InnerException.StackTrace, a.InnerException.Message))
+                MessageBox.Show(a.Message & " Problema de conexión con POS", "Error", MessageBoxButtons.OK, MessageBoxIcon.[Error])
+            Else
+                MessageBox.Show(a.InnerException.Message & " Problema de conexión con POS", "Error", MessageBoxButtons.OK, MessageBoxIcon.[Error])
+            End If
         End Try
+
     End Sub
 
     Private Sub cmdCierre_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdCierre.Click
@@ -159,16 +204,21 @@ Public Class administraciontbk
             POSIntegrado.Instance.OpenPort(portName)
 
             Dim response As Task(Of CloseResponse) = Task.Run(Async Function() Await POSIntegrado.Instance.Close())
+            lblEstado.Text = response.Status.ToString
             Dim resp = response.Wait(posTimeout)
 
             If resp Then
                 If response.Result.Success Then
-                    MessageBox.Show(response.Result.ToString(), "Operación de Cierre.")
+                    TextBox1.Text = response.Result.ToString().Replace(vbLf, vbNewLine)
+                    MsgBox("Cierre OK", vbInformation, "miAutoPOS")
+                End If
+                If response.Result.ResponseCode = 3 Then
+                    MsgBox("Reintente -Conexión falló", vbInformation, "miAutoPOS")
                 End If
             Else
                 MsgBox("Error en Comunicación, no se pudo realizar Cierre", vbInformation, "miAutoPOS")
             End If
-            MessageBox.Show(response.Result.ToString(), "Operación de Cierre.")
+            lblEstado.Text = ""
         Catch a As TransbankException
             MessageBox.Show(a.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.[Error])
         End Try
@@ -200,7 +250,7 @@ Public Class administraciontbk
                                                                      End If
                                                                      Return Await miPos.LoadKeys()
                                                                  End Function)
-            lblEstado.Text = "Solicitando llaves..."
+            'lblEstado.Text = "Solicitando llaves..."
             lblEstado.Text = response.Status.ToString
 
             Dim resp = response.Wait(posTimeout)
@@ -208,14 +258,18 @@ Public Class administraciontbk
 
             If resp Then
                 If response.Result.Success Then
-                    MessageBox.Show(response.Result.ToString(), "Keys Cargada Satisfactoriamente.")
+                    MessageBox.Show(response.Result.ToString(), "Carga de llaves OK")
+                End If
+                If response.Result.ResponseCode = 3 Then
+                    MsgBox("Reintente -Conexión falló", vbInformation, "miAutoPOS")
                 End If
             Else
-                MsgBox("Error en Comunicación, no se pudo cargar Keys", vbInformation, "miAutoPOS")
+                MsgBox("Error en Comunicación Intente de Nuevo", vbInformation, "miAutoPOS")
             End If
             lblEstado.Text = ""
 
             tokenSource.Cancel()
+
 
             If miPos.IsPortOpen Then
                 'POSIntegrado.Instance.ClosePort()
@@ -234,5 +288,27 @@ Public Class administraciontbk
 
     Private Sub administraciontbk_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         iscomopen = False
+    End Sub
+
+    Private Sub cmdTotalVentas_Click(sender As Object, e As EventArgs) Handles cmdTotalVentas.Click
+        Try
+            Dim portName As String = readConfig("COM_TRANSBANK")    'Viene de modulo bass
+            POSIntegrado.Instance.OpenPort(portName)
+
+            Dim response As Task(Of TotalsResponse) = Task.Run(Async Function() Await POSIntegrado.Instance.Totals())
+            Dim sout = response.Wait(posTimeout)
+
+            If sout Then
+                If response.Result.Success Then
+                    TextBox1.Text = response.Result.ToString().Replace(vbLf, vbNewLine)
+                    MsgBox("Total de Ventas OK", vbInformation, "miAutoPOS")
+
+                End If
+            Else
+                MessageBox.Show("Falló la conexión con POS.")
+            End If
+        Catch a As TransbankException
+            MessageBox.Show(a.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.[Error])
+        End Try
     End Sub
 End Class

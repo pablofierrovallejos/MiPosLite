@@ -54,7 +54,7 @@ Partial Class tarjeta
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(106, 73)
         Me.Label1.TabIndex = 1
-        Me.Label1.Text = "60"
+        Me.Label1.Text = "30"
         '
         'lbltitulo1
         '
@@ -75,6 +75,9 @@ Partial Class tarjeta
         Me.lbltitulo2.Size = New System.Drawing.Size(388, 36)
         Me.lbltitulo2.TabIndex = 3
         Me.lbltitulo2.Text = "Presione ""2"" para DÉBITO"
+        '
+        'PrintDocument1
+        '
         '
         'tarjeta
         '

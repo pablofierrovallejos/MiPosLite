@@ -11,7 +11,7 @@ Imports Transbank.Responses.AutoservicioResponse
 
 
 Public Class tarjeta
-    Dim contador As Integer = 60
+    Dim contador As Integer = 30
     Dim posTimeout As String = Integer.Parse(readConfig("POS_TIMEOUT_VENTA_MS"))
     Dim miResponseMsglocal As String
     Dim miResponseMsglocalLong As String
@@ -34,7 +34,7 @@ Public Class tarjeta
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Label1.Text = contador
 
-        If contador = 60 Then
+        If contador = 30 Then
             bsRespuestaTktTransb = generaVentaTransbk(Module1.smontoVenta)
 
             Module1.escribeArchivoVentas(miResponseMsglocal, miResponseMsglocalLong, bsRespuestaTktTransb)
@@ -105,7 +105,6 @@ Public Class tarjeta
         Return bresp
     End Function
 
-
     Private Function obtenerEstadoCaja() As Boolean
         Dim sEstadoCaja As String = Integer.Parse(readConfig("ESTADO_CAJA"))
         If sEstadoCaja.Trim = "ABIERTA" Then
@@ -123,40 +122,24 @@ Public Class tarjeta
             Dim sCompra As String
             Dim mrelleno As Integer
             Dim mrellenoc As Integer
-
             Dim numAleatorio As New Random()
             Dim valorAleatorio As Integer = numAleatorio.Next(100, 999) ' Numero aleatorio para el ticket
-
-
             mrelleno = 17  'Relleno largo  del nombre del producto
             mrellenoc = 2  'Relleno largo  de cantidad de productos
             margenIzq = 0
             ilinea = 2
             ipaso = 18
-            ' La fuente a usar
-            Dim prFont As New Font("Consolas", 9, FontStyle.Regular)
+            Dim prFont As New Font("Consolas", 9, FontStyle.Regular)   ' La fuente a usar en cuerpo
+            Dim prFontTit As New Font("Arial", 12, FontStyle.Regular) ' La fuente del titulo
 
-            ' La fuente del titulo
-            Dim prFontTit As New Font("Arial", 12, FontStyle.Regular)
-
-            'imprimimos la fecha y hora
-            e.Graphics.DrawString(Date.Now.ToShortDateString.ToString & " " & Date.Now.ToShortTimeString.ToString, prFont, Brushes.Black, margenIzq, ilinea)
-
-            'imprimimos el nombre del Local
+            e.Graphics.DrawString(Date.Now.ToShortDateString.ToString & " " & Date.Now.ToShortTimeString.ToString, prFont, Brushes.Black, margenIzq, ilinea)   'imprimimos la fecha y hora
             ilinea = ilinea + ipaso
-            e.Graphics.DrawString("    Heladería Serrano", prFontTit, Brushes.Black, margenIzq, ilinea)
-
-            'Imprimir numero de ticket
+            e.Graphics.DrawString("    Heladería Serrano", prFontTit, Brushes.Black, margenIzq, ilinea)  'imprimimos el nombre del Local
             ilinea = ilinea + ipaso
-            e.Graphics.DrawString("Ticket: " & Date.Now.ToShortDateString.ToString.Replace("-", "") & Date.Now.ToShortTimeString.ToString.Replace(":", "") & "-" & valorAleatorio, prFont, Brushes.Black, margenIzq, ilinea)
-
-            'Salto de linea
+            e.Graphics.DrawString("Ticket: " & Date.Now.ToShortDateString.ToString.Replace("-", "") & Date.Now.ToShortTimeString.ToString.Replace(":", "") & "-" & valorAleatorio, prFont, Brushes.Black, margenIzq, ilinea)  'Imprimir numero de ticket
             ilinea = ilinea + ipaso
             e.Graphics.DrawString(" ", prFont, Brushes.Black, margenIzq, ilinea)
-
-
-            'imprimimos Detalle de la compra
-            sCompra = "Producto       Uni  Sub"
+            sCompra = "Producto       Uni  Sub"  'imprimimos Detalle de la compra
             ilinea = ilinea + ipaso
             e.Graphics.DrawString(sCompra, prFont, Brushes.Black, margenIzq, ilinea)
 
@@ -166,7 +149,6 @@ Public Class tarjeta
                 e.Graphics.DrawString(sCompra, prFont, Brushes.Black, margenIzq, ilinea)
             Next
 
-            'Imprime el total
             ilinea = ilinea + ipaso
             e.Graphics.DrawString(" ", prFont, Brushes.Black, margenIzq, ilinea) ' hace un salto de linea
 
@@ -174,16 +156,12 @@ Public Class tarjeta
             sCompra = "Total: " & Module1.smontoVenta
             e.Graphics.DrawString(sCompra, prFont, Brushes.Black, margenIzq, ilinea)
 
-
             ilinea = ilinea + ipaso
-            e.Graphics.DrawString(":) ", prFont, Brushes.Black, margenIzq, ilinea)
-
+            e.Graphics.DrawString("Gracias!", prFont, Brushes.Black, margenIzq, ilinea)
             e.HasMorePages = False
-
         Catch ex As Exception
             MessageBox.Show("ERROR: " & ex.Message, "Administrador", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-
     End Sub
 
     Public Sub cleanScreen()
