@@ -110,18 +110,17 @@ Public Class administraciontbk
 
             Dim resp = details.Wait(posTimeout)
             Dim stmp As String = ""
-            stmp = "Detalle de Ventas" & vbNewLine
+            TextBox1.Text = "Detalle de Ventas" & vbNewLine
 
             totalDimList = details.Result.Count
 
             If resp Then
                 For Each detail As DetailResponse In details.Result
                     'stmp = detail.CardType
-                    stmp = stmp & "Tipo Tarjeta : " & detail.CardType
-                    stmp = stmp & "     Total : " & detail.Amount
-                    stmp = stmp & "     Ultimos 4Digitos : " & detail.Last4Digits
-                    stmp = stmp & "     Fecha : " & detail.RealDate & vbNewLine
-                    TextBox1.Text = TextBox1.Text & stmp
+                    TextBox1.Text = TextBox1.Text & "Tipo Tarjeta : " & detail.CardType
+                    TextBox1.Text = TextBox1.Text & "     Total : " & detail.Amount
+                    TextBox1.Text = TextBox1.Text & "     Ultimos 4Digitos : " & detail.Last4Digits
+                    TextBox1.Text = TextBox1.Text & "     Fecha : " & detail.RealDate & vbNewLine
                 Next
                 ' If details.resResponseCode = 3 Then
                 ' MsgBox("Reintente -Conexión falló", vbInformation, "miAutoPOS")
@@ -311,4 +310,72 @@ Public Class administraciontbk
             MessageBox.Show(a.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.[Error])
         End Try
     End Sub
+
+    Private Sub cmdAnular_Click(sender As Object, e As EventArgs) Handles cmdAnular.Click
+        Dim frmAnular As New AnularVenta()
+        frmAnular.Show()
+
+    End Sub
+
+    Private Sub cmdUltimaVentaMulticode_Click(sender As Object, e As EventArgs) Handles cmdUltimaVentaMulticode.Click
+        Try
+            Dim portName As String = readConfig("COM_TRANSBANK")    'Viene de modulo bass
+            POSIntegrado.Instance.OpenPort(portName)
+
+            Dim response As Task(Of MultiCodeLastSaleResponse) = Task.Run(Async Function() Await POSIntegrado.Instance.MultiCodeLastSale(True))
+            Dim sout = response.Wait(posTimeout)
+
+            If sout Then
+                If response.Result.Success Then
+                    Logger.i("cmdUltimaVentaMulticode_Click(): " + response.Result.ToString(), New StackFrame(True))
+
+                    Dim lstOfStrings As List(Of String)
+
+                    lstOfStrings = formatBoucher(response.Result.ToString())
+
+
+                    MessageBox.Show(response.Result.ToString(), "Impresión de última venta OK")
+
+                End If
+            Else
+                MessageBox.Show("Falló la conexión con POS.")
+            End If
+        Catch a As TransbankException
+            MessageBox.Show(a.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.[Error])
+        End Try
+    End Sub
+
+
+    Public Function formatBoucher(sdata As String)
+        Logger.i(sdata)
+        Dim lstOfStrings As New List(Of String)
+        Dim slinea As String = ""
+        Dim posIni = InStr(sdata, "Voucher: TRANSBANK")
+        If posIni = 0 Then
+            Return lstOfStrings
+        Else
+            Dim labelInicial As String = "Voucher: TRANSBANK"
+            sdata = sdata.Substring(posIni + labelInicial.Length)
+            sdata = "                       " & sdata
+
+            While sdata.Length > 39
+                slinea = sdata.Substring(0, 40)
+                sdata = sdata.Substring(40)
+                lstOfStrings.Add(slinea)
+
+
+                'Para cortar el mensaje e imprimir solo boucher cliente
+                Dim posCorte = InStr(slinea, "TRANSBANK")
+                If posCorte > 0 Then
+                    sdata = ""
+                Else
+                    Logger.i("CLIENTE>>" + slinea)
+                End If
+                'Logger.i(">>" + slinea)
+
+            End While
+            Return lstOfStrings
+        End If
+    End Function
+
 End Class

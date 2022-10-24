@@ -33,11 +33,13 @@ Partial Class administraciontbk
         Me.cmdPrintVentasPos = New System.Windows.Forms.Button()
         Me.lblEstado = New System.Windows.Forms.Label()
         Me.cmdTotalVentas = New System.Windows.Forms.Button()
+        Me.cmdAnular = New System.Windows.Forms.Button()
+        Me.cmdUltimaVentaMulticode = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'cmdPolling
         '
-        Me.cmdPolling.Location = New System.Drawing.Point(8, 373)
+        Me.cmdPolling.Location = New System.Drawing.Point(8, 349)
         Me.cmdPolling.Name = "cmdPolling"
         Me.cmdPolling.Size = New System.Drawing.Size(144, 40)
         Me.cmdPolling.TabIndex = 0
@@ -46,7 +48,7 @@ Partial Class administraciontbk
         '
         'cmdManualTbk
         '
-        Me.cmdManualTbk.Location = New System.Drawing.Point(8, 322)
+        Me.cmdManualTbk.Location = New System.Drawing.Point(8, 124)
         Me.cmdManualTbk.Name = "cmdManualTbk"
         Me.cmdManualTbk.Size = New System.Drawing.Size(144, 40)
         Me.cmdManualTbk.TabIndex = 1
@@ -55,7 +57,7 @@ Partial Class administraciontbk
         '
         'cmdCargaLlaves
         '
-        Me.cmdCargaLlaves.Location = New System.Drawing.Point(8, 67)
+        Me.cmdCargaLlaves.Location = New System.Drawing.Point(8, 169)
         Me.cmdCargaLlaves.Name = "cmdCargaLlaves"
         Me.cmdCargaLlaves.Size = New System.Drawing.Size(144, 40)
         Me.cmdCargaLlaves.TabIndex = 2
@@ -64,7 +66,7 @@ Partial Class administraciontbk
         '
         'cmdDetalleVentas
         '
-        Me.cmdDetalleVentas.Location = New System.Drawing.Point(8, 169)
+        Me.cmdDetalleVentas.Location = New System.Drawing.Point(8, 304)
         Me.cmdDetalleVentas.Name = "cmdDetalleVentas"
         Me.cmdDetalleVentas.Size = New System.Drawing.Size(144, 40)
         Me.cmdDetalleVentas.TabIndex = 3
@@ -73,7 +75,7 @@ Partial Class administraciontbk
         '
         'cmdUltmaVenta
         '
-        Me.cmdUltmaVenta.Location = New System.Drawing.Point(8, 271)
+        Me.cmdUltmaVenta.Location = New System.Drawing.Point(8, 439)
         Me.cmdUltmaVenta.Name = "cmdUltmaVenta"
         Me.cmdUltmaVenta.Size = New System.Drawing.Size(144, 40)
         Me.cmdUltmaVenta.TabIndex = 4
@@ -82,7 +84,7 @@ Partial Class administraciontbk
         '
         'cmdCierre
         '
-        Me.cmdCierre.Location = New System.Drawing.Point(8, 118)
+        Me.cmdCierre.Location = New System.Drawing.Point(8, 214)
         Me.cmdCierre.Name = "cmdCierre"
         Me.cmdCierre.Size = New System.Drawing.Size(144, 40)
         Me.cmdCierre.TabIndex = 5
@@ -92,16 +94,16 @@ Partial Class administraciontbk
         'TextBox1
         '
         Me.TextBox1.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(158, 54)
+        Me.TextBox1.Location = New System.Drawing.Point(156, 79)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.TextBox1.Size = New System.Drawing.Size(622, 433)
+        Me.TextBox1.Size = New System.Drawing.Size(622, 446)
         Me.TextBox1.TabIndex = 6
         '
         'cmdPrintVentasPos
         '
-        Me.cmdPrintVentasPos.Location = New System.Drawing.Point(158, 493)
+        Me.cmdPrintVentasPos.Location = New System.Drawing.Point(8, 259)
         Me.cmdPrintVentasPos.Name = "cmdPrintVentasPos"
         Me.cmdPrintVentasPos.Size = New System.Drawing.Size(144, 40)
         Me.cmdPrintVentasPos.TabIndex = 7
@@ -119,18 +121,38 @@ Partial Class administraciontbk
         '
         'cmdTotalVentas
         '
-        Me.cmdTotalVentas.Location = New System.Drawing.Point(8, 220)
+        Me.cmdTotalVentas.Location = New System.Drawing.Point(8, 394)
         Me.cmdTotalVentas.Name = "cmdTotalVentas"
         Me.cmdTotalVentas.Size = New System.Drawing.Size(144, 40)
         Me.cmdTotalVentas.TabIndex = 9
         Me.cmdTotalVentas.Text = "Total de Ventas"
         Me.cmdTotalVentas.UseVisualStyleBackColor = True
         '
+        'cmdAnular
+        '
+        Me.cmdAnular.Location = New System.Drawing.Point(8, 79)
+        Me.cmdAnular.Name = "cmdAnular"
+        Me.cmdAnular.Size = New System.Drawing.Size(144, 40)
+        Me.cmdAnular.TabIndex = 10
+        Me.cmdAnular.Text = "Anular Venta TBK"
+        Me.cmdAnular.UseVisualStyleBackColor = True
+        '
+        'cmdUltimaVentaMulticode
+        '
+        Me.cmdUltimaVentaMulticode.Location = New System.Drawing.Point(8, 485)
+        Me.cmdUltimaVentaMulticode.Name = "cmdUltimaVentaMulticode"
+        Me.cmdUltimaVentaMulticode.Size = New System.Drawing.Size(144, 40)
+        Me.cmdUltimaVentaMulticode.TabIndex = 11
+        Me.cmdUltimaVentaMulticode.Text = "Ultima Venta Multicode"
+        Me.cmdUltimaVentaMulticode.UseVisualStyleBackColor = True
+        '
         'administraciontbk
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(790, 583)
+        Me.Controls.Add(Me.cmdUltimaVentaMulticode)
+        Me.Controls.Add(Me.cmdAnular)
         Me.Controls.Add(Me.cmdTotalVentas)
         Me.Controls.Add(Me.lblEstado)
         Me.Controls.Add(Me.cmdPrintVentasPos)
@@ -159,4 +181,6 @@ Partial Class administraciontbk
     Friend WithEvents cmdPrintVentasPos As Button
     Friend WithEvents lblEstado As Label
     Friend WithEvents cmdTotalVentas As Button
+    Friend WithEvents cmdAnular As Button
+    Friend WithEvents cmdUltimaVentaMulticode As Button
 End Class

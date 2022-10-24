@@ -200,7 +200,7 @@ Partial Class frmMenu
         '
         Me.btnPagar.Font = New System.Drawing.Font("Arial Black", 36.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPagar.ForeColor = System.Drawing.Color.DarkBlue
-        Me.btnPagar.Location = New System.Drawing.Point(413, 1149)
+        Me.btnPagar.Location = New System.Drawing.Point(336, 1151)
         Me.btnPagar.Margin = New System.Windows.Forms.Padding(2)
         Me.btnPagar.Name = "btnPagar"
         Me.btnPagar.Size = New System.Drawing.Size(387, 108)
@@ -311,6 +311,7 @@ Partial Class frmMenu
         Me.Name = "frmMenu"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "miAutoPos"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()

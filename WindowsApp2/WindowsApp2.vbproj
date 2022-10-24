@@ -119,6 +119,12 @@
     <Compile Include="bin\AperturaCaja.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="bin\AnularVenta.Designer.vb">
+      <DependentUpon>AnularVenta.vb</DependentUpon>
+    </Compile>
+    <Compile Include="bin\AnularVenta.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="bin\Form2.Designer.vb">
       <DependentUpon>Form2.vb</DependentUpon>
     </Compile>
@@ -187,6 +193,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="bin\AnularVenta.resx">
+      <DependentUpon>AnularVenta.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="bin\AperturaCaja.resx">
       <DependentUpon>AperturaCaja.vb</DependentUpon>
     </EmbeddedResource>

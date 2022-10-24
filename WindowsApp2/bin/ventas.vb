@@ -108,18 +108,25 @@ Public Class ventas
         If spayload.ToString.Length > 100 Then
             Dim resp = MsgBox("Imprimir Boucher TBK?", vbYesNo, "MiPosLite")
             If resp = vbYes Then
+
                 lstOfStrings = formatBoucher(spayload)
-                PrintDocument1.Print()
+                If lstOfStrings IsNot Nothing Then
+                    If lstOfStrings.Count > 0 Then
+                        PrintDocument1.Print()
+                    End If
+                End If
             End If
         End If
+
     End Sub
 
     Public Function formatBoucher(sdata As String)
+        Logger.i(sdata)
         Dim lstOfStrings As New List(Of String)
         Dim slinea As String = ""
         Dim posIni = InStr(sdata, "Shares Type Gloss:")
         If posIni = 0 Then
-            Return sdata
+            Return lstOfStrings
         Else
             Dim labelInicial As String = "Shares Type Gloss:"
             sdata = sdata.Substring(posIni + labelInicial.Length)
@@ -138,6 +145,7 @@ Public Class ventas
 
     Private Sub PrintDocument1_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
         Try
+            Logger.i("PrintDocument1_TransBank: ", New StackFrame(True))
             Dim ilinea As Integer = 2
             Dim ipaso As Integer = 13
             Dim prFont As New Font("Consolas", 6, FontStyle.Bold)
