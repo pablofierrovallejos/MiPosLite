@@ -30,6 +30,7 @@ Partial Class tarjeta
         Me.lbltitulo1 = New System.Windows.Forms.Label()
         Me.lbltitulo2 = New System.Windows.Forms.Label()
         Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
+        Me.PrintDocument2 = New System.Drawing.Printing.PrintDocument()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -104,4 +105,5 @@ Partial Class tarjeta
     Friend WithEvents lbltitulo1 As Label
     Friend WithEvents lbltitulo2 As Label
     Friend WithEvents PrintDocument1 As Printing.PrintDocument
+    Friend WithEvents PrintDocument2 As Printing.PrintDocument
 End Class

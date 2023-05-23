@@ -13,7 +13,8 @@
     Public tbHValor(12) As TextBox                         ' Columna de Textbox para valor de productos comprados
     Public tbHSubT(12) As TextBox                          ' Columna de Textbox para subtotal productos comprados
     Public indexCompras As Integer
-
+    Public enableButtonPagar As Boolean = True
+    Public isPrintedOK As Boolean = False
     Public Function writeConfig(scampoClave As String, sValor As String) As Boolean
         Dim sFicINI As String = Application.StartupPath & "\configparams.ini"
         Dim sSeccion As String = "PARAMETROS"
@@ -38,7 +39,8 @@
     End Function
 
     Public Sub escribeArchivoVentas(sMensajeTbk As String, SMensajeTbkLong As String, brespPos As Boolean)
-        Logger.i("escribeArchivoVentas: ", New StackFrame(True))
+        Logger.i("escribeArchivoVentas(): sMensajeTbk: " & sMensajeTbk, New StackFrame(True))
+        Logger.i("escribeArchivoVentas(): SMensajeTbkLong: " & SMensajeTbkLong, New StackFrame(True))
         Dim dt As Date = Today
         Dim sdate As String = Replace(dt, "-", "")
         Dim file As System.IO.StreamWriter
@@ -80,6 +82,7 @@
             file.Close()
         Catch ex As Exception
             MsgBox("Error al escribir archivo ventas. ", vbInformation, "MiPOSLite")
+            Logger.i("escribeArchivoVentas(): Exception: " & ex.StackTrace, New StackFrame(True))
         End Try
 
 

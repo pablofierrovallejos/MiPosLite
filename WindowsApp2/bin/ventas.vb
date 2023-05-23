@@ -21,7 +21,7 @@ Public Class ventas
         totalArticulos = 0
         Label5.Text = dt
         Dim sdate As String = Replace(dt, "-", "")
-
+        Logger.i("IMPORTARCSV(): sdate: " & sdate, New StackFrame(True))
         Try
             Dim RUTA As String = "C:\ventasPOS\baseventas\ventasPOS" & sdate & ".csv"
             Dim TEXTLINE As String = ""
@@ -37,6 +37,8 @@ Public Class ventas
                     '  row.Cells(1).Value = "ttttt"
 
                     TEXTLINE = OBJREADER.ReadLine()
+                    Logger.i("IMPORTARCSV(): TEXTLINE: " & TEXTLINE, New StackFrame(True))
+
                     SPLITLINE = Split(TEXTLINE, DELIMITADOR)
                     If numeroLinea > 0 Then
 

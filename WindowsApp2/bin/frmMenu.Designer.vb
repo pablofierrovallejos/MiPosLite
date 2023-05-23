@@ -24,8 +24,15 @@ Partial Class frmMenu
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMenu))
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnAnular = New System.Windows.Forms.Button()
+        Me.btnPagar = New System.Windows.Forms.Button()
+        Me.lblcreditot = New System.Windows.Forms.Label()
+        Me.lblcredito = New System.Windows.Forms.Label()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.lblUnidades = New System.Windows.Forms.Label()
         Me.lbltitulo2 = New System.Windows.Forms.Label()
         Me.lbltitulo1 = New System.Windows.Forms.Label()
@@ -37,8 +44,8 @@ Partial Class frmMenu
         Me.lblValor = New System.Windows.Forms.Label()
         Me.lblUnidad = New System.Windows.Forms.Label()
         Me.lblProducto = New System.Windows.Forms.Label()
-        Me.btnPagar = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.MenuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -50,6 +57,10 @@ Partial Class frmMenu
         Me.VentasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AyudaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnsalir = New System.Windows.Forms.Button()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.SerialPort1 = New System.IO.Ports.SerialPort(Me.components)
+        Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
+        Me.SerialPort2 = New System.IO.Ports.SerialPort(Me.components)
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
@@ -60,6 +71,12 @@ Partial Class frmMenu
         '
         Me.Panel1.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Panel1.BackColor = System.Drawing.Color.White
+        Me.Panel1.Controls.Add(Me.btnAnular)
+        Me.Panel1.Controls.Add(Me.btnPagar)
+        Me.Panel1.Controls.Add(Me.lblcreditot)
+        Me.Panel1.Controls.Add(Me.lblcredito)
+        Me.Panel1.Controls.Add(Me.TextBox2)
+        Me.Panel1.Controls.Add(Me.Button1)
         Me.Panel1.Controls.Add(Me.lblUnidades)
         Me.Panel1.Controls.Add(Me.lbltitulo2)
         Me.Panel1.Controls.Add(Me.lbltitulo1)
@@ -74,36 +91,98 @@ Partial Class frmMenu
         Me.Panel1.Location = New System.Drawing.Point(0, 26)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1084, 386)
+        Me.Panel1.Size = New System.Drawing.Size(1350, 262)
         Me.Panel1.TabIndex = 0
+        '
+        'btnAnular
+        '
+        Me.btnAnular.Location = New System.Drawing.Point(945, 234)
+        Me.btnAnular.Name = "btnAnular"
+        Me.btnAnular.Size = New System.Drawing.Size(75, 23)
+        Me.btnAnular.TabIndex = 84
+        Me.btnAnular.Text = "Anular"
+        Me.btnAnular.UseVisualStyleBackColor = True
+        '
+        'btnPagar
+        '
+        Me.btnPagar.Font = New System.Drawing.Font("Arial Black", 36.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPagar.ForeColor = System.Drawing.Color.DarkBlue
+        Me.btnPagar.Location = New System.Drawing.Point(617, 22)
+        Me.btnPagar.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnPagar.Name = "btnPagar"
+        Me.btnPagar.Size = New System.Drawing.Size(228, 108)
+        Me.btnPagar.TabIndex = 10
+        Me.btnPagar.Text = "PAGAR"
+        Me.btnPagar.UseVisualStyleBackColor = True
+        '
+        'lblcreditot
+        '
+        Me.lblcreditot.AutoSize = True
+        Me.lblcreditot.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblcreditot.Location = New System.Drawing.Point(445, 208)
+        Me.lblcreditot.Name = "lblcreditot"
+        Me.lblcreditot.Size = New System.Drawing.Size(112, 20)
+        Me.lblcreditot.TabIndex = 83
+        Me.lblcreditot.Text = "Total Crédito $"
+        '
+        'lblcredito
+        '
+        Me.lblcredito.AutoSize = True
+        Me.lblcredito.Font = New System.Drawing.Font("Arial", 36.0!, System.Drawing.FontStyle.Bold)
+        Me.lblcredito.ForeColor = System.Drawing.Color.Green
+        Me.lblcredito.Location = New System.Drawing.Point(617, 208)
+        Me.lblcredito.Name = "lblcredito"
+        Me.lblcredito.Size = New System.Drawing.Size(51, 56)
+        Me.lblcredito.TabIndex = 82
+        Me.lblcredito.Text = "0"
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox2.Location = New System.Drawing.Point(709, 13)
+        Me.TextBox2.Multiline = True
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.TextBox2.Size = New System.Drawing.Size(363, 190)
+        Me.TextBox2.TabIndex = 81
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(864, 234)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 80
+        Me.Button1.Text = "Consultar"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'lblUnidades
         '
         Me.lblUnidades.AutoSize = True
         Me.lblUnidades.Location = New System.Drawing.Point(462, 338)
         Me.lblUnidades.Name = "lblUnidades"
-        Me.lblUnidades.Size = New System.Drawing.Size(0, 13)
+        Me.lblUnidades.Size = New System.Drawing.Size(10, 13)
         Me.lblUnidades.TabIndex = 79
+        Me.lblUnidades.Text = "."
         '
         'lbltitulo2
         '
         Me.lbltitulo2.AutoSize = True
-        Me.lbltitulo2.Font = New System.Drawing.Font("Script MT Bold", 24.0!, System.Drawing.FontStyle.Bold)
+        Me.lbltitulo2.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbltitulo2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lbltitulo2.Location = New System.Drawing.Point(853, 319)
+        Me.lbltitulo2.Location = New System.Drawing.Point(885, 142)
         Me.lbltitulo2.Name = "lbltitulo2"
-        Me.lbltitulo2.Size = New System.Drawing.Size(117, 38)
+        Me.lbltitulo2.Size = New System.Drawing.Size(106, 29)
         Me.lbltitulo2.TabIndex = 78
         Me.lbltitulo2.Text = "Serrano"
         '
         'lbltitulo1
         '
         Me.lbltitulo1.AutoSize = True
-        Me.lbltitulo1.Font = New System.Drawing.Font("Script MT Bold", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbltitulo1.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbltitulo1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lbltitulo1.Location = New System.Drawing.Point(833, 287)
+        Me.lbltitulo1.Location = New System.Drawing.Point(877, 117)
         Me.lbltitulo1.Name = "lbltitulo1"
-        Me.lbltitulo1.Size = New System.Drawing.Size(150, 38)
+        Me.lbltitulo1.Size = New System.Drawing.Size(127, 29)
         Me.lbltitulo1.TabIndex = 77
         Me.lbltitulo1.Text = "Heladería"
         '
@@ -111,9 +190,9 @@ Partial Class frmMenu
         '
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
         Me.PictureBox1.InitialImage = CType(resources.GetObject("PictureBox1.InitialImage"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(730, 3)
+        Me.PictureBox1.Location = New System.Drawing.Point(864, 1)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(342, 306)
+        Me.PictureBox1.Size = New System.Drawing.Size(149, 129)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 76
         Me.PictureBox1.TabStop = False
@@ -121,7 +200,7 @@ Partial Class frmMenu
         'btnLimpiar
         '
         Me.btnLimpiar.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLimpiar.Location = New System.Drawing.Point(102, 333)
+        Me.btnLimpiar.Location = New System.Drawing.Point(88, 191)
         Me.btnLimpiar.Margin = New System.Windows.Forms.Padding(2)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(112, 37)
@@ -133,12 +212,12 @@ Partial Class frmMenu
         '
         Me.lblPeso.AutoSize = True
         Me.lblPeso.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPeso.Location = New System.Drawing.Point(555, 333)
+        Me.lblPeso.Location = New System.Drawing.Point(445, 183)
         Me.lblPeso.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblPeso.Name = "lblPeso"
-        Me.lblPeso.Size = New System.Drawing.Size(18, 20)
+        Me.lblPeso.Size = New System.Drawing.Size(104, 20)
         Me.lblPeso.TabIndex = 62
-        Me.lblPeso.Text = "$"
+        Me.lblPeso.Text = "Total Venta $"
         '
         'lblsubtotalh
         '
@@ -156,7 +235,7 @@ Partial Class frmMenu
         Me.lblnumTotal.AutoSize = True
         Me.lblnumTotal.Font = New System.Drawing.Font("Arial", 36.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblnumTotal.ForeColor = System.Drawing.Color.Red
-        Me.lblnumTotal.Location = New System.Drawing.Point(576, 308)
+        Me.lblnumTotal.Location = New System.Drawing.Point(617, 154)
         Me.lblnumTotal.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblnumTotal.Name = "lblnumTotal"
         Me.lblnumTotal.Size = New System.Drawing.Size(51, 56)
@@ -196,31 +275,35 @@ Partial Class frmMenu
         Me.lblProducto.TabIndex = 30
         Me.lblProducto.Text = "Producto"
         '
-        'btnPagar
-        '
-        Me.btnPagar.Font = New System.Drawing.Font("Arial Black", 36.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPagar.ForeColor = System.Drawing.Color.DarkBlue
-        Me.btnPagar.Location = New System.Drawing.Point(336, 1151)
-        Me.btnPagar.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnPagar.Name = "btnPagar"
-        Me.btnPagar.Size = New System.Drawing.Size(387, 108)
-        Me.btnPagar.TabIndex = 10
-        Me.btnPagar.Text = "PAGAR"
-        Me.btnPagar.UseVisualStyleBackColor = True
-        '
         'Panel2
         '
         Me.Panel2.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.Panel2.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.Panel2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.Panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Panel2.Controls.Add(Me.btnPagar)
+        Me.Panel2.Controls.Add(Me.TextBox1)
         Me.Panel2.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel2.ForeColor = System.Drawing.Color.Navy
-        Me.Panel2.Location = New System.Drawing.Point(11, 416)
+        Me.Panel2.Location = New System.Drawing.Point(11, 292)
         Me.Panel2.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1062, 1313)
+        Me.Panel2.Size = New System.Drawing.Size(1350, 1447)
         Me.Panel2.TabIndex = 1
+        '
+        'TextBox1
+        '
+        Me.TextBox1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.TextBox1.Font = New System.Drawing.Font("Arial", 26.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.ForeColor = System.Drawing.Color.OrangeRed
+        Me.TextBox1.Location = New System.Drawing.Point(759, 1127)
+        Me.TextBox1.Multiline = True
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(310, 180)
+        Me.TextBox1.TabIndex = 11
+        Me.TextBox1.Text = "Tenga su tarjeta" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "a mano antes de " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "     presionar " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "      PAGAR!"
+        '
+        'PrintDocument1
+        '
         '
         'MenuStrip1
         '
@@ -292,12 +375,27 @@ Partial Class frmMenu
         Me.btnsalir.Text = "x"
         Me.btnsalir.UseVisualStyleBackColor = True
         '
+        'Timer1
+        '
+        Me.Timer1.Interval = 1000
+        '
+        'SerialPort1
+        '
+        '
+        'Timer2
+        '
+        Me.Timer2.Enabled = True
+        Me.Timer2.Interval = 20000
+        '
+        'SerialPort2
+        '
+        '
         'frmMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.ClientSize = New System.Drawing.Size(1084, 1740)
+        Me.ClientSize = New System.Drawing.Size(1084, 749)
         Me.Controls.Add(Me.btnsalir)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.MenuStrip1)
@@ -316,6 +414,7 @@ Partial Class frmMenu
         Me.Panel1.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
@@ -348,4 +447,14 @@ Partial Class frmMenu
     Friend WithEvents lbltitulo1 As Label
     Friend WithEvents lblUnidades As Label
     Friend WithEvents btnsalir As Button
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Timer1 As Timer
+    Friend WithEvents SerialPort1 As IO.Ports.SerialPort
+    Friend WithEvents Button1 As Button
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents Timer2 As Timer
+    Friend WithEvents lblcredito As Label
+    Friend WithEvents lblcreditot As Label
+    Friend WithEvents btnAnular As Button
+    Friend WithEvents SerialPort2 As IO.Ports.SerialPort
 End Class

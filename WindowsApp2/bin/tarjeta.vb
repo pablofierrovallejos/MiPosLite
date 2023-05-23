@@ -10,8 +10,6 @@ Imports Transbank.Responses.IntegradoResponses
 'Imports Transbank.Responses.AutoservicioResponse.LastSaleResponse
 'Imports Transbank.Responses.AutoservicioResponse
 
-
-
 Public Class tarjeta
     Dim contador As Integer = 30
     Dim posTimeout As String = Integer.Parse(readConfig("POS_TIMEOUT_VENTA_MS"))
@@ -19,10 +17,20 @@ Public Class tarjeta
     Dim miResponseMsglocalLong As String
     Dim enespera As Boolean = False
     Private Sub tarjeta_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Logger.i("tarjeta_Load: ", New StackFrame(True))
+        Logger.i("tarjeta_Load() ", New StackFrame(True))
         Me.CenterToScreen()
         Timer1.Interval = 1000
         Timer1.Enabled = True
+    End Sub
+
+    Private Sub tarjeta_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+        Module1.enableButtonPagar = True
+        Logger.i("tarjeta_Closed() ", New StackFrame(True))
+    End Sub
+
+    Private Sub tarjeta_Disposed(sender As Object, e As EventArgs) Handles Me.Disposed
+        Module1.enableButtonPagar = True
+        Logger.i("tarjeta_Disposed() ", New StackFrame(True))
     End Sub
 
     Async Function decrementa() As Task(Of Boolean)
@@ -36,6 +44,7 @@ Public Class tarjeta
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Label1.Text = contador
 
+        Logger.i("Timer1_Tick(): contador: " & contador, New StackFrame(True))
         If contador = 30 Then
             bsRespuestaTktTransb = generaVentaTransbk(Module1.smontoVenta)
 
@@ -48,12 +57,16 @@ Public Class tarjeta
                     If readConfig("PRINT_TKT_INTERNO") = "SI" Then
                         PrintDocument1.Print()
                     End If
+                    If readConfig("PRINT_TKT_TRANSBK") = "SI" Then
+                        PrintDocument2.Print()
+                    End If
                 End If
-                Me.Close()
+                    Me.Close()
             End If
-            cleanScreen()
+            'cleanScreen()
         End If
         If contador <= 0 Then
+            Logger.i("Timer1_Tick(): Timeout form Me.Close() ", New StackFrame(True))
             Me.Close()
         End If
     End Sub
@@ -101,6 +114,7 @@ Public Class tarjeta
             'End If
         Catch ex As Exception
             Debug.Print(ex.StackTrace.ToString)
+            Logger.i("generaVentaTransbk() " & ex.StackTrace.ToString, New StackFrame(True))
         End Try
         Return bresp
     End Function
@@ -116,8 +130,6 @@ Public Class tarjeta
 
     Private Sub PrintDocument1_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
         Try
-
-            Dim lstOfStrings As List(Of String)
             Dim margenIzq As Integer
             Dim ilinea As Integer
             Dim ipaso As Integer
@@ -133,21 +145,47 @@ Public Class tarjeta
             ipaso = 18
             Dim prFont As New Font("Consolas", 9, FontStyle.Regular)   ' La fuente a usar en cuerpo
             Dim prFontTit As New Font("Arial", 12, FontStyle.Regular) ' La fuente del titulo
+            Dim prFontTerm As New Font("Consolas", 6, FontStyle.Bold)
 
-            e.Graphics.DrawString(Date.Now.ToShortDateString.ToString & " " & Date.Now.ToShortTimeString.ToString, prFont, Brushes.Black, margenIzq, ilinea)   'imprimimos la fecha y hora
-            ilinea = ilinea + ipaso
             e.Graphics.DrawString("    Heladería Serrano", prFontTit, Brushes.Black, margenIzq, ilinea)  'imprimimos el nombre del Local
             ilinea = ilinea + ipaso
-            e.Graphics.DrawString("Ticket: " & Date.Now.ToShortDateString.ToString.Replace("-", "") & Date.Now.ToShortTimeString.ToString.Replace(":", "") & "-" & valorAleatorio, prFont, Brushes.Black, margenIzq, ilinea)  'Imprimir numero de ticket
+
+            Dim sDate = Date.Now.ToShortDateString.ToString.Replace("-", "")
+            Dim shora = Date.Now.ToShortTimeString.ToString.Replace(": ", "")
+
+            Logger.i("PrintDocument1(): sDate: " & sDate & " shora: " & shora, New StackFrame(True))
+
+            e.Graphics.DrawString("Ticket: " & sDate & shora & "-" & valorAleatorio, prFontTerm, Brushes.Black, margenIzq, ilinea)  'Imprimir numero de ticket
             ilinea = ilinea + ipaso
+
             e.Graphics.DrawString(" ", prFont, Brushes.Black, margenIzq, ilinea)
             sCompra = "Producto       Uni  Sub"  'imprimimos Detalle de la compra
             ilinea = ilinea + ipaso
             e.Graphics.DrawString(sCompra, prFont, Brushes.Black, margenIzq, ilinea)
 
+            Dim subtbHProd = ""
+            Dim subtbHUnid = ""
+            Dim subtbHSubT = ""
+            Dim subtmp = ""
             For i As Integer = 0 To Module1.indexCompras - 1   ' 
                 ilinea = ilinea + ipaso
-                sCompra = tbHProd(i).Text.PadRight(mrelleno, " ") & tbHUnid(i).Text.PadRight(mrellenoc, " ") & " $" & FormatNumber(Integer.Parse(tbHSubT(i).Text.Replace(".", "")), 0)
+                Logger.i("PrintDocument1(): i: " & i, New StackFrame(True))
+
+                subtbHProd = tbHProd(i).Text.PadRight(mrelleno, " ")
+                Logger.i("PrintDocument1(): subtbHProd: " & subtbHProd, New StackFrame(True))
+
+                subtbHUnid = tbHUnid(i).Text.PadRight(mrellenoc, " ")
+                Logger.i("PrintDocument1(): subtbHUnid: " & subtbHUnid, New StackFrame(True))
+
+                subtmp = tbHSubT(i).Text
+                Logger.i("PrintDocument1(): subtmp: " & subtmp, New StackFrame(True))
+
+                subtbHSubT = FormatNumber(Integer.Parse(subtmp.Replace(".", "")), 0)
+                Logger.i("PrintDocument1(): subtbHSubT: " & subtbHSubT, New StackFrame(True))
+
+                sCompra = subtbHProd & subtbHUnid & " $" & subtbHSubT
+                Logger.i("PrintDocument1(): sCompra: " & sCompra, New StackFrame(True))
+
                 e.Graphics.DrawString(sCompra, prFont, Brushes.Black, margenIzq, ilinea)
             Next
 
@@ -157,33 +195,53 @@ Public Class tarjeta
             ilinea = ilinea + ipaso
             sCompra = "Total: " & Module1.smontoVenta
             e.Graphics.DrawString(sCompra, prFont, Brushes.Black, margenIzq, ilinea)
+            Logger.i("PrintDocument1(): Total: " & Module1.smontoVenta, New StackFrame(True))
 
             ilinea = ilinea + ipaso
-            e.Graphics.DrawString("Gracias!", prFont, Brushes.Black, margenIzq, ilinea)
+            e.Graphics.DrawString("Retire con este ticket.", prFontTerm, Brushes.Black, margenIzq, ilinea)
+            ilinea = ilinea + ipaso
+            e.Graphics.DrawString(" ", prFontTerm, Brushes.Black, margenIzq, ilinea)
+            ilinea = ilinea + ipaso
+            e.Graphics.DrawString(" ", prFontTerm, Brushes.Black, margenIzq, ilinea)
+            ilinea = ilinea + ipaso
+            e.Graphics.DrawString(" ", prFontTerm, Brushes.Black, margenIzq, ilinea)
 
+            e.HasMorePages = False
+            isPrintedOK = True
+        Catch ex As Exception
+            Logger.i("PrintDocument1(): " & ex.Message, New StackFrame(True))
+            Logger.i("PrintDocument1(): " & ex.StackTrace.ToString, New StackFrame(True))
+            MessageBox.Show("ERROR: " & ex.Message, "Administrador", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
 
-
-            'Imprime boucher ultima venta
-            ipaso = 13
+    Private Sub PrintDocument2_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument2.PrintPage
+        Try
+            Dim ilinea As Integer
+            Dim ipaso As Integer
+            Dim lstOfStrings As List(Of String)
             Dim prFontTerm As New Font("Consolas", 6, FontStyle.Bold)
+            'Imprime boucher ultima venta
+            ilinea = 3
+            ipaso = 13
+            Logger.i("PrintDocument2(): ", New StackFrame(True))
             lstOfStrings = getLastSale()
             If lstOfStrings IsNot Nothing Then
                 If lstOfStrings.Count > 0 Then
                     For Each item In lstOfStrings
                         ilinea = ilinea + ipaso
                         e.Graphics.DrawString(item, prFontTerm, Brushes.Black, 0, ilinea)
+                        Logger.i("PrintDocument2_PrintPage(): " & item, New StackFrame(True))
                     Next
                 End If
             End If
 
-
             e.HasMorePages = False
         Catch ex As Exception
+            Logger.i("PrintDocument2(): " & ex.StackTrace.ToString, New StackFrame(True))
             MessageBox.Show("ERROR: " & ex.Message, "Administrador", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
-
 
     Private Function getLastSale()
         Dim lstOfStrings As List(Of String)
@@ -205,6 +263,7 @@ Public Class tarjeta
                 MessageBox.Show("Falló la conexión con POS.")
             End If
         Catch a As TransbankException
+            Logger.i("PrintDocument2(): " & a.StackTrace.ToString, New StackFrame(True))
             MessageBox.Show(a.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.[Error])
         End Try
         Return lstOfStrings
@@ -243,6 +302,7 @@ Public Class tarjeta
         End If
     End Function
     Public Sub cleanScreen()
+        Logger.i("cleanScreen():", New StackFrame(True))
         For i As Integer = 0 To 11   ' Inicializa Vector columnas productos, unidades, valor y subtotal donde se muestran las compras seleccionadas por cliente
             frmMenu.indexCompras = 0
             frmMenu.lblnumTotal.Text = ""
@@ -253,5 +313,6 @@ Public Class tarjeta
             frmMenu.tbHSubT(i).Text = ""
         Next
     End Sub
+
 
 End Class

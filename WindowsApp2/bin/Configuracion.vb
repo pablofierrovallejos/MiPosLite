@@ -51,9 +51,7 @@ Public Class Configuracion
             Next
         End If
 
-
         readFullConfig()
-
     End Sub
 
     Private Sub CheckBox1_Click(sender As Object, e As EventArgs) Handles CheckBox1.Click
@@ -77,7 +75,6 @@ Public Class Configuracion
         Else
             CheckBox1.Checked = False
         End If
-
 
         If readConfig("PRINT_TKT_TRANSBK") = "SI" Then
             CheckBox2.Checked = True
