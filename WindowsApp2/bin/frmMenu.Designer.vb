@@ -61,6 +61,7 @@ Partial Class frmMenu
         Me.SerialPort1 = New System.IO.Ports.SerialPort(Me.components)
         Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
         Me.SerialPort2 = New System.IO.Ports.SerialPort(Me.components)
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
@@ -71,6 +72,7 @@ Partial Class frmMenu
         '
         Me.Panel1.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Panel1.BackColor = System.Drawing.Color.White
+        Me.Panel1.Controls.Add(Me.Button2)
         Me.Panel1.Controls.Add(Me.btnAnular)
         Me.Panel1.Controls.Add(Me.btnPagar)
         Me.Panel1.Controls.Add(Me.lblcreditot)
@@ -390,6 +392,15 @@ Partial Class frmMenu
         'SerialPort2
         '
         '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(725, 233)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(78, 23)
+        Me.Button2.TabIndex = 85
+        Me.Button2.Text = "insertarVenta"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'frmMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -457,4 +468,5 @@ Partial Class frmMenu
     Friend WithEvents lblcreditot As Label
     Friend WithEvents btnAnular As Button
     Friend WithEvents SerialPort2 As IO.Ports.SerialPort
+    Friend WithEvents Button2 As Button
 End Class

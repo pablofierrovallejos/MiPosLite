@@ -11,6 +11,12 @@ Imports Transbank.Responses.AutoservicioResponse
 Imports System.Reflection.Emit
 Imports System.Windows.Forms.AxHost
 
+'Librerías para consumir servicios rest
+Imports System.IO
+Imports System.Net
+Imports Newtonsoft.Json
+Imports RestSharp
+
 Public Class frmMenu
     Dim btnMatriz(30) As System.Windows.Forms.Button    ' Botones de productos
     Dim tbNombreProd(30) As TextBox                     ' Textbox para nombre de productos
@@ -151,8 +157,8 @@ Public Class frmMenu
 
     Private Sub MantenedorDeProductosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MantenedorDeProductosToolStripMenuItem.Click
         If habilitarMenu = "SI" Then
-            Dim form2 As New Form2()
-            form2.Show()
+            Dim frmProductos As New frmProductos()
+            frmProductos.Show()
         End If
     End Sub
 
@@ -165,8 +171,8 @@ Public Class frmMenu
     End Sub
 
     Private Sub AyudaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AyudaToolStripMenuItem.Click
-        Dim form3 As New Form3()
-        form3.Show()
+        Dim frmAbout As New frmAbout()
+        frmAbout.Show()
     End Sub
 
     Private Sub ConfiguraciónToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConfiguraciónToolStripMenuItem.Click
@@ -469,8 +475,18 @@ Public Class frmMenu
         Next
         Return totprod
     End Function
+
+
+
+
+
+
+
     Private Sub btnPagar_Click(sender As Object, e As EventArgs) Handles btnPagar.Click
         Logger.i("btnPagar_Click(): lblnumTotal: " & lblnumTotal.Text & " Module1.enableButtonPagar: " & Module1.enableButtonPagar, New StackFrame(True))
+
+
+
 
         If smodoCaja = "EFECTIVO" Then
             ejecutaVentaEfectivo()
@@ -874,5 +890,27 @@ Public Class frmMenu
             Logger.i("PrintDocument1(): " & ex.StackTrace.ToString, New StackFrame(True))
             MessageBox.Show("ERROR: " & ex.Message, "Administrador", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+        Try
+            Dim myReq As HttpWebRequest
+            Dim myResp As HttpWebResponse
+            Dim myReader As StreamReader
+            myReq = HttpWebRequest.Create("http://localhost:8090/api/productos/insertar-venta")
+            myReq.Method = "POST"
+            myReq.ContentType = "application/json"
+            myReq.Accept = "application/json"
+            '       myReq.Headers.Add("Authorization", "Bearer LKJLMLKJLHLMKLJLM839800K=")
+            Dim myData As String = "{""secuencia"":""0001"",""nroboleta"":""10000004030"",""applicationName"":""comunicacionpos""}"
+            myReq.GetRequestStream.Write(System.Text.Encoding.UTF8.GetBytes(myData), 0, System.Text.Encoding.UTF8.GetBytes(myData).Count)
+            myResp = myReq.GetResponse
+            myReader = New System.IO.StreamReader(myResp.GetResponseStream)
+            TextBox2.Text = myReader.ReadToEnd
+        Catch ex As Exception
+            TextBox2.Text = TextBox2.Text & "Error: " & ex.Message
+        End Try
+
     End Sub
 End Class

@@ -80,6 +80,9 @@ Partial Class tarjeta
         'PrintDocument1
         '
         '
+        'PrintDocument2
+        '
+        '
         'tarjeta
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
