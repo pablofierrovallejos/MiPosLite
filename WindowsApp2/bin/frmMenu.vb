@@ -893,7 +893,60 @@ Public Class frmMenu
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        'Public tbHProd(12) As TextBox                          ' Columna de Textbox para los nombres de productos comprados
+        'Public tbHUnid(12) As TextBox                          ' Columna de Textbox para las cantidades de productos comprados       
+        'Public tbHValor(12) As TextBox                         ' Columna de Textbox para valor de productos comprados
+        'Public tbHSubT(12) As TextBox                          ' Columna de Textbox para subtotal productos comprados
+        'Public indexCompras As Integer = 0 ' Guarda el indice de la compra actual
+        'Dim itotalProductos As Integer = 0
+        'Dim miVuelto As Integer = 0
 
+        Dim sfecha As String = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss") ' hh:mm dddd, dd MMMM yyyy")
+        Dim siventa As String = DateTime.Now.ToString("ddHHmmssfff") ' hh:mm dddd, dd MMMM yyyy")
+        Dim idventa As Long = Long.Parse(siventa)
+
+        ' "2023-06-11T15:38:34",
+        insertarVentaService(idventa,            'idventa                 
+                             sfecha,        'fecha
+                             "secuencia",   'secuencia
+                             "nroboleta",   'nroboleto
+                              itotalProductos,        'totalarticulos,
+                              Integer.Parse(lblnumTotal.Text.Replace(".", "")),      'subtotalventa,
+                              0,        'iva
+                              Integer.Parse(lblnumTotal.Text.Replace(".", "")),      'totalimporte,
+                              "CONTADO", 'tipopago,
+                              0,         'comisiontbk,
+                              "com transbk ok", '"comunicacionpos,
+                              "APROBADO",       'estadotransbank,
+                              "traza",          'trazastattransbk,
+                              "boucher")        'longmsgtransbank)
+
+
+        For i As Integer = 0 To (indexCompras - 1)
+
+            insertarDetalleVentaService(idventa,    'idventa As Integer,
+                                        tbHProd(i).Text,        'nombreproducto As String,
+                                        "ARX343",           'idproducto As String,
+                                        Integer.Parse(tbHUnid(i).Text),        'cantidad As Integer,
+                                        Integer.Parse(tbHSubT(i).Text.Replace(".", "")))   'preciosubtotal As Integer
+        Next
+
+    End Sub
+    Public Function insertarVentaService(idventa As Long,
+                                         dfechavta As String,
+                                         secuencia As String,
+                                         nroboleta As String,
+                                         totalarticulos As Integer,
+                                         subtotalventa As Integer,
+                                         iva As Integer,
+                                         totalimporte As Integer,
+                                         tipopago As String,
+                                         comisiontbk As Integer,
+                                         comunicacionpos As String,
+                                         estadotransbank As String,
+                                         trazastattransbk As String,
+                                         longmsgtransbank As String
+                                         ) As String
         Try
             Dim myReq As HttpWebRequest
             Dim myResp As HttpWebResponse
@@ -902,8 +955,22 @@ Public Class frmMenu
             myReq.Method = "POST"
             myReq.ContentType = "application/json"
             myReq.Accept = "application/json"
-            '       myReq.Headers.Add("Authorization", "Bearer LKJLMLKJLHLMKLJLM839800K=")
-            Dim myData As String = "{""secuencia"":""0001"",""nroboleta"":""10000004030"",""applicationName"":""comunicacionpos""}"
+
+            Dim myData As String = "{""idventa"":""" & idventa & """, 
+                                     ""fechaventa"":""" & dfechavta & """,    
+                                     ""secuencia"":""" & secuencia & """,
+                                     ""nroboleta"":""" & nroboleta & """,
+                                     ""totalarticulos"":""" & totalarticulos & """,
+                                     ""subtotalventa"":""" & subtotalventa & """,
+                                     ""iva"":""" & iva & """,
+                                     ""totalimporte"":""" & totalimporte & """,
+                                     ""tipopago"":""" & tipopago & """,
+                                     ""comisiontbk"":""" & comisiontbk & """,
+                                     ""comunicacionpos"":""" & comunicacionpos & """,
+                                     ""estadotransbank"":""" & estadotransbank & """,
+                                     ""trazastattransbk"":""" & trazastattransbk & """,
+                                     ""longmsgtransbank"":""" & longmsgtransbank & """}"
+
             myReq.GetRequestStream.Write(System.Text.Encoding.UTF8.GetBytes(myData), 0, System.Text.Encoding.UTF8.GetBytes(myData).Count)
             myResp = myReq.GetResponse
             myReader = New System.IO.StreamReader(myResp.GetResponseStream)
@@ -911,6 +978,37 @@ Public Class frmMenu
         Catch ex As Exception
             TextBox2.Text = TextBox2.Text & "Error: " & ex.Message
         End Try
+        Return "OK"
+    End Function
 
-    End Sub
+    Public Function insertarDetalleVentaService(idventa As Long,
+                                        nombreproducto As String,
+                                        idproducto As String,
+                                        cantidad As Integer,
+                                        preciosubtotal As Integer
+                                        ) As String
+        Try
+            Dim myReq As HttpWebRequest
+            Dim myResp As HttpWebResponse
+            Dim myReader As StreamReader
+            myReq = HttpWebRequest.Create("http://localhost:8090/api/productos/insertar-detalleventa")
+            myReq.Method = "POST"
+            myReq.ContentType = "application/json"
+            myReq.Accept = "application/json"
+
+            Dim myData As String = "{""idventa"":""" & idventa & """, 
+                                     ""nombreproducto"":""" & nombreproducto & """,
+                                     ""idproducto"":""" & idproducto & """,
+                                     ""cantidad"":""" & cantidad & """,
+                                     ""preciosubtotal"":""" & preciosubtotal & """}"
+
+            myReq.GetRequestStream.Write(System.Text.Encoding.UTF8.GetBytes(myData), 0, System.Text.Encoding.UTF8.GetBytes(myData).Count)
+            myResp = myReq.GetResponse
+            myReader = New System.IO.StreamReader(myResp.GetResponseStream)
+            TextBox2.Text = myReader.ReadToEnd
+        Catch ex As Exception
+            TextBox2.Text = TextBox2.Text & "Error: " & ex.Message
+        End Try
+        Return "OK"
+    End Function
 End Class
