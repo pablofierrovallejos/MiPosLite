@@ -12,11 +12,13 @@ c:\ventasPOS
 Dentro de ella copiar los archivos de configuracion en imagenes
 
 
-
 SDK .NET  -> https://www.nuget.org/packages/TransbankPosSDK/
 PM> Install-Package TransbankPosSDK
 
-<p align="center">
+
+dotnet add package TransbankPosSDK --version 3.0.2
+
+=======<p align="center">
    <img src ="https://github.com/pablofierrovallejos/MiPosLite/blob/master/pantalla1.PNG" />
 </p>
 
@@ -32,3 +34,4 @@ PM> Install-Package TransbankPosSDK
 
 Driver impresora térmica Dinon 9389  (ZJ-58)
 http://www.zjiang.com/en/init.php/product/index?id=28
+
