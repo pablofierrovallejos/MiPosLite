@@ -18,9 +18,9 @@ Imports Newtonsoft.Json
 Imports RestSharp
 
 Public Class frmMenu
-    Dim btnMatriz(30) As System.Windows.Forms.Button    ' Botones de productos
-    Dim tbNombreProd(30) As TextBox                     ' Textbox para nombre de productos
-    Dim tbPrecio(30) As TextBox                         ' Textbox para precio de cada producto
+    Dim btnMatriz(100) As System.Windows.Forms.Button    ' Botones de productos
+    Dim tbNombreProd(100) As TextBox                     ' Textbox para nombre de productos
+    Dim tbPrecio(100) As TextBox                         ' Textbox para precio de cada producto
     Public tbHProd(12) As TextBox                          ' Columna de Textbox para los nombres de productos comprados
     Public tbHUnid(12) As TextBox                          ' Columna de Textbox para las cantidades de productos comprados       
     Public tbHValor(12) As TextBox                         ' Columna de Textbox para valor de productos comprados
@@ -301,8 +301,8 @@ Public Class frmMenu
         Button1.Location = New Point(readConfig("XPOS_BTN_SENDSERIAL"), readConfig("YPOS_BTN_SENDSERIAL"))
         btnAnular.Location = New Point(readConfig("XPOS_BTN_ANULAR"), readConfig("YPOS_BTN_ANULAR"))
 
-
-        For i As Integer = 0 To totalnroArticulos   ' 11 default , Inicializa Vector columnas productos, unidades, valor y subtotal donde se muestran las compras seleccionadas por cliente
+        'El siguiente for crea el listado de compras realizadas por cliente (Header)
+        For i As Integer = 0 To (totalnroArticulos - 1)   ' 11 default , Inicializa Vector columnas productos, unidades, valor y subtotal donde se muestran las compras seleccionadas por cliente
             tbHProd(i) = New TextBox With {
                 .Top = yPosV,
                 .Left = xPosV,
@@ -334,7 +334,6 @@ Public Class frmMenu
             'yPosV += 20
             yPosV += espaciadoListaCompras
 
-
             Panel1.Controls.Add(tbHProd(i)) ' Agrega el nombre del producto de compras realizadas al panel 1
             tbHProd(i).BringToFront()
 
@@ -348,11 +347,16 @@ Public Class frmMenu
             tbHSubT(i).BringToFront()
         Next
 
+
         Dim anchoBtnMatriz As String = readConfig("ANCHO_BOTON_MATRIZ")
         Dim altoBtnMatriz As String = readConfig("ALTO_BOTON_MATRIZ")
         Dim nrocolumnasMatriz As String = readConfig("NRO_COLUMNAS_MATRIZ")
+        Dim itotalProductos As String = readConfig("TOTAL_PRODUCTOS_EN_PANTALLA")
+        Dim iespacioHorizBtn As Integer = readConfig("ESPACIO_HORIZ_BTN")
+        Dim iespacioVerticBtn As Integer = readConfig("ESPACIO_VERTIC_BTN")
 
-        For i As Integer = 0 To 29 ' Inicializa matriz de botones para seleccionar los productos a comprar
+        ' El siguiente for contruye la matriz de productos en pantalla (Body) para que cliente haga selección de productos
+        For i As Integer = 0 To (itotalProductos - 1) ' Inicializa matriz de botones para seleccionar los productos a comprar
             btnMatriz(i) = New System.Windows.Forms.Button
             btnMatriz(i).BackgroundImageLayout = ImageLayout.Stretch
             btnMatriz(i).Width = anchoBtnMatriz '170
@@ -362,7 +366,7 @@ Public Class frmMenu
 
             tbNombreProd(i) = New TextBox
             tbNombreProd(i).Text = ""
-            tbNombreProd(i).Top = yPos + 94 ' 145
+            tbNombreProd(i).Top = yPos + (altoBtnMatriz - 2) ' 145
             tbNombreProd(i).Left = xPos
             tbNombreProd(i).Width = anchoBtnMatriz
             tbNombreProd(i).ReadOnly = True
@@ -372,7 +376,7 @@ Public Class frmMenu
 
             tbPrecio(i) = New TextBox
             tbPrecio(i).Text = ""
-            tbPrecio(i).Top = yPos + 118
+            tbPrecio(i).Top = yPos + altoBtnMatriz + 24
             tbPrecio(i).Left = xPos
             tbPrecio(i).Width = anchoBtnMatriz
             tbPrecio(i).ReadOnly = True
@@ -380,13 +384,13 @@ Public Class frmMenu
             tbPrecio(i).Font = New Font("Arial", 13)
             tbPrecio(i).ForeColor = Color.Red
 
-            If columna < nrocolumnasMatriz Then  '5
-                xPos = xPos + 150
+            If columna < (nrocolumnasMatriz - 1) Then  '5
+                xPos = xPos + anchoBtnMatriz + iespacioHorizBtn
                 columna = columna + 1
             Else
                 columna = 0
                 xPos = 15
-                yPos = yPos + 156
+                yPos = yPos + altoBtnMatriz + iespacioVerticBtn
             End If
             Panel2.Controls.Add(btnMatriz(i))    ' Agrega los botons al panel con productos
             AddHandler btnMatriz(i).Click, AddressOf Me.ClickButton
@@ -410,7 +414,7 @@ Public Class frmMenu
     Public Sub putSaleOnList(sNomProd As String, sPrecio As String)
         Dim totalnroArticulos As String = readConfig("NRO_LINEAS_LIS_COMPRAS")
         Dim habilitarSonido As String = readConfig("HABILITAR_SONIDO")
-        If indexCompras <= totalnroArticulos Then
+        If indexCompras < totalnroArticulos Then
             addItemLst(sNomProd, sPrecio)
         Else
             If existeProductoEnLista(sNomProd) Then
@@ -432,7 +436,7 @@ Public Class frmMenu
         Dim existProd As Boolean = False
         Dim totalMonto As Integer = 0
         Dim totalnroArticulos As String = readConfig("NRO_LINEAS_LIS_COMPRAS")
-        For i As Integer = 0 To totalnroArticulos
+        For i As Integer = 0 To (totalnroArticulos - 1)
             If tbHProd(i).Text = sNomProd Then
                 existProd = True
                 tbHUnid(i).Text = Integer.Parse(tbHUnid(i).Text + 1)
@@ -478,14 +482,8 @@ Public Class frmMenu
 
 
 
-
-
-
-
     Private Sub btnPagar_Click(sender As Object, e As EventArgs) Handles btnPagar.Click
         Logger.i("btnPagar_Click(): lblnumTotal: " & lblnumTotal.Text & " Module1.enableButtonPagar: " & Module1.enableButtonPagar, New StackFrame(True))
-
-
 
 
         If smodoCaja = "EFECTIVO" Then
@@ -505,6 +503,9 @@ Public Class frmMenu
             End If
             icontador = 0  ' Resetea el contador del timer que limpia la pantalla
         End If
+
+        registrarVentaenBaseDatos("EFECTIVO") ' para efectos de prueba, cambiar 
+
     End Sub
     Public Sub ejecutarPosForm()
 
@@ -538,12 +539,10 @@ Public Class frmMenu
     End Sub
 
     Public Sub logTextBox(listTextBox() As TextBox, slabel As String)
-
         For i As Integer = 0 To 11
             If listTextBox(i).Text.Length > 0 Then
                 Logger.i("ejecutarPosForm(): logTextBox(): Label:" & slabel & " " & listTextBox(i).Text, New StackFrame(True))
             End If
-
         Next
     End Sub
 
@@ -741,7 +740,6 @@ Public Class frmMenu
     End Sub
 
     Private Sub ejecutaVentaEfectivo()
-
         ' lblcredito.Text = FormatNumber(Int(sdata), 0)
         Dim totalventa As Integer
         Dim totalcreadito As Integer
@@ -892,7 +890,7 @@ Public Class frmMenu
         End Try
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub registrarVentaenBaseDatos(stipoPago As String)
         'Public tbHProd(12) As TextBox                          ' Columna de Textbox para los nombres de productos comprados
         'Public tbHUnid(12) As TextBox                          ' Columna de Textbox para las cantidades de productos comprados       
         'Public tbHValor(12) As TextBox                         ' Columna de Textbox para valor de productos comprados
@@ -904,18 +902,18 @@ Public Class frmMenu
         Dim sfecha As String = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss") ' hh:mm dddd, dd MMMM yyyy")
         Dim siventa As String = DateTime.Now.ToString("ddHHmmssfff") ' hh:mm dddd, dd MMMM yyyy")
         Dim idventa As Long = Long.Parse(siventa)
-
+        Dim itotprod As Integer = sumarProductos()
         ' "2023-06-11T15:38:34",
-        insertarVentaService(idventa,            'idventa                 
-                             sfecha,        'fecha
-                             "secuencia",   'secuencia
-                             "nroboleta",   'nroboleto
-                              itotalProductos,        'totalarticulos,
+        insertarVentaService(idventa,           'idventa                 
+                             sfecha,            'fecha
+                             "secuencia",       'secuencia
+                             "nroboleta",       'nroboleto
+                              itotprod,        'totalarticulos,
                               Integer.Parse(lblnumTotal.Text.Replace(".", "")),      'subtotalventa,
-                              0,        'iva
+                              0,                'iva
                               Integer.Parse(lblnumTotal.Text.Replace(".", "")),      'totalimporte,
-                              "CONTADO", 'tipopago,
-                              0,         'comisiontbk,
+                              stipoPago,        'tipopago,
+                              0,                'comisiontbk,
                               "com transbk ok", '"comunicacionpos,
                               "APROBADO",       'estadotransbank,
                               "traza",          'trazastattransbk,
@@ -930,7 +928,6 @@ Public Class frmMenu
                                         Integer.Parse(tbHUnid(i).Text),        'cantidad As Integer,
                                         Integer.Parse(tbHSubT(i).Text.Replace(".", "")))   'preciosubtotal As Integer
         Next
-
     End Sub
     Public Function insertarVentaService(idventa As Long,
                                          dfechavta As String,

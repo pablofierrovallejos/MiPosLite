@@ -61,7 +61,6 @@ Partial Class frmMenu
         Me.SerialPort1 = New System.IO.Ports.SerialPort(Me.components)
         Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
         Me.SerialPort2 = New System.IO.Ports.SerialPort(Me.components)
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
@@ -72,7 +71,6 @@ Partial Class frmMenu
         '
         Me.Panel1.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Panel1.BackColor = System.Drawing.Color.White
-        Me.Panel1.Controls.Add(Me.Button2)
         Me.Panel1.Controls.Add(Me.btnAnular)
         Me.Panel1.Controls.Add(Me.btnPagar)
         Me.Panel1.Controls.Add(Me.lblcreditot)
@@ -109,7 +107,7 @@ Partial Class frmMenu
         '
         Me.btnPagar.Font = New System.Drawing.Font("Arial Black", 36.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPagar.ForeColor = System.Drawing.Color.DarkBlue
-        Me.btnPagar.Location = New System.Drawing.Point(617, 22)
+        Me.btnPagar.Location = New System.Drawing.Point(785, 52)
         Me.btnPagar.Margin = New System.Windows.Forms.Padding(2)
         Me.btnPagar.Name = "btnPagar"
         Me.btnPagar.Size = New System.Drawing.Size(228, 108)
@@ -141,11 +139,11 @@ Partial Class frmMenu
         'TextBox2
         '
         Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(709, 13)
+        Me.TextBox2.Location = New System.Drawing.Point(753, 11)
         Me.TextBox2.Multiline = True
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.TextBox2.Size = New System.Drawing.Size(363, 190)
+        Me.TextBox2.Size = New System.Drawing.Size(319, 192)
         Me.TextBox2.TabIndex = 81
         '
         'Button1
@@ -297,7 +295,7 @@ Partial Class frmMenu
         Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox1.Font = New System.Drawing.Font("Arial", 26.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox1.ForeColor = System.Drawing.Color.OrangeRed
-        Me.TextBox1.Location = New System.Drawing.Point(759, 1127)
+        Me.TextBox1.Location = New System.Drawing.Point(410, 1291)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(310, 180)
@@ -392,15 +390,6 @@ Partial Class frmMenu
         'SerialPort2
         '
         '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(725, 233)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(78, 23)
-        Me.Button2.TabIndex = 85
-        Me.Button2.Text = "insertarVenta"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
         'frmMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -468,5 +457,4 @@ Partial Class frmMenu
     Friend WithEvents lblcreditot As Label
     Friend WithEvents btnAnular As Button
     Friend WithEvents SerialPort2 As IO.Ports.SerialPort
-    Friend WithEvents Button2 As Button
 End Class
